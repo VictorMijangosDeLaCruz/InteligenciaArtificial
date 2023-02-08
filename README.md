@@ -1,5 +1,5 @@
 # InteligenciaArtificial
-Repositorio para el curso de Inteligencia Artificial de la Facultad de Ciencias, UNAM.
+Página de githu para el curso de Inteligencia Artificial de la Facultad de Ciencias, UNAM. Aquí se almacenarán el material práctico de la materia para que pueda ser consultado.
 
 ## Contenido
 
