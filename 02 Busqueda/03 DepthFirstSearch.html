@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>02 BreadthFirstSearch</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>03 DepthFirstSearch</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14259,33 +14259,21 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Algoritmo-de-b&#250;squeda-primero-en-amplitud">Algoritmo de b&#250;squeda primero en amplitud<a class="anchor-link" href="#Algoritmo-de-b&#250;squeda-primero-en-amplitud">&#182;</a></h1><p>El algoritmo de búsqueda primero en amplitud o breadth first search se basa en expandir los nodos del árbol de búsqueda de manera ordenada, jerárquica; primero expandirá el nodo raíz y posteriormente cada uno de sus hijos. Entonces procederá a expandir los hijos del primer nodo que expandió primero y así hasta expandir todos los nodos.</p>
-<p>Es decir, el algoritmo de primero en amplitud expande todos los nodos de un nivel de profundidad del árbol primero para pasar a expandir los del siguiente nivel.</p>
-<p>Aquí presentamos una implementación del algoritmo de primero en amplitud para solucionar el problema del laberinto, en donde buscamos llevar un punto 'o' hacia la meta marcada con 'x'. Generamos el laberinto.</p>
-<h3 id="Creaci&#243;n-del-problema-de-laberinto">Creaci&#243;n del problema de laberinto<a class="anchor-link" href="#Creaci&#243;n-del-problema-de-laberinto">&#182;</a></h3><p>El problema del laberinto presenta un agente que marcamos como 'o' que inicia en un punto del mapa del laberinto y tiene que llegar a la salida marcada con 'x'. Usamos la clase para simular este ambiente.</p>
+<h1 id="Algoritmo-de-b&#250;squeda-primero-en-profundidad">Algoritmo de b&#250;squeda primero en profundidad<a class="anchor-link" href="#Algoritmo-de-b&#250;squeda-primero-en-profundidad">&#182;</a></h1><p>El algoritmo de búsqueda primero en profundidad o depth-first search se basa en expandir los nodos que se encuentren a mayor profundidad en éste. De esta forma, los primeros nodos en expandirse serán aquellos que estén más bajo dentro de la profundidad del árlbol. Esto contrasta con el algoritmo de primero en amplitud, pues este algoritmo expandía, de manera contraria, los nodos de menor profundidad primero.</p>
+<p>Esta estrategia permite al lagoritmo tratar de encontrar una solución en los nodos que resultaron de acciones consecutivas, en lugar de expandir priemero aquellos que ha expandido de una acción previa.</p>
+<p>Aquí presentamos una implementación del algoritmo de primero en profundidad para solucionar el problema del laberinto, en donde buscamos llevar un punto 'o' hacia la meta marcada con 'x'. Generamos el laberinto.</p>
+<h3 id="Creaci&#243;n-del-problema-del-laberinto">Creaci&#243;n del problema del laberinto<a class="anchor-link" href="#Creaci&#243;n-del-problema-del-laberinto">&#182;</a></h3><p>Utilizaremos el mismo problema de laberinto que hemos usado con el algoritmo de primero en amplitud.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">maze_simulator</span> <span class="kn">import</span> <span class="n">Maze</span>
-</pre></div>
 
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mapa</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">mapa</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">##############################</span>
 <span class="s2"># o         #                #</span>
 <span class="s2"># ####      ########         #</span>
@@ -14336,18 +14324,18 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Creaci&#243;n-del-algoritmo-primero-en-amplitud">Creaci&#243;n del algoritmo primero en amplitud<a class="anchor-link" href="#Creaci&#243;n-del-algoritmo-primero-en-amplitud">&#182;</a></h2><p>El algoritmo primero en amplitud requiere de una pila de tipo FIFO, asimismo, definiremos una clase para los nodos del árbol y una función para expandir estos nodos construyendo los nodos hijos.</p>
-<h4 id="Pila">Pila<a class="anchor-link" href="#Pila">&#182;</a></h4><p>La pila FIFO (First-In-First-Out) es una pila que hace pop sobre los elementos que han entrado primero. De esta forma, en la expansión del árbol de búsqueda se tiene que los nodos que se expandirán primero son aquellos que están más arriba en la jerárquía del árbol, es decir, los de menor profundidad.</p>
-<p>Para definir esta pila, usamos una lista que guarda los elementos/nodos. Definimos la función <i>push</i> que introducirá nuevos elementos, y la función <i>pop</i> que sacará al elemento en la cola de la pila. También requerimos de una función que nos indique cuando la pila está vacía, pues esta se usará en el algoritmo.</p>
+<h2 id="Creaci&#243;n-del-algoritmo-primero-en-amplitud">Creaci&#243;n del algoritmo primero en amplitud<a class="anchor-link" href="#Creaci&#243;n-del-algoritmo-primero-en-amplitud">&#182;</a></h2><p>El algoritmo primero en profundidad requiere de una pila de tipo LIFO, asimismo, definiremos una clase para los nodos del árbol y una función para expandir estos nodos construyendo los nodos hijos.</p>
+<h4 id="Pila">Pila<a class="anchor-link" href="#Pila">&#182;</a></h4><p>La pila LIFO (Last-In-First-Out) es una pila que hace pop sobre los elementos que han entrado al último. De esta forma, en la expansión del árbol de búsqueda se tiene que los nodos que se expandirán primero son aquellos que están a mayor profunidad en el árbol, que son los nodos que han entrado al último en la pila.</p>
+<p>Para definir esta pila, usamos una lista que guarda los elementos/nodos. Definimos la función <i>push</i> que introducirá nuevos elementos, y la función <i>pop</i> que sacará al elemento en el tope de la pila. También requerimos de una función que nos indique cuando la pila está vacía, pues esta se usará en el algoritmo.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FIFOQueue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LIFOQueue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Clase de una cola FIFO en los problemas de búsqueda&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="p">[]</span>
@@ -14365,14 +14353,14 @@ a.anchor-link {
   
     <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Saca el primer elemento de la pila&quot;&quot;&quot;</span>
-        <span class="n">first_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">first_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     
         <span class="k">return</span> <span class="n">first_element</span>
     
     <span class="k">def</span> <span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Muestra el elemento en el tope de la pila&quot;&quot;&quot;</span>
-        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         
         <span class="k">return</span> <span class="n">item</span>
 </pre></div>
@@ -14392,7 +14380,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -14433,28 +14421,29 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Algoritmo">Algoritmo<a class="anchor-link" href="#Algoritmo">&#182;</a></h3><p>El algoritmo, como ya lo hemos señalado, buscará expandir los nodos de menor profunidad primero, por lo que se enfocará en la amplitud del árbol de búsqueda. Para esto, utiliza la pila FIFO para guardar la frontera. Los pasos que sigue el algoritmo son:</p>
+<h3 id="Algoritmo">Algoritmo<a class="anchor-link" href="#Algoritmo">&#182;</a></h3><p>El algoritmo de primero en profundidad usa la pila LIFO para expandir los nodos de mayor profundidad primero. El algoritmo consta de los siguientes pasos:</p>
 <ol>
 <li>Guarda el nodo inicial</li>
-<li>Genera la frontera con este primer nodo, y guarda los estados alcanzados</li>
-<li>Mientras la frontera no esté vacía realiza:<ol>
-<li>Expande el nodo con jerarquía más alta de la frontera</li>
-<li>Revisa si el hijo no es meta, si lo es acaba</li>
-<li>En otro caso, guarda el nodo hijo en la frontera si esté no ha sido alcanzado todavía</li>
+<li>Genera la frontera con este primer nodo, donde la frontera es una pila LIFO</li>
+<li>Mientras la frontera esté vacía realiza:<ol>
+<li>Saca el nodo del tope de la pila; es decir, el de mayor profundidad</li>
+<li>Revisa si este nodo es terminal, si lo es termina</li>
+<li>En otro caso, expande el nodo</li>
+<li>Guarda los nodos hijos en la frontera.</li>
 </ol>
 </li>
 </ol>
-<p>El algoritmo termina al alcanzar la meta, o bien al agotar los nodos posibles sin encontrar esta meta.</p>
-<p>El algoritmo revisa si un nodo es meta inmediatamente cuando este surge en una expansión, estrategia que se conoce como <i>Early Goal Test</i> (prueba temprana de meta).</p>
+<p>El algoritmo terminará entonces cuando la meta es alcanzada.</p>
+<p>Además de la forma de expandir los nodos, este algoritmo se diferencia del primero en amplitud en que la revisión de si un nodo es meta se hace al sacar al nodo de la pila y cuando los nodos hijos se expanden. A esta estrategia se le conoce como <i>Late Goal Test</i> (prueba tardía de meta), pues revisa si el nodo es meta hasta que este ha sido expulsado de la pila y no inmediatamente al ser generado.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">BreadthFirstSearch</span><span class="p">(</span><span class="n">problem</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">DepthFirstSearch</span><span class="p">(</span><span class="n">problem</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Algoritmo Breadth-First Search&quot;&quot;&quot;</span>
     <span class="c1">#Almacenamiento de nodos</span>
     <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
@@ -14467,7 +14456,7 @@ a.anchor-link {
         <span class="k">return</span> <span class="n">nodes</span>
     
     <span class="c1">#Frontera con cola de prioridad</span>
-    <span class="n">frontier</span> <span class="o">=</span> <span class="n">FIFOQueue</span><span class="p">()</span>
+    <span class="n">frontier</span> <span class="o">=</span> <span class="n">LIFOQueue</span><span class="p">()</span>
     <span class="n">frontier</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
     <span class="c1">#Nodos alcanzados</span>
     <span class="n">reached</span> <span class="o">=</span> <span class="p">{</span><span class="n">problem</span><span class="o">.</span><span class="n">initial</span><span class="p">:</span><span class="n">node</span><span class="p">}</span>
@@ -14476,6 +14465,10 @@ a.anchor-link {
     <span class="k">while</span> <span class="n">frontier</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
         <span class="c1">#Pop en frontera</span>
         <span class="n">node</span> <span class="o">=</span> <span class="n">frontier</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="c1">#Revisa si el nodo es meta</span>
+        <span class="k">if</span> <span class="n">problem</span><span class="o">.</span><span class="n">is_goal</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">state</span><span class="p">):</span>
+            <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">nodes</span>
         <span class="c1">#Guarda el nodo en la lista</span>
         <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         
@@ -14483,11 +14476,6 @@ a.anchor-link {
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">expand</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
             <span class="c1">#Guarda el estado del hijo</span>
             <span class="n">state</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">state</span>
-            
-            <span class="c1">#Revisa si el nodo es meta</span>
-            <span class="k">if</span> <span class="n">problem</span><span class="o">.</span><span class="n">is_goal</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-                <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">nodes</span>
             
             <span class="c1">#Guarda los hijos no alcanzados o que tengan menor costo</span>
             <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reached</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -14507,17 +14495,17 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Aplici&#243;n-del-algoritmo">Aplici&#243;n del algoritmo<a class="anchor-link" href="#Aplici&#243;n-del-algoritmo">&#182;</a></h4><p>Aplicamos entonces el algoritmo de primero en profundidad al problema del laberinto. Esto generará el árbol de búsqueda, en donde, si lo ha hecho correctamente, ha alcanzado el estado meta y por tanto ha generado el camino de acciones que llevan a la meta.</p>
+<h4 id="Aplicaci&#243;n-del-algoritmo">Aplicaci&#243;n del algoritmo<a class="anchor-link" href="#Aplicaci&#243;n-del-algoritmo">&#182;</a></h4><p>Ahora aplicamos el algoritmo al problema del laberinto y a partir de esto obtenemos el camino solución para que el agente alcance la meta. Ilustramos las acciones en el camino que sigue el agente hasta la meta.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Aplica el algortimo al problema</span>
-<span class="n">tree</span> <span class="o">=</span> <span class="n">BreadthFirstSearch</span><span class="p">(</span><span class="n">ent</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">DepthFirstSearch</span><span class="p">(</span><span class="n">ent</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14525,17 +14513,10 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Definimos una función que nos permita recuperar del árbol de búsqueda los nodos que definen el camino encontrado. Simplemente recorremos el árbol desde el nodo meta hasta el nodo raíz; el camino encontrado, será el que nos lleva a la solución.</p>
-<p>A partir de esto, podemos visualizar la solución; en este caso, podemos visualizar el camino que siguió el agente desde el punto en el que inició hasta la meta.</p>
-
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="n">search_tree</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
@@ -14582,12 +14563,12 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>##############################
-# o....     #                #
-# ####.     ########         #
-#    #...   #........   #    #
-#    ###...... #####.####    #
-#      #     ###   #.        #
-#  #           #   #.........x
+# o.........#                #
+# ####     .########   ......#
+#    #  ....# ..........#   .#
+#    ###.   ...##### ####....#
+#      #.....###   #     .   #
+#  #           #   #     ....x
 ##############################
 </pre>
 </div>
@@ -14600,6 +14581,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Uno de los problemas del algoritmo de primero en profundidad es que puede encontrar soluciones de mayor longitud, pues si existe una solución no-optima, un camino de mayor longitud en el árbol, esta se seguirá explorando hasta encontrar una solución. Por tanto, si bien puede encontrar una solución, esta no será necesariamente la más óptima. Esto es uno de los riesgos de expandir los nodos más profundos. En este caso, por ejemplo, se nota que la solución encontrada es menos óptima que la encontró el algoritmo de primero en amplitud.</p>
 
 </div>
 </div>
