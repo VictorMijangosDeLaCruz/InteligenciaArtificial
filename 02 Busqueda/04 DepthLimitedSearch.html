@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>02 BreadthFirstSearch</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>04 DepthLimitedSearch</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14259,33 +14259,20 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Algoritmo-de-b&#250;squeda-primero-en-amplitud">Algoritmo de b&#250;squeda primero en amplitud<a class="anchor-link" href="#Algoritmo-de-b&#250;squeda-primero-en-amplitud">&#182;</a></h1><p>El algoritmo de búsqueda primero en amplitud o breadth first search se basa en expandir los nodos del árbol de búsqueda de manera ordenada, jerárquica; primero expandirá el nodo raíz y posteriormente cada uno de sus hijos. Entonces procederá a expandir los hijos del primer nodo que expandió primero y así hasta expandir todos los nodos.</p>
-<p>Es decir, el algoritmo de primero en amplitud expande todos los nodos de un nivel de profundidad del árbol primero para pasar a expandir los del siguiente nivel.</p>
-<p>Aquí presentamos una implementación del algoritmo de primero en amplitud para solucionar el problema del laberinto, en donde buscamos llevar un punto 'o' hacia la meta marcada con 'x'. Generamos el laberinto.</p>
-<h3 id="Creaci&#243;n-del-problema-de-laberinto">Creaci&#243;n del problema de laberinto<a class="anchor-link" href="#Creaci&#243;n-del-problema-de-laberinto">&#182;</a></h3><p>El problema del laberinto presenta un agente que marcamos como 'o' que inicia en un punto del mapa del laberinto y tiene que llegar a la salida marcada con 'x'. Usamos la clase para simular este ambiente.</p>
+<h1 id="Algoritmo-de-b&#250;squeda-de-profundidad-limitada">Algoritmo de b&#250;squeda de profundidad limitada<a class="anchor-link" href="#Algoritmo-de-b&#250;squeda-de-profundidad-limitada">&#182;</a></h1><p>El lagoritmo de primero en profundidad tiene el problema que, aunque encuentre la solución, no sea la solución óptima pues buscará intensivamente por un camino maximizando la profundidad del árbol. Esto también implica que puede tardarse demasiado en converger. Para solventar esto, se propone el algoritmo de búsqueda de profundidad limitada, el cual definirá un máximo de profundidad sobre la que va a buscar el algoritmo. Esta profundidad máxima limitará la búsqueda en profundidad y, por tanto, limitará también la longitud de una solución encontrada.</p>
+<p>Planteamos aquí la aplicación del algoritmo de búsqueda de profundidad limitada para el problema del laberinto.</p>
+<h3 id="Creaci&#243;n-del-problema-del-laberinto">Creaci&#243;n del problema del laberinto<a class="anchor-link" href="#Creaci&#243;n-del-problema-del-laberinto">&#182;</a></h3><p>Creamos el problema del laberinto como lo hemos venido haciendo:</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">maze_simulator</span> <span class="kn">import</span> <span class="n">Maze</span>
-</pre></div>
 
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mapa</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">mapa</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">##############################</span>
 <span class="s2"># o         #                #</span>
 <span class="s2"># ####      ########         #</span>
@@ -14333,92 +14320,51 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Creaci&#243;n-del-algoritmo-primero-en-amplitud">Creaci&#243;n del algoritmo primero en amplitud<a class="anchor-link" href="#Creaci&#243;n-del-algoritmo-primero-en-amplitud">&#182;</a></h2><p>El algoritmo primero en amplitud requiere de una pila de tipo FIFO, asimismo, definiremos una clase para los nodos del árbol y una función para expandir estos nodos construyendo los nodos hijos.</p>
-<h4 id="Pila">Pila<a class="anchor-link" href="#Pila">&#182;</a></h4><p>La pila FIFO (First-In-First-Out) es una pila que hace pop sobre los elementos que han entrado primero. De esta forma, en la expansión del árbol de búsqueda se tiene que los nodos que se expandirán primero son aquellos que están más arriba en la jerárquía del árbol, es decir, los de menor profundidad.</p>
-<p>Para definir esta pila, usamos una lista que guarda los elementos/nodos. Definimos la función <i>push</i> que introducirá nuevos elementos, y la función <i>pop</i> que sacará al elemento en la cola de la pila. También requerimos de una función que nos indique cuando la pila está vacía, pues esta se usará en el algoritmo.</p>
+<h3 id="Pila-y-nodos">Pila y nodos<a class="anchor-link" href="#Pila-y-nodos">&#182;</a></h3><p>Como se trata de una búsqueda en profundida, utilizaremos una pila LIFO (Last-In-First-Ou) que permitirá expandir primero los nodos que entran al último a la pila y que corresponden a los nodos de mayor profundidad. Asimismo, creamos el objeto nodo, tomando en cuenta la profundidad de éstos, pues el algoritmo de profundidad limitada necesita saber en qué profundidad se encuentra un nodo para no expandir más éstos.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FIFOQueue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LIFOQueue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Clase de una cola FIFO en los problemas de búsqueda&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="p">[]</span>
-  
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">])</span>
-  
     <span class="k">def</span> <span class="nf">isEmpty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Revisa si la pila es vacía&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">==</span> <span class="p">[]</span>
-  
     <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Introudce un elemento a la pila&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-  
     <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Saca el primer elemento de la pila&quot;&quot;&quot;</span>
-        <span class="n">first_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">last_element</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">last_element</span>
     
-        <span class="k">return</span> <span class="n">first_element</span>
-    
-    <span class="k">def</span> <span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Muestra el elemento en el tope de la pila&quot;&quot;&quot;</span>
-        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        
-        <span class="k">return</span> <span class="n">item</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Expansi&#243;n-de-nodos">Expansi&#243;n de nodos<a class="anchor-link" href="#Expansi&#243;n-de-nodos">&#182;</a></h4><p>Definimos un nodo como un objecto que tendrá los siguientes elementos: 1) un estado, que indicará precisamente qué estado del mundo representa este nodo; 2) padre, que indica de dónde viene el nodo actual; y 3) acción, que indica que acción generó al nodo.</p>
-<p>Para expandir los nodos, usamos las acciones legales y aplicamos la función que nos da el resultado de esa acción aplicada al estado actual. Con el resultado, generamos nuevos nodos hijos del árbol de búsqueda.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Clase para crear nodos con sus atributos&quot;&quot;&quot;</span>
+<span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Clase para crear nodos con sus atributos.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="c1">#self.cost = 0 #El costo no es tomado en cuenta en este método</span>
-        
+        <span class="c1">#Guarda la profundidad del nodo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;State: </span><span class="si">{}</span><span class="s2">, Cost: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">cost</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;State: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;State: </span><span class="si">{}</span><span class="s2">, Action: </span><span class="si">{}</span><span class="s2">, Parent: </span><span class="si">{}</span><span class="s2">, Cost: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">cost</span><span class="p">)</span>
-            
+            <span class="k">return</span> <span class="s2">&quot;State: </span><span class="si">{}</span><span class="s2">, Action: </span><span class="si">{}</span><span class="s2">, Parent: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>   
             
 <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Función para expandir los nodos dado el problema&quot;&quot;&quot;</span>
-    <span class="c1">#Nodo inical</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">state</span> 
-
     <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">problem</span><span class="o">.</span><span class="n">actions</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="c1">#Ejecuta la acción</span>
-        <span class="n">new_s</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
-        
-        <span class="c1">#Genera un nuevo nodo</span>
+        <span class="n">new_s</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>        
         <span class="n">new_node</span><span class="p">,</span><span class="n">new_node</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="n">new_node</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span><span class="n">new_node</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(),</span><span class="n">new_s</span><span class="p">,</span><span class="n">node</span><span class="p">,</span><span class="n">action</span>
-        
+        <span class="n">new_node</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">yield</span> <span class="n">new_node</span>
 </pre></div>
 
@@ -14430,44 +14376,30 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Algoritmo">Algoritmo<a class="anchor-link" href="#Algoritmo">&#182;</a></h3><p>El algoritmo, como ya lo hemos señalado, buscará expandir los nodos de menor profunidad primero, por lo que se enfocará en la amplitud del árbol de búsqueda. Para esto, utiliza la pila FIFO para guardar la frontera. Los pasos que sigue el algoritmo son:</p>
-<ol>
-<li>Guarda el nodo inicial</li>
-<li>Genera la frontera con este primer nodo, y guarda los estados alcanzados</li>
-<li>Mientras la frontera no esté vacía realiza:<ol>
-<li>Expande el nodo con jerarquía más alta de la frontera</li>
-<li>Revisa si el hijo no es meta, si lo es acaba</li>
-<li>En otro caso, guarda el nodo hijo en la frontera si esté no ha sido alcanzado todavía</li>
-</ol>
-</li>
-</ol>
-<p>El algoritmo termina al alcanzar la meta, o bien al agotar los nodos posibles sin encontrar esta meta.</p>
-<p>El algoritmo revisa si un nodo es meta inmediatamente cuando este surge en una expansión, estrategia que se conoce como <i>Early Goal Test</i> (prueba temprana de meta).</p>
+<h3 id="Algoritmo">Algoritmo<a class="anchor-link" href="#Algoritmo">&#182;</a></h3><p>El aloritmo de búsqueda de profundidad limitada se implementará de manera similar al algoritmo de primero en profundidad, pero pondremos una restricción: cuando el nodo se encuentra a una profundidad dada $l$ ya no expandirá más este nodo.</p>
+<p>Si el algoritmo a expandido todos los nodos con profundidad menor a $l$ sin encontrar una solución, entonces mandará un mensaje de <code>cutoff</code> que indicará precisamente que el algoritmo no ha podido encontrar la solución (al menos a ese nivle de profundidad). En caso contrario, el algoritmo regresará la solución.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">BreadthFirstSearch</span><span class="p">(</span><span class="n">problem</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Algoritmo Breadth-First Search&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">DepthLimitedSearch</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span><span class="n">l</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Algoritmo Depth-Limited Search&quot;&quot;&quot;</span>
     <span class="c1">#Almacenamiento de nodos</span>
     <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1">#Nodo inicial</span>
     <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">()</span>
-    <span class="n">node</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">initial</span>
-    
-    <span class="c1">#Revisa si el nodo es meta</span>
-    <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">problem</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">nodes</span>
-    
+    <span class="n">node</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">initial</span>    
     <span class="c1">#Frontera con cola de prioridad</span>
-    <span class="n">frontier</span> <span class="o">=</span> <span class="n">FIFOQueue</span><span class="p">()</span>
+    <span class="n">frontier</span> <span class="o">=</span> <span class="n">LIFOQueue</span><span class="p">()</span>
     <span class="n">frontier</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
     <span class="c1">#Nodos alcanzados</span>
     <span class="n">reached</span> <span class="o">=</span> <span class="p">{</span><span class="n">problem</span><span class="o">.</span><span class="n">initial</span><span class="p">:</span><span class="n">node</span><span class="p">}</span>
+    <span class="c1">#resultado</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;failure&quot;</span>
 
     <span class="c1">#Mientras la frontera no esté vacía</span>
     <span class="k">while</span> <span class="n">frontier</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
@@ -14476,24 +14408,19 @@ a.anchor-link {
         <span class="c1">#Guarda el nodo en la lista</span>
         <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         
-        <span class="c1">#Expande el nodo actual</span>
-        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">expand</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-            <span class="c1">#Guarda el estado del hijo</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">state</span>
-            
-            <span class="c1">#Revisa si el nodo es meta</span>
-            <span class="k">if</span> <span class="n">problem</span><span class="o">.</span><span class="n">is_goal</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-                <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">nodes</span>
-            
-            <span class="c1">#Guarda los hijos no alcanzados o que tengan menor costo</span>
-            <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reached</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">reached</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
-                <span class="n">frontier</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-        
-    <span class="c1">#Si no logra llegar a un nodo final</span>
-    <span class="c1">#El algoritmo regresa mensaje de error</span>
-    <span class="k">return</span> <span class="s2">&quot;No se ha logrado llegar a un estado final.&quot;</span>
+        <span class="k">if</span> <span class="n">problem</span><span class="o">.</span><span class="n">is_goal</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">state</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Se encontró solución&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">nodes</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">depth</span> <span class="o">&gt;</span> <span class="n">l</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;cutoff&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">expand</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">state</span>
+                <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reached</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">reached</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="n">child</span>
+                    <span class="n">frontier</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 
      </div>
@@ -14504,50 +14431,105 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Aplici&#243;n-del-algoritmo">Aplici&#243;n del algoritmo<a class="anchor-link" href="#Aplici&#243;n-del-algoritmo">&#182;</a></h4><p>Aplicamos entonces el algoritmo de primero en profundidad al problema del laberinto. Esto generará el árbol de búsqueda, en donde, si lo ha hecho correctamente, ha alcanzado el estado meta y por tanto ha generado el camino de acciones que llevan a la meta.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Aplica el algortimo al problema</span>
-<span class="n">tree</span> <span class="o">=</span> <span class="n">BreadthFirstSearch</span><span class="p">(</span><span class="n">ent</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Definimos una función que nos permita recuperar del árbol de búsqueda los nodos que definen el camino encontrado. Simplemente recorremos el árbol desde el nodo meta hasta el nodo raíz; el camino encontrado, será el que nos lleva a la solución.</p>
-<p>A partir de esto, podemos visualizar la solución; en este caso, podemos visualizar el camino que siguió el agente desde el punto en el que inició hasta la meta.</p>
+<h4 id="Aplicaci&#243;n-del-algoritmo-al-problema">Aplicaci&#243;n del algoritmo al problema<a class="anchor-link" href="#Aplicaci&#243;n-del-algoritmo-al-problema">&#182;</a></h4><p>En el problema del laberinto podemos escoger una profundidad pequeña, de tal forma que el algoritmo de profundidad limitada no pueda encontrar la solución, en este caso regresará <code>cutoff</code>, pues no ha podido encontrar la solución en esta profundidad.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tree_5</span> <span class="o">=</span> <span class="n">DepthLimitedSearch</span><span class="p">(</span><span class="n">ent</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tree_5</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>cutoff
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Podemos encontrar una solición si escogemos un número más grande en el parámetro de la profundidad. Aunque si este número es muy grande, puede encontrarse una solución similar al de búsqueda de primero en profundidad.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">DepthLimitedSearch</span><span class="p">(</span><span class="n">ent</span><span class="p">,</span><span class="n">l</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Se encontró solución
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Finalmente, podemos visualizar la solución encontrada por el algoritmo.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="n">search_tree</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Recorre el árbol de búsqueda de atrás hacia el inicio para obtener el camino de acciones</span>
-<span class="sd">    que llevaron a la meta.&quot;&quot;&quot;</span>
-    <span class="c1">#Meta</span>
+    <span class="sd">&quot;&quot;&quot;Recupera la solución.&quot;&quot;&quot;</span>
     <span class="n">leaf</span> <span class="o">=</span> <span class="n">search_tree</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c1">#Padre de la meta</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">leaf</span><span class="o">.</span><span class="n">parent</span>
-    <span class="c1">#Adjunta la meta y su padre al camino</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">leaf</span><span class="p">,</span> <span class="n">parent</span><span class="p">]</span>
-    <span class="c1">#Recorre el árbol de búsqueda hasta el inicial</span>
     <span class="k">while</span> <span class="n">parent</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="n">root</span><span class="p">:</span>
         <span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
-        <span class="c1">#Adjunta los padres en el camino</span>
         <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
         
     <span class="k">return</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -14580,7 +14562,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedImage jp-OutputArea-output ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -14594,6 +14576,110 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>El problema del algoritmo de búsqueda de profundidad limitada es que en muchos problemas no conocemos de principio la profundidad para hacer la búsqueda. Existen algunas propuestas para encontrar esta profundidad (como tomar el diametro de la gráfica del problema), entre ellas una de las más comunes es implementar el algoritmo de Búsqueda de profundidad iterativa.</p>
+<h1 id="Algoritmo-de-b&#250;squeda-de-profundidad-iterativa">Algoritmo de b&#250;squeda de profundidad iterativa<a class="anchor-link" href="#Algoritmo-de-b&#250;squeda-de-profundidad-iterativa">&#182;</a></h1><p>El algoritmo de búsqueda de profundidad iterative o <i>Iterative Deepening Search</i> es una adaptación del algoritmo de profundidad limitada, en donde se itera un contador sobre el parámetro de profundidad iterativa. Esto permite explorar diferentes profundidades hasta encontrar una solución en alguna de ellas.</p>
+<p>El algoritmo comenzará con un contador de profundidad con $l=0$, donde $l$ es la profundidad, y enonces aplicará el algoritmo de profunidad limitado con este valor de profundidad. Si no se encuentra solución, entonces aumentará en 1 la profundidad para volver a aplicar el algoritmo de profundidad limitada. Este proceso se repetirá hasta que se encuentre la solución. De esta forma, este algoritmo garantiza encontrar una solución, aunque puede ser más costoso.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">IterativeDeepeningSearch</span><span class="p">(</span><span class="n">problem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Algoritmo de Iterative Deepening Search.&quot;&quot;&quot;</span>
+    <span class="c1">#Inicializa la profundidad</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#Revisa si hay resultados</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">DepthLimitedSearch</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+    <span class="c1">#Itera hasta encontrar una solución</span>
+    <span class="k">while</span> <span class="n">result</span> <span class="o">==</span> <span class="s2">&quot;cutoff&quot;</span><span class="p">:</span>
+        <span class="c1">#Agrega una profundidad más</span>
+        <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1">#Revisa el resultado</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">DepthLimitedSearch</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resuelto en </span><span class="si">{}</span><span class="s2"> iteraciones&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Aplicaci&#243;n-del-algoritmo-al-problema">Aplicaci&#243;n del algoritmo al problema<a class="anchor-link" href="#Aplicaci&#243;n-del-algoritmo-al-problema">&#182;</a></h4><p>Aplicando el algoritmo de búsqueda de profundidad iterativa al problema del laberinto, podemos ver que se encuentra una soluión, y el algoritmo imprimirá la profundidad en que se encontró la solución.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ent_it</span> <span class="o">=</span> <span class="n">Maze</span><span class="p">(</span><span class="n">mapa</span><span class="p">)</span>
+<span class="n">tree_it</span> <span class="o">=</span> <span class="n">IterativeDeepeningSearch</span><span class="p">(</span><span class="n">ent_it</span><span class="p">)</span>
+
+<span class="c1">#Visualiza la solución</span>
+<span class="n">prev_s</span> <span class="o">=</span> <span class="n">ent_it</span><span class="o">.</span><span class="n">initial</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">get_path</span><span class="p">(</span><span class="n">tree_it</span><span class="p">,</span> <span class="n">ent_it</span><span class="o">.</span><span class="n">initial</span><span class="p">):</span>
+    <span class="n">ent_it</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">prev_s</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">prev_s</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">state</span>
+    
+<span class="n">ent</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Se encontró solución
+Resuelto en 43 iteraciones
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Como se puede notar, la solución encontrada es incluso más corta que la que encontraba el algoritmo de profundidad limitada.</p>
 
 </div>
 </div>
