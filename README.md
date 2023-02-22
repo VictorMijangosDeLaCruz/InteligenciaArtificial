@@ -12,5 +12,8 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
         1. [Problema del laberinto](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/01%20MazeProblem.html)
         2. [Búsqueda Primero en Amplitud](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/02%20BreadthFirstSearch.html)
         3. [Búsqueda Primero en Profundidad](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/03%20DepthFirstSearch.html)
+        4. [Búsqueda de profundad limitada](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/04%20DepthLimitedSearch.html)
+    2. Búsqueda heurística
+        1. [Problema del laberinto con tráfico](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/05%20TrafficMazeSimulator.html)
 3. Modelos probabilísticos
 4. Aprendizaje automático
