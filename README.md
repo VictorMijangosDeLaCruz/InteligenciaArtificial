@@ -15,5 +15,8 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
         4. [Búsqueda de Profundad Limitada](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/04%20DepthLimitedSearch.html)
     2. Búsqueda heurística
         1. [Problema del laberinto con tráfico](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/05%20TrafficMazeSimulator.html)
+        2. [Primero mejor ambicioso](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/06%20GreedyBestFirstSearch.html)
+        3. [Búsqueda A* (A estrella)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/07%20AStar.html)
+        4. [Búsqueda A* Bidireccional](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/08%20BidirectionalAStar.html)
 3. Modelos probabilísticos
 4. Aprendizaje automático
