@@ -14276,7 +14276,7 @@ a.anchor-link {
 
 <span class="c1">#Crea el problema</span>
 <span class="n">board</span> <span class="o">=</span> <span class="n">Board</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">board</span><span class="o">.</span><span class="n">put_pieces</span><span class="p">()</span> <span class="c1">#num=8, init=&#39;random&#39;)</span>
+<span class="n">board</span><span class="o">.</span><span class="n">put_pieces</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">)</span>
 
 <span class="c1">#Visualiza el problema</span>
 <span class="n">board</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
@@ -14301,7 +14301,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedImage jp-OutputArea-output ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAADnCAYAAADl9EEgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjMuMCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy86wFpkAAAACXBIWXMAAAsTAAALEwEAmpwYAAADdElEQVR4nO3dQW7bQBAAwVGQ10rvIb9LP8AEc7C0adBVR/mwGhONBXTgPI7jGKDnz//+AsA5cUKUOCFKnBAlToj6+4+/L/sp9/F4rDpqVv9CfdfZVs61bduys2ZmXq/XsrOO4zj9R7o5IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcEHW5jsEagfdYOdu+78vO8sw+y80JUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEqMt1DNYIvIe1Fj/3G5+ZmxOixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oSoy10phX0Rn7ByrpmZbduWneWZvcfq3Sxn3JwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IulzHcNfX7a9+1f5dZ9v3fdlZv/GZuTkhSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQdbmOofBK+k9YOdfMfWe761wzM9u2LT3vjJsTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUZfrGO76uv3Vr9q3IuHnVs41s3a25/N5+rmbE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihKjLXSn7vq/6Hrfd8TFz39nuOtfM+t0sZ9ycECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiHoUXjsPfOfmhChxQpQ4IUqcECVOiBInRH0B+WRzUb+qNBAAAAAASUVORK5CYII=
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAADnCAYAAADl9EEgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjMuMCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy86wFpkAAAACXBIWXMAAAsTAAALEwEAmpwYAAADa0lEQVR4nO3dQYoiQRBA0bCZ23oeva5zAafohcZ8kve2Lsqg+CTUIuP2er0G6Pn5338AeE+cECVOiBInRIkTov5c/fh8Ptc+5d7v961HzfYX6tvttvaszdlOnWtmfba3D3NyQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IepyHcPmioTH47H2rM2r9mesSPiEk9/Zvzg5IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcEHW5juHU6/Y3Vz/MWJHwCdvrEQqzOTkhSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IutyVUtgX8Q2bc83s7mbxzj5jezfLO05OiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRF2uYzj1uv3tq/Y3Z7P64TMKszk5IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcEHW5jqFwJf03bM41c+5sp65+mNlf//COkxOixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlRl+sYTl0jsH3V/qmznbr6YabxzpycECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRF3uSinsi/iGzblmzp3t1Llm9nezvOPkhChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQtRt80p94PecnBAlTogSJ0SJE6LECVHihKi/Gw9tWl8qTKAAAAAASUVORK5CYII=
 "
 >
 </div>
@@ -14320,7 +14320,7 @@ a.anchor-link {
 <ol>
 <li>Obtención de población inicial (<tt>get_population</tt>): Genera genes de la forma: $$[p_1, p_2, p_3, \cdots, p_8]$$ donde cada $p_i$ es un número que representa la posición de la reina en esa columna (o 0 si no hay reina). De tal forma, si tenemos una reina en la posición $(2,3)$, tendremos que $p_2=3$.</li>
 <li>Obtención de pesos probabilísticos (<tt>get_scores</tt>): Obtiene valores de probabilidad de los individuos en base a la función $p(x) = \frac{e^{f(x)}}{\sum_y e^{f(y)}}$ donde $f$ es la función fitness. De esta forma podemos elegir aleatoriamente individuos según su probabilidad (selección ruleta).</li>
-<li>Dibuja la solución (<tt>get_biard</tt>): Dibuja el tablero final a partir del vector individuo $[p_1, p_2, p_3, \cdots, p_8]$.</li>
+<li>Dibuja la solución (<tt>get_board</tt>): Dibuja el tablero final a partir del vector individuo $[p_1, p_2, p_3, \cdots, p_8]$.</li>
 </ol>
 
 </div>
@@ -14330,7 +14330,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Genera una población de genes de tamaño s&quot;&quot;&quot;</span>
     <span class="n">population</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
@@ -14379,22 +14379,46 @@ solucionar el problema.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Función fitness para el problema de 8 reinas&quot;&quot;&quot;</span>
-    <span class="n">board</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">s</span><span class="p">,</span><span class="n">s</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
-        <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     
     <span class="n">err</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">m</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
-                <span class="n">rows</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">board</span><span class="p">[</span><span class="n">n</span><span class="p">])</span><span class="o">*</span><span class="n">board</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
-                <span class="n">columns</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="n">board</span><span class="p">[:,</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">board</span><span class="p">[:,</span><span class="n">n</span><span class="p">])</span><span class="o">*</span><span class="n">board</span><span class="p">[:,</span><span class="n">m</span><span class="p">]</span>
-                <span class="n">diags</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="n">board</span><span class="p">[:,</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">board</span><span class="p">[:,</span><span class="n">n</span><span class="p">],</span><span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="p">))</span><span class="o">*</span><span class="n">board</span><span class="p">[:,</span><span class="n">m</span><span class="p">]</span>
-                <span class="n">err</span> <span class="o">+=</span> <span class="n">rows</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">columns</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">diags</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    
-    <span class="k">return</span> <span class="n">err</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">queens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">matrix</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">queens</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="c1">#Revisa la diagonal</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="o">&lt;</span><span class="n">s</span> <span class="ow">and</span> <span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="o">&lt;</span><span class="n">s</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="p">]</span> <span class="ow">in</span> <span class="n">queens</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="p">]</span> <span class="ow">in</span> <span class="n">queens</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="o">&lt;</span><span class="n">s</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="o">&lt;</span><span class="n">s</span> <span class="ow">and</span> <span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+                    
+            <span class="c1">#Revisa las columnas</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="o">&lt;</span><span class="n">s</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">-</span><span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+            <span class="c1">#Revisa los renglones</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="o">&lt;</span><span class="n">s</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="p">]</span><span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">-</span><span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="p">]</span><span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">err</span>
 </pre></div>
 
      </div>
@@ -14441,8 +14465,13 @@ solucionar el problema.</p>
 
 <span class="k">def</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Función de mutación&quot;&quot;&quot;</span>
-    <span class="n">change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">])</span>
+    <span class="n">change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">change</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">array</span>
+    <span class="k">elif</span> <span class="n">change</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)))</span>
+        <span class="n">array</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">8</span>
+        
         <span class="k">return</span> <span class="n">array</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)),</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -14501,10 +14530,11 @@ solucionar el problema.</p>
         <span class="n">new_ind</span> <span class="o">=</span> <span class="n">replacement</span><span class="p">([</span><span class="n">child</span><span class="p">,</span><span class="n">parent1</span><span class="p">,</span><span class="n">parent2</span><span class="p">],</span> <span class="n">fitness_function</span><span class="o">=</span><span class="n">fitness_function</span><span class="p">)</span>
         <span class="n">population2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_ind</span><span class="p">)</span>
     
-    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
         <span class="c1">#Si se cumple el criterio de detención, se visualiza la solución</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="n">fitness_function</span><span class="p">(</span><span class="n">subject</span><span class="p">)</span> <span class="k">for</span> <span class="n">subject</span> <span class="ow">in</span> <span class="n">population2</span><span class="p">])</span>
         <span class="n">get_board</span><span class="p">(</span><span class="n">population2</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fitness_function</span><span class="p">(</span><span class="n">population2</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1">#En otro caso repite los pasos</span>
         <span class="n">genetic_algorithm</span><span class="p">(</span><span class="n">population2</span><span class="p">,</span> <span class="n">fitness_function</span><span class="o">=</span><span class="n">fitness_function</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -14529,7 +14559,7 @@ solucionar el problema.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">init_population</span> <span class="o">=</span> <span class="n">get_population</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">init_population</span> <span class="o">=</span> <span class="n">get_population</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>    
 <span class="n">genetic_algorithm</span><span class="p">(</span><span class="n">init_population</span><span class="p">)</span>
 </pre></div>
 
@@ -14552,11 +14582,23 @@ solucionar el problema.</p>
 
 
 <div class="jp-RenderedImage jp-OutputArea-output ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAADnCAYAAADl9EEgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjMuMCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy86wFpkAAAACXBIWXMAAAsTAAALEwEAmpwYAAADbUlEQVR4nO3dQW7bQBBFwWaQ0/JAuq58gMjMIlLnga7aekEPiIcBtOA/ns/nAD2//vc/ALwmTogSJ0SJE6LECVG///L3tZ9yH4/H1qPmPM+1Z83MHMex9qzNX9/veq6Z9bO9fJibE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVGXcwx3nUjY/NT+jImEd7jzO/uOmxOixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlRl3MMd51I2P7U/uasxV0nErbfWeFsbk6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROiLrdSCnsRn7C5XTJjc+YdNs81s7/N8oqbE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVGXcwx3/dz+9qf273q2zVmLn/jO3JwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IupxjKHyS/hM2zzVz34mE8zzXnnXnd/YdNydEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROiLucY7jojsP2pfbMW/+4nvjM3J0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVGXWymFvYhP2NxlmbFf8g6b55rZ32Z5xc0JUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEqKPw2XngT25OiBInRIkTosQJUeKEKHFC1BfQoXcLY8LEfgAAAABJRU5ErkJggg==
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAADnCAYAAADl9EEgAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjMuMCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy86wFpkAAAACXBIWXMAAAsTAAALEwEAmpwYAAADcklEQVR4nO3dQY4iMRAAwWK1r23e0/1d9gHD9F4YT8qKOMLBWFbKEgfX4/V6DdDz57d/APCeOCFKnBAlTogSJ0T9/c/3y/7KfTweq5aa1f9Q77q367qWrXUcx7K1Zpaf2dvF3JwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6Iuh3HsOsYgZX7mpk5z3PZWs7sMwpDpd2cECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiLodx2CMwGfsurdd9zXT2JubE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihKjbWSnP53PV79h2xsfM2r1d17VsLWf2s9ycECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiLodx7Drc/urn9rfdW+77mtm7ViL4zjefu7mhChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQtTtOIaVz+2f57lsrZX7mjEi4RN2PrPvuDkhSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQdTuOYdfn9lc/tb/r3nYd1zHTODM3J0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVG3s1IK8yJ+wnVdy9aa2Xd+ya77mlk/T+cdNydEiROixAlR4oQocUKUOCFKnBAlTogSJ0SJE6LECVHihChxQpQ4IUqcECVOiBInRIkTosQJUeKEKHFClDghSpwQJU6IEidEiROiHoVn54Gv3JwQJU6IEidEiROixAlR4oSof5LNcZIESDQ1AAAAAElFTkSuQmCC
 "
 >
 </div>
 
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>0
+</pre>
+</div>
 </div>
 
 </div>
