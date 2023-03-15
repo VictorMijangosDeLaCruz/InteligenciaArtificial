@@ -20,5 +20,7 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
         4. [Búsqueda A* Bidireccional](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/08%20BidirectionalAStar.html)
         5. [Búsqueda por Haz (Beam Search)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/09%20BeamSearch.html)
     3. [Resumen de algoritmos de búsqueda](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/10%20ResumenBusqueda.html)
-3. Modelos probabilísticos
-4. Aprendizaje automático
+5. Búsqueda en entornos parcialmente observables, con restricciones y competitivos
+    1. [Problema de las 8 reinas](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/01%208Queens.html)
+4. Modelos probabilísticos
+5. Aprendizaje automático
