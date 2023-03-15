@@ -22,5 +22,6 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
     3. [Resumen de algoritmos de búsqueda](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/10%20ResumenBusqueda.html)
 5. Búsqueda en entornos parcialmente observables, con restricciones y competitivos
     1. [Problema de las 8 reinas](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/01%208Queens.html)
+    2. [Algoritmo de ascenso de la colina](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/02%20HillClimbing.html)
 4. Modelos probabilísticos
 5. Aprendizaje automático
