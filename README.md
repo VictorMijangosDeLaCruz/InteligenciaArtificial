@@ -26,7 +26,7 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
     3. [Algoritmos genéticos](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/03%20Genetic.html)
     4. [Satisfacción de restricciones: Sudoku](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/04%20Sudoku.html)
 6. Búsqueda adversaria
-    1. [Juego del gato](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/04%20Gato.html)
-    2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/05%20Minimax.html)
+    1. [Juego del gato](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/05%20Gato.html)
+    2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/06%20Minimax.html)
 7. Modelos probabilísticos
 8. Aprendizaje automático
