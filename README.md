@@ -20,10 +20,13 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
         4. [Búsqueda A* Bidireccional](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/08%20BidirectionalAStar.html)
         5. [Búsqueda por Haz (Beam Search)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/09%20BeamSearch.html)
     3. [Resumen de algoritmos de búsqueda](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/10%20ResumenBusqueda.html)
-5. Búsqueda en entornos parcialmente observables, con restricciones y competitivos
+5. Búsqueda por optimización y satifacción de restricciones
     1. [Problema de las 8 reinas](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/01%208Queens.html)
     2. [Algoritmo de ascenso de la colina](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/02%20HillClimbing.html)
     3. [Algoritmos genéticos](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/03%20Genetic.html)
     4. [Satisfacción de restricciones: Sudoku](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/04%20Sudoku.html)
-4. Modelos probabilísticos
-5. Aprendizaje automático
+6. Búsqueda adversaria
+    1. [Juego del gato](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/04%20Gato.html)
+    2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/05%20Minimax.html)
+7. Modelos probabilísticos
+8. Aprendizaje automático
