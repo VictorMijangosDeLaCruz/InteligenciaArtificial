@@ -30,6 +30,6 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
     2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/06%20Minimax.html)
     3. [Algoritmo alpha-beta](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/07%20AlphaBeta.html)
 7. Modelos probabilísticos
-    1. Modelos grficos dirigidos
+    1. Modelos gráficos dirigidos
         1. [Red Bayesiana para el problema de Monty Hall](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/01%20MontyHall.html)
 8. Aprendizaje automático
