@@ -32,6 +32,6 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
 7. Modelos probabilísticos
     1. Modelos gráficos dirigidos
         1. [Red Bayesiana para el problema de Monty Hall](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/01%20MontyHall.html)
-        2. [Inferencia en red Baysiana: Muestreo por rechazo]
-        3. [Inferencia en red Baysiana: Ponderación de verosimilitud]
+        2. [Inferencia en red Baysiana: Muestreo por rechazo](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/02%20RejectionSampling.html)
+        3. [Inferencia en red Baysiana: Ponderación de verosimilitud](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/03%20LikelihoodWeighting.html)
 8. Aprendizaje automático
