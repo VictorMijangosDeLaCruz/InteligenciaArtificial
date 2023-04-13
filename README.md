@@ -35,4 +35,5 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
         2. [Inferencia en red Baysiana: Muestreo por rechazo](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/02%20RejectionSampling.html)
         3. [Inferencia en red Baysiana: Ponderación de verosimilitud](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/03%20LikelihoodWeighting.html)
         4. [Bayes naïve (frecuentista)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/04%20NaiveBayes.html)
+        5. [Bayes naïve (Gaussiano)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/05%20GaussianNaiveBayes.html)
 8. Aprendizaje automático
