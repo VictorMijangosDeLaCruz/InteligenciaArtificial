@@ -30,10 +30,14 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
     2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/06%20Minimax.html)
     3. [Algoritmo alpha-beta](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/07%20AlphaBeta.html)
 7. Modelos probabilísticos
-    1. Modelos gráficos dirigidos
+    1. Redes bayesianas
         1. [Red Bayesiana para el problema de Monty Hall](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/01%20MontyHall.html)
         2. [Inferencia en red Baysiana: Muestreo por rechazo](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/02%20RejectionSampling.html)
         3. [Inferencia en red Baysiana: Ponderación de verosimilitud](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/03%20LikelihoodWeighting.html)
-        4. [Bayes naïve (frecuentista)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/04%20NaiveBayes.html)
-        5. [Bayes naïve (Gaussiano)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/05%20GaussianNaiveBayes.html)
+    2. Bayes Naïve
+        1. [Bayes naïve (frecuentista)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/04%20NaiveBayes.html)
+        2. [Bayes naïve (Gaussiano)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/05%20GaussianNaiveBayes.html)
+    3. Modelos Ocultos de Márkov
+        1. [Algoritmo de Viterbi para etiquetado de texto](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/06%20HMMViterbi.html)
+        2. [Algoritmo de Viterbi para localización](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/07%20ViterbiLocalization.html)
 8. Aprendizaje automático
