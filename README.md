@@ -43,8 +43,9 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
         1. [Bayes naïve (frecuentista)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/04%20NaiveBayes.html)
         2. [Bayes naïve (Gaussiano)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/05%20GaussianNaiveBayes.html)
     3. Modelos Ocultos de Márkov
-        1. [Algoritmo de Viterbi para etiquetado de texto](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/06%20HMMViterbi.html)
-        2. [Algoritmo de Viterbi para localización](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/07%20ViterbiLocalization.html)
+        1. [Algoritmo de Avance-Retroceso](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/08%20ForwardBackward.html)
+        2. [Algoritmo de Viterbi para etiquetado de texto](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/06%20HMMViterbi.html)
+        3. [Algoritmo de Viterbi para localización](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/07%20ViterbiLocalization.html)
 6. Aprendizaje automático
     1. [Estructura de un agente de aprendizaje](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/00%20EstructuraAprendizaje.html)
     2. Aprendizaje supervisado: Modelos paramétricos (lineales)
