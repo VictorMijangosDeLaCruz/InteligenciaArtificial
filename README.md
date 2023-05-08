@@ -42,6 +42,13 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
         2. [Algoritmo de Viterbi para localización](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/07%20ViterbiLocalization.html)
 6. Aprendizaje automático
     1. [Estructura de un agente de aprendizaje](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/00%20EstructuraAprendizaje.html)
-    2. Aprendizaje supervisado
+    2. Aprendizaje supervisado: Modelos paramétricos (lineales)
         1. [Regresión lineal](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/01%20LinearRegression.html)
-        2. [Regresión logística](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/01%20LogisticRegression.html)
+        2. [Regresión logística](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/02%20LogisticRegression.html)
+        3. [Perceptrón](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/03%20Perceptron.html)
+    3. Aprendizaje supervisado: Modelos no paramétricos
+        1. [k-Vecinos más cercanos](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/04%20kNN.html)
+        2. [Árboles de decisión](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/05%20DecisionTrees.html)
+    4. Aprendizaje no supervisado
+        1. [k-Medias](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/06%20kMeans.html)
+    5. Aprendizaje por refuerzo
