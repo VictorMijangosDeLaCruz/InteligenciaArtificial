@@ -62,4 +62,4 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
 
 
 --------------------------------------------------
-Proyecto PAPIME PE102723
+<div style="text-align: right">Proyecto PAPIME PE102723</div>
