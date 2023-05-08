@@ -41,3 +41,4 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
         1. [Algoritmo de Viterbi para etiquetado de texto](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/06%20HMMViterbi.html)
         2. [Algoritmo de Viterbi para localización](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/07%20ViterbiLocalization.html)
 8. Aprendizaje automático
+        1. [Estructura de un agente de aprendizaje](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/00%20EstructuraAprendizaje.html)
