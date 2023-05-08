@@ -52,3 +52,4 @@ Página de githu para el curso de Inteligencia Artificial de la Facultad de Cien
     4. Aprendizaje no supervisado
         1. [k-Medias](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/06%20kMeans.html)
     5. Aprendizaje por refuerzo
+        1. [Q-Learning](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/07%20QLearning.html)
