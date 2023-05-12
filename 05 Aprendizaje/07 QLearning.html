@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Q-learning_Frozen-Lake</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>07 QLearning</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -15110,7 +15110,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Q-learning-en-el-ambiente-del-Frozen-Lake">Q-learning en el ambiente del Frozen Lake<a class="anchor-link" href="#Q-learning-en-el-ambiente-del-Frozen-Lake">&#182;</a></h1><div style="text-align: right"><b>Autora</b>: Alicia Muñiz Jiménez<div>
+<h1 id="Q-learning-en-el-ambiente-del-Frozen-Lake">Q-learning en el ambiente del Frozen Lake<a class="anchor-link" href="#Q-learning-en-el-ambiente-del-Frozen-Lake">&#182;</a></h1><p><b>Autora</b>: Alicia Muñiz Jiménez</p>
 
 </div>
 </div>
@@ -15222,10 +15222,11 @@ $$<p>Donde:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span> 
 <span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">random</span>
 </pre></div>
@@ -15246,15 +15247,25 @@ $$<p>Donde:</p>
 </div>
 </div>
 </div>
-</div><div id="cell-id=2ff1a16c" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=2ff1a16c" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FrozenLake-v1&quot;</span><span class="p">,</span><span class="n">desc</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SFFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FHFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFH&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFG&quot;</span><span class="p">],</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Crea ambiente; render_mode=&#39;human&#39; permite visualizar gráficamente el entorno </span>
+<span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FrozenLake-v1&quot;</span><span class="p">,</span><span class="n">desc</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SHFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFH&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFG&quot;</span><span class="p">],</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">)</span>
+<span class="c1">#Índices de las acciones</span>
+<span class="n">action_names</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Izquierda&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;Abajo&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;Derecha&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;Arriba&#39;</span><span class="p">}</span>
+
+<span class="c1">#Número de acciones</span>
+<span class="n">action_space_size</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
+<span class="c1">#Número de cuadros</span>
+<span class="n">state_space_size</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">n</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ambiente:</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s1"> Tamaño: </span><span class="si">{}</span><span class="s1">; Núm. acciones: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">desc</span><span class="p">,</span> <span class="n">state_space_size</span><span class="p">,</span> <span class="n">action_space_size</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -15262,27 +15273,60 @@ $$<p>Donde:</p>
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Ambiente:
+[[b&#39;S&#39; b&#39;H&#39; b&#39;F&#39; b&#39;F&#39;]
+ [b&#39;F&#39; b&#39;F&#39; b&#39;F&#39; b&#39;F&#39;]
+ [b&#39;F&#39; b&#39;F&#39; b&#39;F&#39; b&#39;H&#39;]
+ [b&#39;F&#39; b&#39;F&#39; b&#39;F&#39; b&#39;G&#39;]]
+ Tamaño: 16; Núm. acciones: 4
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div><div id="cell-id=da9db83a" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ensayos</span> <span class="o">=</span> <span class="mi">10</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Número de ensayos</span>
+<span class="n">ensayos</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="k">for</span> <span class="n">ensayos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ensayos</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-  <span class="n">estado</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-  <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
-  <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#Estado inicial</span>
+    <span class="n">estado</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
 
-  <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
-    <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+        <span class="c1">#Visualiza el ambiente</span>
+        <span class="c1">#env.render() #Quitar comentario para visualizar</span>
+        <span class="c1">#Muestrea una acción</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">action_names</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
+        <span class="c1">#Obtiene la recompensa por la acción</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">+=</span> <span class="n">reward</span>
 
-  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ensayo:</span><span class="si">{}</span><span class="s1"> action:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ensayos</span><span class="p">,</span> <span class="n">action</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ensayo:</span><span class="si">{}</span><span class="se">\n\t</span><span class="s1">Acciones:</span><span class="si">{}</span><span class="s1">; Recompensa: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ensayos</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
 
 <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
@@ -15304,16 +15348,12 @@ $$<p>Donde:</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Ensayo:1 action:2
-Ensayo:2 action:2
-Ensayo:3 action:2
-Ensayo:4 action:2
-Ensayo:5 action:2
-Ensayo:6 action:2
-Ensayo:7 action:2
-Ensayo:8 action:3
-Ensayo:9 action:2
-Ensayo:10 action:2
+<pre>Ensayo:1
+	Acciones:[&#39;Izquierda&#39;, &#39;Derecha&#39;]; Recompensa: 0.0
+Ensayo:2
+	Acciones:[&#39;Arriba&#39;, &#39;Arriba&#39;, &#39;Izquierda&#39;, &#39;Derecha&#39;]; Recompensa: 0.0
+Ensayo:3
+	Acciones:[&#39;Abajo&#39;, &#39;Arriba&#39;, &#39;Arriba&#39;, &#39;Derecha&#39;]; Recompensa: 0.0
 </pre>
 </div>
 </div>
@@ -15322,6 +15362,19 @@ Ensayo:10 action:2
 
 </div>
 
+</div>
+<div id="cell-id=0f975a90" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Un ejemplo de la exploración que hace el agente se puede visualizar de la siguiente forma:</p>
+<p><img src="Images/FrozenLake.gif" alt="image" /></p>
+
+</div>
+</div>
+</div>
 </div>
 <div id="cell-id=eeb0544e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15350,11 +15403,10 @@ Ensayo:10 action:2
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FrozenLake-v1&quot;</span><span class="p">,</span><span class="n">desc</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SFFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FHFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFH&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFG&quot;</span><span class="p">],</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;ansi&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FrozenLake-v1&quot;</span><span class="p">,</span><span class="n">desc</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SFFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FHFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFH&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFG&quot;</span><span class="p">],</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;ansi&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15367,14 +15419,12 @@ Ensayo:10 action:2
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[49]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">action_space_size</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
-<span class="n">state_space_size</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">n</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Tabla de valores Q inicalmente con 0s</span>
 <span class="n">Q_table</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">state_space_size</span><span class="p">,</span> <span class="n">action_space_size</span><span class="p">))</span>
-<span class="n">Q_table</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">Q_table</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Izquierda&#39;</span><span class="p">,</span> <span class="s1">&#39;Abajo&#39;</span><span class="p">,</span> <span class="s1">&#39;Derecha&#39;</span><span class="p">,</span> <span class="s1">&#39;Arriba&#39;</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -15390,28 +15440,151 @@ Ensayo:10 action:2
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[49]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.],
-       [0., 0., 0., 0.]])</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Izquierda</th>
+      <th>Abajo</th>
+      <th>Derecha</th>
+      <th>Arriba</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
@@ -15420,181 +15593,39 @@ Ensayo:10 action:2
 
 </div>
 
-</div><div id="cell-id=c074975c" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=cc266f94" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[50]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[50]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>4</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div id="cell-id=4a892f33" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[51]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">n</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[51]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>16</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div id="cell-id=cc266f94" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[52]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q_table</span><span class="o">.</span><span class="n">shape</span>
-
-<span class="k">def</span> <span class="nf">policy</span><span class="p">(</span> <span class="n">state</span> <span class="p">:</span> <span class="nb">tuple</span> <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Choosing action based on epsilon-greedy policy&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">policy</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">Q_table</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Elije la acción en base a una política ambiciosa&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Q_table</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 
-<span class="k">def</span> <span class="nf">new_Q_value</span><span class="p">(</span> <span class="n">reward</span> <span class="p">:</span> <span class="nb">float</span> <span class="p">,</span>  <span class="n">new_state</span> <span class="p">:</span> <span class="nb">tuple</span> <span class="p">,</span> <span class="n">discount_factor</span><span class="o">=</span><span class="mi">1</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Temporal diffrence for updating Q-value of state-action pair&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">new_Q_value</span><span class="p">(</span> <span class="n">reward</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">Q_table</span><span class="p">,</span> <span class="n">discount_factor</span><span class="o">=</span><span class="mi">1</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Diferencia temporta para acutaliza el valor-Q del par estado-acción&quot;&quot;&quot;</span>
+    <span class="c1">#obtiene Q*</span>
     <span class="n">future_optimal_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Q_table</span><span class="p">[</span><span class="n">new_state</span><span class="p">])</span>
+    <span class="c1">#R + \gammaxQ*</span>
     <span class="n">learned_value</span> <span class="o">=</span> <span class="n">reward</span> <span class="o">+</span> <span class="n">discount_factor</span> <span class="o">*</span> <span class="n">future_optimal_value</span>
+    
     <span class="k">return</span> <span class="n">learned_value</span>
 
-<span class="c1"># Adaptive learning of Learning Rate</span>
-<span class="k">def</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="nb">int</span> <span class="p">,</span> <span class="n">min_rate</span><span class="o">=</span><span class="mf">0.01</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span>  <span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decaying learning rate&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">learning_rate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">min_rate</span><span class="o">=</span><span class="mf">0.01</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apata la tasa de aprendizaje&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">min_rate</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span><span class="p">)))</span>
 
-<span class="k">def</span> <span class="nf">exploration_rate</span><span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_rate</span><span class="o">=</span> <span class="mf">0.1</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decaying exploration rate&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">exploration_rate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">min_rate</span><span class="o">=</span> <span class="mf">0.1</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adapta la tasa de exploración&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">min_rate</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">n</span>  <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span><span class="p">)))</span>
-
-<span class="n">Q_table</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[52]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>(16, 4)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div id="cell-id=be3cc06b" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[53]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[53]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>{&#39;prob&#39;: 1}</pre>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </div><div id="cell-id=290b6e0b" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15602,47 +15633,45 @@ Ensayo:10 action:2
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[54]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">num_episodio</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">puntajes_ep</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="n">n_episodes</span> <span class="o">=</span> <span class="mi">2000</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">puntajes_ep</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1">#Número de episodios</span>
+<span class="n">n_episodes</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_episodes</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-    
-    <span class="c1"># Discretize state into buckets</span>
+    <span class="c1">#Estado inicial</span>
     <span class="n">current_state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">num_episodio</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
-
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">while</span> <span class="n">done</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+        <span class="c1">#Escoje acción de acuerdo con la política</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">Q_table</span><span class="p">)</span>
         
-        <span class="c1"># policy action </span>
-        <span class="n">action</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">current_state</span><span class="p">)</span> <span class="c1"># exploit</span>
-        
-        <span class="c1"># insert random action</span>
+        <span class="c1">#Genera núm. aleatorio, si es menor al rango de exploración</span>
+        <span class="c1">#realiza una acción aleatoria</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">exploration_rate</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">:</span> 
-            <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span> <span class="c1"># explore </span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">action_names</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
          
-        <span class="c1"># increment enviroment</span>
+        <span class="c1">#Cálcula la recompensa y actualiza las observaciones</span>
         <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-        <span class="c1">#print(obs)</span>
         <span class="n">new_state</span> <span class="o">=</span> <span class="n">obs</span>
-        
         <span class="n">score</span> <span class="o">+=</span> <span class="n">reward</span>
 
-        <span class="c1"># Update Q-Table</span>
+        <span class="c1">#Rango de aprendizaje</span>
         <span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-        <span class="n">learnt_value</span> <span class="o">=</span> <span class="n">new_Q_value</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="n">new_state</span> <span class="p">)</span>
+        <span class="c1">#Actualiza la tabla para valores Q</span>
+        <span class="n">learnt_value</span> <span class="o">=</span> <span class="n">new_Q_value</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">Q_table</span> <span class="p">)</span>
         <span class="n">old_value</span> <span class="o">=</span> <span class="n">Q_table</span><span class="p">[</span><span class="n">current_state</span><span class="p">,</span> <span class="n">action</span><span class="p">]</span>
+        <span class="c1">#Cálcula el nuevo valor Q: (1-l)*Q_t + l*Q_t+1</span>
         <span class="n">Q_table</span><span class="p">[</span><span class="n">current_state</span><span class="p">,</span> <span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">lr</span><span class="p">)</span><span class="o">*</span><span class="n">old_value</span> <span class="o">+</span> <span class="n">lr</span><span class="o">*</span><span class="n">learnt_value</span>
-        
+        <span class="c1">#Cambia al nuevo estado</span>
         <span class="n">current_state</span> <span class="o">=</span> <span class="n">new_state</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Episode:</span><span class="si">{}</span><span class="s1"> Puntaje:</span><span class="si">{}</span><span class="s1"> e:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">exploration_rate</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
     <span class="n">puntajes_ep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">e</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Episode </span><span class="si">{}</span><span class="se">\n\t</span><span class="s1">Puntaje:</span><span class="si">{}</span><span class="s1">; Acciones:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">actions</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -15662,2008 +15691,58 @@ Ensayo:10 action:2
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Episode:1 Puntaje:0.0 e:1
-Episode:2 Puntaje:0.0 e:1
-Episode:3 Puntaje:0.0 e:1
-Episode:4 Puntaje:0.0 e:1
-Episode:5 Puntaje:0.0 e:1
-Episode:6 Puntaje:0.0 e:1
-Episode:7 Puntaje:0.0 e:1
-Episode:8 Puntaje:0.0 e:1
-Episode:9 Puntaje:0.0 e:1
-Episode:10 Puntaje:0.0 e:1
-Episode:11 Puntaje:0.0 e:1
-Episode:12 Puntaje:0.0 e:1
-Episode:13 Puntaje:0.0 e:1
-Episode:14 Puntaje:0.0 e:1
-Episode:15 Puntaje:0.0 e:1
-Episode:16 Puntaje:0.0 e:1
-Episode:17 Puntaje:0.0 e:1
-Episode:18 Puntaje:0.0 e:1
-Episode:19 Puntaje:0.0 e:1
-Episode:20 Puntaje:0.0 e:1
-Episode:21 Puntaje:0.0 e:1
-Episode:22 Puntaje:0.0 e:1
-Episode:23 Puntaje:0.0 e:1
-Episode:24 Puntaje:0.0 e:1
-Episode:25 Puntaje:0.0 e:0.9829666607012196
-Episode:26 Puntaje:0.0 e:0.9665762445130502
-Episode:27 Puntaje:0.0 e:0.9507819773298184
-Episode:28 Puntaje:0.0 e:0.9355420107730815
-Episode:29 Puntaje:0.0 e:0.9208187539523752
-Episode:30 Puntaje:0.0 e:0.906578314837765
-Episode:31 Puntaje:0.0 e:0.8927900303521317
-Episode:32 Puntaje:0.0 e:0.8794260687941501
-Episode:33 Puntaje:0.0 e:0.8664610916297825
-Episode:34 Puntaje:0.0 e:0.853871964321762
-Episode:35 Puntaje:0.0 e:0.8416375079047503
-Episode:36 Puntaje:0.0 e:0.8297382846050426
-Episode:37 Puntaje:0.0 e:0.8181564120552275
-Episode:38 Puntaje:0.0 e:0.8068754016455384
-Episode:39 Puntaje:0.0 e:0.7958800173440752
-Episode:40 Puntaje:0.0 e:0.7851561519523022
-Episode:41 Puntaje:0.0 e:0.7746907182741372
-Episode:42 Puntaje:0.0 e:0.7644715530924511
-Episode:43 Puntaje:0.0 e:0.7544873321858502
-Episode:44 Puntaje:0.0 e:0.744727494896694
-Episode:45 Puntaje:0.0 e:0.7351821769904635
-Episode:46 Puntaje:0.0 e:0.7258421507363202
-Episode:47 Puntaje:0.0 e:0.7166987712964504
-Episode:48 Puntaje:0.0 e:0.707743928643524
-Episode:49 Puntaje:0.0 e:0.6989700043360187
-Episode:50 Puntaje:0.0 e:0.6903698325741012
-Episode:51 Puntaje:0.0 e:0.6819366650372385
-Episode:52 Puntaje:0.0 e:0.6736641390712486
-Episode:53 Puntaje:0.0 e:0.6655462488490691
-Episode:54 Puntaje:0.0 e:0.6575773191777937
-Episode:55 Puntaje:0.0 e:0.6497519816658371
-Episode:56 Puntaje:0.0 e:0.6420651529995463
-Episode:57 Puntaje:0.0 e:0.6345120151091004
-Episode:58 Puntaje:0.0 e:0.6270879970298935
-Episode:59 Puntaje:0.0 e:0.619788758288394
-Episode:60 Puntaje:0.0 e:0.6126101736612706
-Episode:61 Puntaje:0.0 e:0.6055483191737837
-Episode:62 Puntaje:0.0 e:0.5985994592184559
-Episode:63 Puntaje:0.0 e:0.5917600346881504
-Episode:64 Puntaje:0.0 e:0.585026652029182
-Episode:65 Puntaje:0.0 e:0.5783960731301689
-Episode:66 Puntaje:0.0 e:0.5718652059712112
-Episode:67 Puntaje:0.0 e:0.5654310959658013
-Episode:68 Puntaje:0.0 e:0.5590909179347823
-Episode:69 Puntaje:0.0 e:0.5528419686577808
-Episode:70 Puntaje:0.0 e:0.5466816599529624
-Episode:71 Puntaje:0.0 e:0.5406075122407692
-Episode:72 Puntaje:0.0 e:0.5346171485515817
-Episode:73 Puntaje:0.0 e:0.5287082889410615
-Episode:74 Puntaje:0.0 e:0.5228787452803376
-Episode:75 Puntaje:0.0 e:0.5171264163912462
-Episode:76 Puntaje:0.0 e:0.5114492834995557
-Episode:77 Puntaje:0.0 e:0.5058454059815571
-Episode:78 Puntaje:0.0 e:0.5003129173815961
-Episode:79 Puntaje:0.0 e:0.49485002168009395
-Episode:80 Puntaje:0.0 e:0.48945498979338786
-Episode:81 Puntaje:0.0 e:0.4841261562883209
-Episode:82 Puntaje:0.0 e:0.47886191629596375
-Episode:83 Puntaje:0.0 e:0.473660722610156
-Episode:84 Puntaje:0.0 e:0.46852108295774486
-Episode:85 Puntaje:0.0 e:0.46344155742846993
-Episode:86 Puntaje:0.0 e:0.45842075605341903
-Episode:87 Puntaje:0.0 e:0.4534573365218689
-Episode:88 Puntaje:0.0 e:0.4485500020271248
-Episode:89 Puntaje:0.0 e:0.44369749923271273
-Episode:90 Puntaje:0.0 e:0.43889861635094396
-Episode:91 Puntaje:0.0 e:0.43415218132648237
-Episode:92 Puntaje:0.0 e:0.4294570601181025
-Episode:93 Puntaje:0.0 e:0.42481215507233894
-Episode:94 Puntaje:0.0 e:0.4202164033831899
-Episode:95 Puntaje:0.0 e:0.4156687756324692
-Episode:96 Puntaje:0.0 e:0.41116827440579273
-Episode:97 Puntaje:0.0 e:0.4067139329795427
-Episode:98 Puntaje:0.0 e:0.4023048140744877
-Episode:99 Puntaje:0.0 e:0.3979400086720376
-Episode:100 Puntaje:0.0 e:0.3936186348893951
-Episode:101 Puntaje:0.0 e:0.3893398369101201
-Episode:102 Puntaje:0.0 e:0.38510278396686537
-Episode:103 Puntaje:0.0 e:0.38090666937325723
-Episode:104 Puntaje:0.0 e:0.37675070960209955
-Episode:105 Puntaje:0.0 e:0.3726341434072673
-Episode:106 Puntaje:1.0 e:0.368556230986828
-Episode:107 Puntaje:0.0 e:0.36451625318508785
-Episode:108 Puntaje:0.0 e:0.3605135107314139
-Episode:109 Puntaje:0.0 e:0.3565473235138126
-Episode:110 Puntaje:0.0 e:0.35261702988538013
-Episode:111 Puntaje:0.0 e:0.348721986001856
-Episode:112 Puntaje:0.0 e:0.3448615651886179
-Episode:113 Puntaje:0.0 e:0.341035157335565
-Episode:114 Puntaje:0.0 e:0.3372421683184259
-Episode:115 Puntaje:0.0 e:0.3334820194451191
-Episode:116 Puntaje:0.0 e:0.329754146925876
-Episode:117 Puntaje:0.0 e:0.32605800136591223
-Episode:118 Puntaje:0.0 e:0.3223930472795069
-Episode:119 Puntaje:0.0 e:0.31875876262441283
-Episode:120 Puntaje:0.0 e:0.31515463835558755
-Episode:121 Puntaje:0.0 e:0.31158017799728943
-Episode:122 Puntaje:0.0 e:0.30803489723263966
-Episode:123 Puntaje:0.0 e:0.30451832350980257
-Episode:124 Puntaje:0.0 e:0.30102999566398114
-Episode:125 Puntaje:0.0 e:0.29756946355447467
-Episode:126 Puntaje:0.0 e:0.2941362877160807
-Episode:127 Puntaje:0.0 e:0.2907300390241693
-Episode:128 Puntaje:0.0 e:0.2873502983727886
-Episode:129 Puntaje:0.0 e:0.2839966563652008
-Episode:130 Puntaje:0.0 e:0.2806687130162734
-Episode:131 Puntaje:0.0 e:0.2773660774661877
-Episode:132 Puntaje:0.0 e:0.2740883677049518
-Episode:133 Puntaje:1.0 e:0.2708352103072299
-Episode:134 Puntaje:0.0 e:0.2676062401770315
-Episode:135 Puntaje:0.0 e:0.26440110030182007
-Episode:136 Puntaje:0.0 e:0.2612194415156308
-Episode:137 Puntaje:0.0 e:0.25806092227080113
-Episode:138 Puntaje:0.0 e:0.25492520841794253
-Episode:139 Puntaje:0.0 e:0.25181197299379965
-Episode:140 Puntaje:0.0 e:0.2487208960166577
-Episode:141 Puntaje:0.0 e:0.2456516642889811
-Episode:142 Puntaje:0.0 e:0.24260397120697585
-Episode:143 Puntaje:0.0 e:0.23957751657678794
-Episode:144 Puntaje:1.0 e:0.23657200643706278
-Episode:145 Puntaje:0.0 e:0.23358715288760057
-Episode:146 Puntaje:0.0 e:0.2306226739238615
-Episode:147 Puntaje:0.0 e:0.22767829327708022
-Episode:148 Puntaje:0.0 e:0.22475374025976358
-Episode:149 Puntaje:0.0 e:0.22184874961635637
-Episode:150 Puntaje:0.0 e:0.21896306137886812
-Episode:151 Puntaje:1.0 e:0.2160964207272651
-Episode:152 Puntaje:0.0 e:0.21324857785443885
-Episode:153 Puntaje:1.0 e:0.2104192878355745
-Episode:154 Puntaje:1.0 e:0.2076083105017461
-Episode:155 Puntaje:1.0 e:0.204815410317576
-Episode:156 Puntaje:1.0 e:0.2020403562628038
-Episode:157 Puntaje:1.0 e:0.19928292171761497
-Episode:158 Puntaje:1.0 e:0.19654288435158607
-Episode:159 Puntaje:1.0 e:0.1938200260161128
-Episode:160 Puntaje:1.0 e:0.19111413264018784
-Episode:161 Puntaje:1.0 e:0.1884249941294066
-Episode:162 Puntaje:1.0 e:0.18575240426807982
-Episode:163 Puntaje:1.0 e:0.18309616062433975
-Episode:164 Puntaje:1.0 e:0.18045606445813134
-Episode:165 Puntaje:1.0 e:0.1778319206319825
-Episode:166 Puntaje:1.0 e:0.1752235375244543
-Episode:167 Puntaje:1.0 e:0.17263072694617476
-Episode:168 Puntaje:1.0 e:0.17005330405836405
-Episode:169 Puntaje:1.0 e:0.16749108729376372
-Episode:170 Puntaje:1.0 e:0.16494389827988376
-Episode:171 Puntaje:1.0 e:0.16241156176448868
-Episode:172 Puntaje:1.0 e:0.15989390554324223
-Episode:173 Puntaje:1.0 e:0.1573907603894379
-Episode:174 Puntaje:1.0 e:0.1549019599857432
-Episode:175 Puntaje:1.0 e:0.15242734085788778
-Episode:176 Puntaje:1.0 e:0.149966742310231
-Episode:177 Puntaje:1.0 e:0.14752000636314366
-Episode:178 Puntaje:1.0 e:0.1450869776921444
-Episode:179 Puntaje:1.0 e:0.14266750356873148
-Episode:180 Puntaje:1.0 e:0.14026143380285305
-Episode:181 Puntaje:1.0 e:0.13786862068696282
-Episode:182 Puntaje:1.0 e:0.13548891894160808
-Episode:183 Puntaje:1.0 e:0.1331221856625011
-Episode:184 Puntaje:1.0 e:0.13076828026902376
-Episode:185 Puntaje:1.0 e:0.12842706445412122
-Episode:186 Puntaje:1.0 e:0.12609840213553858
-Episode:187 Puntaje:1.0 e:0.1237821594083578
-Episode:188 Puntaje:1.0 e:0.12147820449879354
-Episode:189 Puntaje:1.0 e:0.11918640771920863
-Episode:190 Puntaje:0.0 e:0.11690664142431006
-Episode:191 Puntaje:1.0 e:0.11463877996848804
-Episode:192 Puntaje:1.0 e:0.11238269966426384
-Episode:193 Puntaje:1.0 e:0.11013827874181159
-Episode:194 Puntaje:1.0 e:0.10790539730951965
-Episode:195 Puntaje:1.0 e:0.10568393731556158
-Episode:196 Puntaje:1.0 e:0.1034737825104447
-Episode:197 Puntaje:1.0 e:0.10127481841050645
-Episode:198 Puntaje:1.0 e:0.1
-Episode:199 Puntaje:1.0 e:0.1
-Episode:200 Puntaje:1.0 e:0.1
-Episode:201 Puntaje:1.0 e:0.1
-Episode:202 Puntaje:1.0 e:0.1
-Episode:203 Puntaje:1.0 e:0.1
-Episode:204 Puntaje:1.0 e:0.1
-Episode:205 Puntaje:1.0 e:0.1
-Episode:206 Puntaje:1.0 e:0.1
-Episode:207 Puntaje:1.0 e:0.1
-Episode:208 Puntaje:1.0 e:0.1
-Episode:209 Puntaje:1.0 e:0.1
-Episode:210 Puntaje:1.0 e:0.1
-Episode:211 Puntaje:1.0 e:0.1
-Episode:212 Puntaje:1.0 e:0.1
-Episode:213 Puntaje:1.0 e:0.1
-Episode:214 Puntaje:1.0 e:0.1
-Episode:215 Puntaje:1.0 e:0.1
-Episode:216 Puntaje:1.0 e:0.1
-Episode:217 Puntaje:1.0 e:0.1
-Episode:218 Puntaje:1.0 e:0.1
-Episode:219 Puntaje:1.0 e:0.1
-Episode:220 Puntaje:1.0 e:0.1
-Episode:221 Puntaje:1.0 e:0.1
-Episode:222 Puntaje:1.0 e:0.1
-Episode:223 Puntaje:1.0 e:0.1
-Episode:224 Puntaje:1.0 e:0.1
-Episode:225 Puntaje:1.0 e:0.1
-Episode:226 Puntaje:1.0 e:0.1
-Episode:227 Puntaje:1.0 e:0.1
-Episode:228 Puntaje:1.0 e:0.1
-Episode:229 Puntaje:1.0 e:0.1
-Episode:230 Puntaje:1.0 e:0.1
-Episode:231 Puntaje:1.0 e:0.1
-Episode:232 Puntaje:1.0 e:0.1
-Episode:233 Puntaje:1.0 e:0.1
-Episode:234 Puntaje:1.0 e:0.1
-Episode:235 Puntaje:1.0 e:0.1
-Episode:236 Puntaje:1.0 e:0.1
-Episode:237 Puntaje:0.0 e:0.1
-Episode:238 Puntaje:1.0 e:0.1
-Episode:239 Puntaje:1.0 e:0.1
-Episode:240 Puntaje:1.0 e:0.1
-Episode:241 Puntaje:1.0 e:0.1
-Episode:242 Puntaje:1.0 e:0.1
-Episode:243 Puntaje:1.0 e:0.1
-Episode:244 Puntaje:1.0 e:0.1
-Episode:245 Puntaje:1.0 e:0.1
-Episode:246 Puntaje:1.0 e:0.1
-Episode:247 Puntaje:1.0 e:0.1
-Episode:248 Puntaje:1.0 e:0.1
-Episode:249 Puntaje:1.0 e:0.1
-Episode:250 Puntaje:1.0 e:0.1
-Episode:251 Puntaje:1.0 e:0.1
-Episode:252 Puntaje:1.0 e:0.1
-Episode:253 Puntaje:1.0 e:0.1
-Episode:254 Puntaje:1.0 e:0.1
-Episode:255 Puntaje:1.0 e:0.1
-Episode:256 Puntaje:1.0 e:0.1
-Episode:257 Puntaje:1.0 e:0.1
-Episode:258 Puntaje:1.0 e:0.1
-Episode:259 Puntaje:1.0 e:0.1
-Episode:260 Puntaje:1.0 e:0.1
-Episode:261 Puntaje:1.0 e:0.1
-Episode:262 Puntaje:1.0 e:0.1
-Episode:263 Puntaje:1.0 e:0.1
-Episode:264 Puntaje:1.0 e:0.1
-Episode:265 Puntaje:1.0 e:0.1
-Episode:266 Puntaje:1.0 e:0.1
-Episode:267 Puntaje:1.0 e:0.1
-Episode:268 Puntaje:1.0 e:0.1
-Episode:269 Puntaje:1.0 e:0.1
-Episode:270 Puntaje:1.0 e:0.1
-Episode:271 Puntaje:1.0 e:0.1
-Episode:272 Puntaje:1.0 e:0.1
-Episode:273 Puntaje:0.0 e:0.1
-Episode:274 Puntaje:1.0 e:0.1
-Episode:275 Puntaje:1.0 e:0.1
-Episode:276 Puntaje:1.0 e:0.1
-Episode:277 Puntaje:1.0 e:0.1
-Episode:278 Puntaje:1.0 e:0.1
-Episode:279 Puntaje:1.0 e:0.1
-Episode:280 Puntaje:1.0 e:0.1
-Episode:281 Puntaje:1.0 e:0.1
-Episode:282 Puntaje:1.0 e:0.1
-Episode:283 Puntaje:1.0 e:0.1
-Episode:284 Puntaje:1.0 e:0.1
-Episode:285 Puntaje:1.0 e:0.1
-Episode:286 Puntaje:1.0 e:0.1
-Episode:287 Puntaje:1.0 e:0.1
-Episode:288 Puntaje:1.0 e:0.1
-Episode:289 Puntaje:1.0 e:0.1
-Episode:290 Puntaje:1.0 e:0.1
-Episode:291 Puntaje:1.0 e:0.1
-Episode:292 Puntaje:1.0 e:0.1
-Episode:293 Puntaje:1.0 e:0.1
-Episode:294 Puntaje:1.0 e:0.1
-Episode:295 Puntaje:1.0 e:0.1
-Episode:296 Puntaje:1.0 e:0.1
-Episode:297 Puntaje:1.0 e:0.1
-Episode:298 Puntaje:1.0 e:0.1
-Episode:299 Puntaje:1.0 e:0.1
-Episode:300 Puntaje:1.0 e:0.1
-Episode:301 Puntaje:1.0 e:0.1
-Episode:302 Puntaje:1.0 e:0.1
-Episode:303 Puntaje:1.0 e:0.1
-Episode:304 Puntaje:1.0 e:0.1
-Episode:305 Puntaje:1.0 e:0.1
-Episode:306 Puntaje:1.0 e:0.1
-Episode:307 Puntaje:1.0 e:0.1
-Episode:308 Puntaje:1.0 e:0.1
-Episode:309 Puntaje:1.0 e:0.1
-Episode:310 Puntaje:1.0 e:0.1
-Episode:311 Puntaje:1.0 e:0.1
-Episode:312 Puntaje:1.0 e:0.1
-Episode:313 Puntaje:1.0 e:0.1
-Episode:314 Puntaje:1.0 e:0.1
-Episode:315 Puntaje:1.0 e:0.1
-Episode:316 Puntaje:1.0 e:0.1
-Episode:317 Puntaje:1.0 e:0.1
-Episode:318 Puntaje:1.0 e:0.1
-Episode:319 Puntaje:1.0 e:0.1
-Episode:320 Puntaje:1.0 e:0.1
-Episode:321 Puntaje:1.0 e:0.1
-Episode:322 Puntaje:0.0 e:0.1
-Episode:323 Puntaje:1.0 e:0.1
-Episode:324 Puntaje:1.0 e:0.1
-Episode:325 Puntaje:1.0 e:0.1
-Episode:326 Puntaje:1.0 e:0.1
-Episode:327 Puntaje:1.0 e:0.1
-Episode:328 Puntaje:1.0 e:0.1
-Episode:329 Puntaje:1.0 e:0.1
-Episode:330 Puntaje:1.0 e:0.1
-Episode:331 Puntaje:1.0 e:0.1
-Episode:332 Puntaje:1.0 e:0.1
-Episode:333 Puntaje:1.0 e:0.1
-Episode:334 Puntaje:1.0 e:0.1
-Episode:335 Puntaje:1.0 e:0.1
-Episode:336 Puntaje:1.0 e:0.1
-Episode:337 Puntaje:1.0 e:0.1
-Episode:338 Puntaje:1.0 e:0.1
-Episode:339 Puntaje:1.0 e:0.1
-Episode:340 Puntaje:1.0 e:0.1
-Episode:341 Puntaje:1.0 e:0.1
-Episode:342 Puntaje:1.0 e:0.1
-Episode:343 Puntaje:1.0 e:0.1
-Episode:344 Puntaje:1.0 e:0.1
-Episode:345 Puntaje:1.0 e:0.1
-Episode:346 Puntaje:1.0 e:0.1
-Episode:347 Puntaje:1.0 e:0.1
-Episode:348 Puntaje:1.0 e:0.1
-Episode:349 Puntaje:1.0 e:0.1
-Episode:350 Puntaje:1.0 e:0.1
-Episode:351 Puntaje:1.0 e:0.1
-Episode:352 Puntaje:1.0 e:0.1
-Episode:353 Puntaje:1.0 e:0.1
-Episode:354 Puntaje:1.0 e:0.1
-Episode:355 Puntaje:1.0 e:0.1
-Episode:356 Puntaje:1.0 e:0.1
-Episode:357 Puntaje:1.0 e:0.1
-Episode:358 Puntaje:1.0 e:0.1
-Episode:359 Puntaje:1.0 e:0.1
-Episode:360 Puntaje:1.0 e:0.1
-Episode:361 Puntaje:1.0 e:0.1
-Episode:362 Puntaje:1.0 e:0.1
-Episode:363 Puntaje:1.0 e:0.1
-Episode:364 Puntaje:1.0 e:0.1
-Episode:365 Puntaje:1.0 e:0.1
-Episode:366 Puntaje:1.0 e:0.1
-Episode:367 Puntaje:1.0 e:0.1
-Episode:368 Puntaje:1.0 e:0.1
-Episode:369 Puntaje:1.0 e:0.1
-Episode:370 Puntaje:1.0 e:0.1
-Episode:371 Puntaje:1.0 e:0.1
-Episode:372 Puntaje:1.0 e:0.1
-Episode:373 Puntaje:1.0 e:0.1
-Episode:374 Puntaje:1.0 e:0.1
-Episode:375 Puntaje:1.0 e:0.1
-Episode:376 Puntaje:1.0 e:0.1
-Episode:377 Puntaje:1.0 e:0.1
-Episode:378 Puntaje:1.0 e:0.1
-Episode:379 Puntaje:1.0 e:0.1
-Episode:380 Puntaje:1.0 e:0.1
-Episode:381 Puntaje:1.0 e:0.1
-Episode:382 Puntaje:1.0 e:0.1
-Episode:383 Puntaje:1.0 e:0.1
-Episode:384 Puntaje:1.0 e:0.1
-Episode:385 Puntaje:1.0 e:0.1
-Episode:386 Puntaje:1.0 e:0.1
-Episode:387 Puntaje:1.0 e:0.1
-Episode:388 Puntaje:1.0 e:0.1
-Episode:389 Puntaje:1.0 e:0.1
-Episode:390 Puntaje:1.0 e:0.1
-Episode:391 Puntaje:1.0 e:0.1
-Episode:392 Puntaje:1.0 e:0.1
-Episode:393 Puntaje:1.0 e:0.1
-Episode:394 Puntaje:1.0 e:0.1
-Episode:395 Puntaje:1.0 e:0.1
-Episode:396 Puntaje:1.0 e:0.1
-Episode:397 Puntaje:1.0 e:0.1
-Episode:398 Puntaje:1.0 e:0.1
-Episode:399 Puntaje:1.0 e:0.1
-Episode:400 Puntaje:1.0 e:0.1
-Episode:401 Puntaje:1.0 e:0.1
-Episode:402 Puntaje:1.0 e:0.1
-Episode:403 Puntaje:1.0 e:0.1
-Episode:404 Puntaje:1.0 e:0.1
-Episode:405 Puntaje:1.0 e:0.1
-Episode:406 Puntaje:1.0 e:0.1
-Episode:407 Puntaje:1.0 e:0.1
-Episode:408 Puntaje:1.0 e:0.1
-Episode:409 Puntaje:1.0 e:0.1
-Episode:410 Puntaje:1.0 e:0.1
-Episode:411 Puntaje:1.0 e:0.1
-Episode:412 Puntaje:1.0 e:0.1
-Episode:413 Puntaje:1.0 e:0.1
-Episode:414 Puntaje:0.0 e:0.1
-Episode:415 Puntaje:1.0 e:0.1
-Episode:416 Puntaje:1.0 e:0.1
-Episode:417 Puntaje:1.0 e:0.1
-Episode:418 Puntaje:1.0 e:0.1
-Episode:419 Puntaje:1.0 e:0.1
-Episode:420 Puntaje:1.0 e:0.1
-Episode:421 Puntaje:0.0 e:0.1
-Episode:422 Puntaje:1.0 e:0.1
-Episode:423 Puntaje:1.0 e:0.1
-Episode:424 Puntaje:1.0 e:0.1
-Episode:425 Puntaje:0.0 e:0.1
-Episode:426 Puntaje:0.0 e:0.1
-Episode:427 Puntaje:1.0 e:0.1
-Episode:428 Puntaje:1.0 e:0.1
-Episode:429 Puntaje:1.0 e:0.1
-Episode:430 Puntaje:1.0 e:0.1
-Episode:431 Puntaje:1.0 e:0.1
-Episode:432 Puntaje:1.0 e:0.1
-Episode:433 Puntaje:1.0 e:0.1
-Episode:434 Puntaje:1.0 e:0.1
-Episode:435 Puntaje:1.0 e:0.1
-Episode:436 Puntaje:1.0 e:0.1
-Episode:437 Puntaje:1.0 e:0.1
-Episode:438 Puntaje:1.0 e:0.1
-Episode:439 Puntaje:1.0 e:0.1
-Episode:440 Puntaje:1.0 e:0.1
-Episode:441 Puntaje:1.0 e:0.1
-Episode:442 Puntaje:1.0 e:0.1
-Episode:443 Puntaje:1.0 e:0.1
-Episode:444 Puntaje:1.0 e:0.1
-Episode:445 Puntaje:1.0 e:0.1
-Episode:446 Puntaje:1.0 e:0.1
-Episode:447 Puntaje:1.0 e:0.1
-Episode:448 Puntaje:1.0 e:0.1
-Episode:449 Puntaje:1.0 e:0.1
-Episode:450 Puntaje:1.0 e:0.1
-Episode:451 Puntaje:1.0 e:0.1
-Episode:452 Puntaje:1.0 e:0.1
-Episode:453 Puntaje:1.0 e:0.1
-Episode:454 Puntaje:1.0 e:0.1
-Episode:455 Puntaje:1.0 e:0.1
-Episode:456 Puntaje:0.0 e:0.1
-Episode:457 Puntaje:1.0 e:0.1
-Episode:458 Puntaje:1.0 e:0.1
-Episode:459 Puntaje:1.0 e:0.1
-Episode:460 Puntaje:1.0 e:0.1
-Episode:461 Puntaje:1.0 e:0.1
-Episode:462 Puntaje:1.0 e:0.1
-Episode:463 Puntaje:1.0 e:0.1
-Episode:464 Puntaje:1.0 e:0.1
-Episode:465 Puntaje:1.0 e:0.1
-Episode:466 Puntaje:1.0 e:0.1
-Episode:467 Puntaje:1.0 e:0.1
-Episode:468 Puntaje:1.0 e:0.1
-Episode:469 Puntaje:1.0 e:0.1
-Episode:470 Puntaje:1.0 e:0.1
-Episode:471 Puntaje:1.0 e:0.1
-Episode:472 Puntaje:1.0 e:0.1
-Episode:473 Puntaje:1.0 e:0.1
-Episode:474 Puntaje:1.0 e:0.1
-Episode:475 Puntaje:1.0 e:0.1
-Episode:476 Puntaje:1.0 e:0.1
-Episode:477 Puntaje:1.0 e:0.1
-Episode:478 Puntaje:1.0 e:0.1
-Episode:479 Puntaje:1.0 e:0.1
-Episode:480 Puntaje:1.0 e:0.1
-Episode:481 Puntaje:1.0 e:0.1
-Episode:482 Puntaje:1.0 e:0.1
-Episode:483 Puntaje:1.0 e:0.1
-Episode:484 Puntaje:1.0 e:0.1
-Episode:485 Puntaje:1.0 e:0.1
-Episode:486 Puntaje:1.0 e:0.1
-Episode:487 Puntaje:1.0 e:0.1
-Episode:488 Puntaje:1.0 e:0.1
-Episode:489 Puntaje:1.0 e:0.1
-Episode:490 Puntaje:1.0 e:0.1
-Episode:491 Puntaje:1.0 e:0.1
-Episode:492 Puntaje:1.0 e:0.1
-Episode:493 Puntaje:1.0 e:0.1
-Episode:494 Puntaje:1.0 e:0.1
-Episode:495 Puntaje:1.0 e:0.1
-Episode:496 Puntaje:1.0 e:0.1
-Episode:497 Puntaje:1.0 e:0.1
-Episode:498 Puntaje:1.0 e:0.1
-Episode:499 Puntaje:1.0 e:0.1
-Episode:500 Puntaje:1.0 e:0.1
-Episode:501 Puntaje:1.0 e:0.1
-Episode:502 Puntaje:1.0 e:0.1
-Episode:503 Puntaje:1.0 e:0.1
-Episode:504 Puntaje:1.0 e:0.1
-Episode:505 Puntaje:1.0 e:0.1
-Episode:506 Puntaje:1.0 e:0.1
-Episode:507 Puntaje:1.0 e:0.1
-Episode:508 Puntaje:1.0 e:0.1
-Episode:509 Puntaje:1.0 e:0.1
-Episode:510 Puntaje:1.0 e:0.1
-Episode:511 Puntaje:1.0 e:0.1
-Episode:512 Puntaje:1.0 e:0.1
-Episode:513 Puntaje:1.0 e:0.1
-Episode:514 Puntaje:1.0 e:0.1
-Episode:515 Puntaje:1.0 e:0.1
-Episode:516 Puntaje:1.0 e:0.1
-Episode:517 Puntaje:1.0 e:0.1
-Episode:518 Puntaje:1.0 e:0.1
-Episode:519 Puntaje:1.0 e:0.1
-Episode:520 Puntaje:1.0 e:0.1
-Episode:521 Puntaje:1.0 e:0.1
-Episode:522 Puntaje:1.0 e:0.1
-Episode:523 Puntaje:1.0 e:0.1
-Episode:524 Puntaje:1.0 e:0.1
-Episode:525 Puntaje:1.0 e:0.1
-Episode:526 Puntaje:1.0 e:0.1
-Episode:527 Puntaje:1.0 e:0.1
-Episode:528 Puntaje:1.0 e:0.1
-Episode:529 Puntaje:1.0 e:0.1
-Episode:530 Puntaje:1.0 e:0.1
-Episode:531 Puntaje:1.0 e:0.1
-Episode:532 Puntaje:1.0 e:0.1
-Episode:533 Puntaje:1.0 e:0.1
-Episode:534 Puntaje:1.0 e:0.1
-Episode:535 Puntaje:1.0 e:0.1
-Episode:536 Puntaje:1.0 e:0.1
-Episode:537 Puntaje:1.0 e:0.1
-Episode:538 Puntaje:1.0 e:0.1
-Episode:539 Puntaje:1.0 e:0.1
-Episode:540 Puntaje:1.0 e:0.1
-Episode:541 Puntaje:1.0 e:0.1
-Episode:542 Puntaje:1.0 e:0.1
-Episode:543 Puntaje:1.0 e:0.1
-Episode:544 Puntaje:1.0 e:0.1
-Episode:545 Puntaje:1.0 e:0.1
-Episode:546 Puntaje:1.0 e:0.1
-Episode:547 Puntaje:1.0 e:0.1
-Episode:548 Puntaje:1.0 e:0.1
-Episode:549 Puntaje:1.0 e:0.1
-Episode:550 Puntaje:1.0 e:0.1
-Episode:551 Puntaje:1.0 e:0.1
-Episode:552 Puntaje:1.0 e:0.1
-Episode:553 Puntaje:1.0 e:0.1
-Episode:554 Puntaje:1.0 e:0.1
-Episode:555 Puntaje:1.0 e:0.1
-Episode:556 Puntaje:1.0 e:0.1
-Episode:557 Puntaje:1.0 e:0.1
-Episode:558 Puntaje:1.0 e:0.1
-Episode:559 Puntaje:1.0 e:0.1
-Episode:560 Puntaje:1.0 e:0.1
-Episode:561 Puntaje:1.0 e:0.1
-Episode:562 Puntaje:1.0 e:0.1
-Episode:563 Puntaje:1.0 e:0.1
-Episode:564 Puntaje:0.0 e:0.1
-Episode:565 Puntaje:1.0 e:0.1
-Episode:566 Puntaje:1.0 e:0.1
-Episode:567 Puntaje:1.0 e:0.1
-Episode:568 Puntaje:1.0 e:0.1
-Episode:569 Puntaje:1.0 e:0.1
-Episode:570 Puntaje:1.0 e:0.1
-Episode:571 Puntaje:1.0 e:0.1
-Episode:572 Puntaje:1.0 e:0.1
-Episode:573 Puntaje:1.0 e:0.1
-Episode:574 Puntaje:1.0 e:0.1
-Episode:575 Puntaje:1.0 e:0.1
-Episode:576 Puntaje:1.0 e:0.1
-Episode:577 Puntaje:1.0 e:0.1
-Episode:578 Puntaje:1.0 e:0.1
-Episode:579 Puntaje:1.0 e:0.1
-Episode:580 Puntaje:1.0 e:0.1
-Episode:581 Puntaje:1.0 e:0.1
-Episode:582 Puntaje:1.0 e:0.1
-Episode:583 Puntaje:1.0 e:0.1
-Episode:584 Puntaje:1.0 e:0.1
-Episode:585 Puntaje:1.0 e:0.1
-Episode:586 Puntaje:0.0 e:0.1
-Episode:587 Puntaje:1.0 e:0.1
-Episode:588 Puntaje:1.0 e:0.1
-Episode:589 Puntaje:1.0 e:0.1
-Episode:590 Puntaje:1.0 e:0.1
-Episode:591 Puntaje:1.0 e:0.1
-Episode:592 Puntaje:1.0 e:0.1
-Episode:593 Puntaje:0.0 e:0.1
-Episode:594 Puntaje:1.0 e:0.1
-Episode:595 Puntaje:1.0 e:0.1
-Episode:596 Puntaje:1.0 e:0.1
-Episode:597 Puntaje:1.0 e:0.1
-Episode:598 Puntaje:1.0 e:0.1
-Episode:599 Puntaje:1.0 e:0.1
-Episode:600 Puntaje:1.0 e:0.1
-Episode:601 Puntaje:1.0 e:0.1
-Episode:602 Puntaje:1.0 e:0.1
-Episode:603 Puntaje:1.0 e:0.1
-Episode:604 Puntaje:1.0 e:0.1
-Episode:605 Puntaje:1.0 e:0.1
-Episode:606 Puntaje:1.0 e:0.1
-Episode:607 Puntaje:1.0 e:0.1
-Episode:608 Puntaje:1.0 e:0.1
-Episode:609 Puntaje:1.0 e:0.1
-Episode:610 Puntaje:1.0 e:0.1
-Episode:611 Puntaje:1.0 e:0.1
-Episode:612 Puntaje:1.0 e:0.1
-Episode:613 Puntaje:1.0 e:0.1
-Episode:614 Puntaje:1.0 e:0.1
-Episode:615 Puntaje:1.0 e:0.1
-Episode:616 Puntaje:1.0 e:0.1
-Episode:617 Puntaje:1.0 e:0.1
-Episode:618 Puntaje:1.0 e:0.1
-Episode:619 Puntaje:1.0 e:0.1
-Episode:620 Puntaje:1.0 e:0.1
-Episode:621 Puntaje:1.0 e:0.1
-Episode:622 Puntaje:1.0 e:0.1
-Episode:623 Puntaje:1.0 e:0.1
-Episode:624 Puntaje:1.0 e:0.1
-Episode:625 Puntaje:1.0 e:0.1
-Episode:626 Puntaje:1.0 e:0.1
-Episode:627 Puntaje:1.0 e:0.1
-Episode:628 Puntaje:1.0 e:0.1
-Episode:629 Puntaje:1.0 e:0.1
-Episode:630 Puntaje:1.0 e:0.1
-Episode:631 Puntaje:1.0 e:0.1
-Episode:632 Puntaje:1.0 e:0.1
-Episode:633 Puntaje:1.0 e:0.1
-Episode:634 Puntaje:1.0 e:0.1
-Episode:635 Puntaje:1.0 e:0.1
-Episode:636 Puntaje:1.0 e:0.1
-Episode:637 Puntaje:0.0 e:0.1
-Episode:638 Puntaje:1.0 e:0.1
-Episode:639 Puntaje:1.0 e:0.1
-Episode:640 Puntaje:1.0 e:0.1
-Episode:641 Puntaje:1.0 e:0.1
-Episode:642 Puntaje:1.0 e:0.1
-Episode:643 Puntaje:1.0 e:0.1
-Episode:644 Puntaje:1.0 e:0.1
-Episode:645 Puntaje:1.0 e:0.1
-Episode:646 Puntaje:1.0 e:0.1
-Episode:647 Puntaje:1.0 e:0.1
-Episode:648 Puntaje:1.0 e:0.1
-Episode:649 Puntaje:1.0 e:0.1
-Episode:650 Puntaje:1.0 e:0.1
-Episode:651 Puntaje:1.0 e:0.1
-Episode:652 Puntaje:1.0 e:0.1
-Episode:653 Puntaje:1.0 e:0.1
-Episode:654 Puntaje:1.0 e:0.1
-Episode:655 Puntaje:1.0 e:0.1
-Episode:656 Puntaje:1.0 e:0.1
-Episode:657 Puntaje:1.0 e:0.1
-Episode:658 Puntaje:1.0 e:0.1
-Episode:659 Puntaje:1.0 e:0.1
-Episode:660 Puntaje:1.0 e:0.1
-Episode:661 Puntaje:1.0 e:0.1
-Episode:662 Puntaje:1.0 e:0.1
-Episode:663 Puntaje:1.0 e:0.1
-Episode:664 Puntaje:1.0 e:0.1
-Episode:665 Puntaje:1.0 e:0.1
-Episode:666 Puntaje:1.0 e:0.1
-Episode:667 Puntaje:1.0 e:0.1
-Episode:668 Puntaje:1.0 e:0.1
-Episode:669 Puntaje:1.0 e:0.1
-Episode:670 Puntaje:1.0 e:0.1
-Episode:671 Puntaje:1.0 e:0.1
-Episode:672 Puntaje:1.0 e:0.1
-Episode:673 Puntaje:1.0 e:0.1
-Episode:674 Puntaje:1.0 e:0.1
-Episode:675 Puntaje:1.0 e:0.1
-Episode:676 Puntaje:1.0 e:0.1
-Episode:677 Puntaje:1.0 e:0.1
-Episode:678 Puntaje:1.0 e:0.1
-Episode:679 Puntaje:1.0 e:0.1
-Episode:680 Puntaje:1.0 e:0.1
-Episode:681 Puntaje:1.0 e:0.1
-Episode:682 Puntaje:1.0 e:0.1
-Episode:683 Puntaje:1.0 e:0.1
-Episode:684 Puntaje:1.0 e:0.1
-Episode:685 Puntaje:1.0 e:0.1
-Episode:686 Puntaje:1.0 e:0.1
-Episode:687 Puntaje:0.0 e:0.1
-Episode:688 Puntaje:1.0 e:0.1
-Episode:689 Puntaje:1.0 e:0.1
-Episode:690 Puntaje:1.0 e:0.1
-Episode:691 Puntaje:1.0 e:0.1
-Episode:692 Puntaje:1.0 e:0.1
-Episode:693 Puntaje:1.0 e:0.1
-Episode:694 Puntaje:1.0 e:0.1
-Episode:695 Puntaje:1.0 e:0.1
-Episode:696 Puntaje:1.0 e:0.1
-Episode:697 Puntaje:1.0 e:0.1
-Episode:698 Puntaje:1.0 e:0.1
-Episode:699 Puntaje:1.0 e:0.1
-Episode:700 Puntaje:1.0 e:0.1
-Episode:701 Puntaje:1.0 e:0.1
-Episode:702 Puntaje:1.0 e:0.1
-Episode:703 Puntaje:1.0 e:0.1
-Episode:704 Puntaje:1.0 e:0.1
-Episode:705 Puntaje:1.0 e:0.1
-Episode:706 Puntaje:1.0 e:0.1
-Episode:707 Puntaje:0.0 e:0.1
-Episode:708 Puntaje:1.0 e:0.1
-Episode:709 Puntaje:1.0 e:0.1
-Episode:710 Puntaje:1.0 e:0.1
-Episode:711 Puntaje:1.0 e:0.1
-Episode:712 Puntaje:0.0 e:0.1
-Episode:713 Puntaje:1.0 e:0.1
-Episode:714 Puntaje:1.0 e:0.1
-Episode:715 Puntaje:0.0 e:0.1
-Episode:716 Puntaje:1.0 e:0.1
-Episode:717 Puntaje:1.0 e:0.1
-Episode:718 Puntaje:1.0 e:0.1
-Episode:719 Puntaje:1.0 e:0.1
-Episode:720 Puntaje:1.0 e:0.1
-Episode:721 Puntaje:1.0 e:0.1
-Episode:722 Puntaje:1.0 e:0.1
-Episode:723 Puntaje:1.0 e:0.1
-Episode:724 Puntaje:1.0 e:0.1
-Episode:725 Puntaje:1.0 e:0.1
-Episode:726 Puntaje:1.0 e:0.1
-Episode:727 Puntaje:1.0 e:0.1
-Episode:728 Puntaje:1.0 e:0.1
-Episode:729 Puntaje:1.0 e:0.1
-Episode:730 Puntaje:1.0 e:0.1
-Episode:731 Puntaje:1.0 e:0.1
-Episode:732 Puntaje:1.0 e:0.1
-Episode:733 Puntaje:1.0 e:0.1
-Episode:734 Puntaje:1.0 e:0.1
-Episode:735 Puntaje:1.0 e:0.1
-Episode:736 Puntaje:1.0 e:0.1
-Episode:737 Puntaje:1.0 e:0.1
-Episode:738 Puntaje:1.0 e:0.1
-Episode:739 Puntaje:1.0 e:0.1
-Episode:740 Puntaje:1.0 e:0.1
-Episode:741 Puntaje:1.0 e:0.1
-Episode:742 Puntaje:1.0 e:0.1
-Episode:743 Puntaje:1.0 e:0.1
-Episode:744 Puntaje:1.0 e:0.1
-Episode:745 Puntaje:1.0 e:0.1
-Episode:746 Puntaje:1.0 e:0.1
-Episode:747 Puntaje:1.0 e:0.1
-Episode:748 Puntaje:1.0 e:0.1
-Episode:749 Puntaje:1.0 e:0.1
-Episode:750 Puntaje:1.0 e:0.1
-Episode:751 Puntaje:1.0 e:0.1
-Episode:752 Puntaje:1.0 e:0.1
-Episode:753 Puntaje:1.0 e:0.1
-Episode:754 Puntaje:1.0 e:0.1
-Episode:755 Puntaje:1.0 e:0.1
-Episode:756 Puntaje:1.0 e:0.1
-Episode:757 Puntaje:1.0 e:0.1
-Episode:758 Puntaje:1.0 e:0.1
-Episode:759 Puntaje:1.0 e:0.1
-Episode:760 Puntaje:1.0 e:0.1
-Episode:761 Puntaje:1.0 e:0.1
-Episode:762 Puntaje:1.0 e:0.1
-Episode:763 Puntaje:1.0 e:0.1
-Episode:764 Puntaje:1.0 e:0.1
-Episode:765 Puntaje:1.0 e:0.1
-Episode:766 Puntaje:1.0 e:0.1
-Episode:767 Puntaje:1.0 e:0.1
-Episode:768 Puntaje:1.0 e:0.1
-Episode:769 Puntaje:1.0 e:0.1
-Episode:770 Puntaje:1.0 e:0.1
-Episode:771 Puntaje:1.0 e:0.1
-Episode:772 Puntaje:1.0 e:0.1
-Episode:773 Puntaje:1.0 e:0.1
-Episode:774 Puntaje:1.0 e:0.1
-Episode:775 Puntaje:1.0 e:0.1
-Episode:776 Puntaje:1.0 e:0.1
-Episode:777 Puntaje:1.0 e:0.1
-Episode:778 Puntaje:1.0 e:0.1
-Episode:779 Puntaje:0.0 e:0.1
-Episode:780 Puntaje:1.0 e:0.1
-Episode:781 Puntaje:1.0 e:0.1
-Episode:782 Puntaje:1.0 e:0.1
-Episode:783 Puntaje:1.0 e:0.1
-Episode:784 Puntaje:0.0 e:0.1
-Episode:785 Puntaje:1.0 e:0.1
-Episode:786 Puntaje:1.0 e:0.1
-Episode:787 Puntaje:1.0 e:0.1
-Episode:788 Puntaje:0.0 e:0.1
-Episode:789 Puntaje:1.0 e:0.1
-Episode:790 Puntaje:1.0 e:0.1
-Episode:791 Puntaje:1.0 e:0.1
-Episode:792 Puntaje:1.0 e:0.1
-Episode:793 Puntaje:1.0 e:0.1
-Episode:794 Puntaje:1.0 e:0.1
-Episode:795 Puntaje:1.0 e:0.1
-Episode:796 Puntaje:1.0 e:0.1
-Episode:797 Puntaje:1.0 e:0.1
-Episode:798 Puntaje:1.0 e:0.1
-Episode:799 Puntaje:1.0 e:0.1
-Episode:800 Puntaje:1.0 e:0.1
-Episode:801 Puntaje:1.0 e:0.1
-Episode:802 Puntaje:1.0 e:0.1
-Episode:803 Puntaje:1.0 e:0.1
-Episode:804 Puntaje:1.0 e:0.1
-Episode:805 Puntaje:1.0 e:0.1
-Episode:806 Puntaje:1.0 e:0.1
-Episode:807 Puntaje:1.0 e:0.1
-Episode:808 Puntaje:1.0 e:0.1
-Episode:809 Puntaje:1.0 e:0.1
-Episode:810 Puntaje:1.0 e:0.1
-Episode:811 Puntaje:1.0 e:0.1
-Episode:812 Puntaje:1.0 e:0.1
-Episode:813 Puntaje:1.0 e:0.1
-Episode:814 Puntaje:1.0 e:0.1
-Episode:815 Puntaje:1.0 e:0.1
-Episode:816 Puntaje:1.0 e:0.1
-Episode:817 Puntaje:1.0 e:0.1
-Episode:818 Puntaje:1.0 e:0.1
-Episode:819 Puntaje:1.0 e:0.1
-Episode:820 Puntaje:1.0 e:0.1
-Episode:821 Puntaje:1.0 e:0.1
-Episode:822 Puntaje:1.0 e:0.1
-Episode:823 Puntaje:1.0 e:0.1
-Episode:824 Puntaje:1.0 e:0.1
-Episode:825 Puntaje:1.0 e:0.1
-Episode:826 Puntaje:1.0 e:0.1
-Episode:827 Puntaje:1.0 e:0.1
-Episode:828 Puntaje:1.0 e:0.1
-Episode:829 Puntaje:1.0 e:0.1
-Episode:830 Puntaje:1.0 e:0.1
-Episode:831 Puntaje:1.0 e:0.1
-Episode:832 Puntaje:1.0 e:0.1
-Episode:833 Puntaje:1.0 e:0.1
-Episode:834 Puntaje:1.0 e:0.1
-Episode:835 Puntaje:1.0 e:0.1
-Episode:836 Puntaje:1.0 e:0.1
-Episode:837 Puntaje:1.0 e:0.1
-Episode:838 Puntaje:1.0 e:0.1
-Episode:839 Puntaje:1.0 e:0.1
-Episode:840 Puntaje:1.0 e:0.1
-Episode:841 Puntaje:1.0 e:0.1
-Episode:842 Puntaje:1.0 e:0.1
-Episode:843 Puntaje:1.0 e:0.1
-Episode:844 Puntaje:1.0 e:0.1
-Episode:845 Puntaje:1.0 e:0.1
-Episode:846 Puntaje:1.0 e:0.1
-Episode:847 Puntaje:1.0 e:0.1
-Episode:848 Puntaje:1.0 e:0.1
-Episode:849 Puntaje:1.0 e:0.1
-Episode:850 Puntaje:1.0 e:0.1
-Episode:851 Puntaje:1.0 e:0.1
-Episode:852 Puntaje:1.0 e:0.1
-Episode:853 Puntaje:1.0 e:0.1
-Episode:854 Puntaje:1.0 e:0.1
-Episode:855 Puntaje:1.0 e:0.1
-Episode:856 Puntaje:1.0 e:0.1
-Episode:857 Puntaje:1.0 e:0.1
-Episode:858 Puntaje:1.0 e:0.1
-Episode:859 Puntaje:1.0 e:0.1
-Episode:860 Puntaje:1.0 e:0.1
-Episode:861 Puntaje:1.0 e:0.1
-Episode:862 Puntaje:1.0 e:0.1
-Episode:863 Puntaje:1.0 e:0.1
-Episode:864 Puntaje:1.0 e:0.1
-Episode:865 Puntaje:0.0 e:0.1
-Episode:866 Puntaje:1.0 e:0.1
-Episode:867 Puntaje:1.0 e:0.1
-Episode:868 Puntaje:1.0 e:0.1
-Episode:869 Puntaje:1.0 e:0.1
-Episode:870 Puntaje:1.0 e:0.1
-Episode:871 Puntaje:1.0 e:0.1
-Episode:872 Puntaje:1.0 e:0.1
-Episode:873 Puntaje:1.0 e:0.1
-Episode:874 Puntaje:1.0 e:0.1
-Episode:875 Puntaje:1.0 e:0.1
-Episode:876 Puntaje:1.0 e:0.1
-Episode:877 Puntaje:1.0 e:0.1
-Episode:878 Puntaje:1.0 e:0.1
-Episode:879 Puntaje:1.0 e:0.1
-Episode:880 Puntaje:1.0 e:0.1
-Episode:881 Puntaje:1.0 e:0.1
-Episode:882 Puntaje:1.0 e:0.1
-Episode:883 Puntaje:1.0 e:0.1
-Episode:884 Puntaje:1.0 e:0.1
-Episode:885 Puntaje:1.0 e:0.1
-Episode:886 Puntaje:1.0 e:0.1
-Episode:887 Puntaje:1.0 e:0.1
-Episode:888 Puntaje:1.0 e:0.1
-Episode:889 Puntaje:1.0 e:0.1
-Episode:890 Puntaje:1.0 e:0.1
-Episode:891 Puntaje:1.0 e:0.1
-Episode:892 Puntaje:1.0 e:0.1
-Episode:893 Puntaje:1.0 e:0.1
-Episode:894 Puntaje:1.0 e:0.1
-Episode:895 Puntaje:1.0 e:0.1
-Episode:896 Puntaje:1.0 e:0.1
-Episode:897 Puntaje:1.0 e:0.1
-Episode:898 Puntaje:1.0 e:0.1
-Episode:899 Puntaje:1.0 e:0.1
-Episode:900 Puntaje:1.0 e:0.1
-Episode:901 Puntaje:1.0 e:0.1
-Episode:902 Puntaje:1.0 e:0.1
-Episode:903 Puntaje:1.0 e:0.1
-Episode:904 Puntaje:1.0 e:0.1
-Episode:905 Puntaje:1.0 e:0.1
-Episode:906 Puntaje:1.0 e:0.1
-Episode:907 Puntaje:1.0 e:0.1
-Episode:908 Puntaje:0.0 e:0.1
-Episode:909 Puntaje:1.0 e:0.1
-Episode:910 Puntaje:1.0 e:0.1
-Episode:911 Puntaje:1.0 e:0.1
-Episode:912 Puntaje:1.0 e:0.1
-Episode:913 Puntaje:1.0 e:0.1
-Episode:914 Puntaje:1.0 e:0.1
-Episode:915 Puntaje:0.0 e:0.1
-Episode:916 Puntaje:1.0 e:0.1
-Episode:917 Puntaje:1.0 e:0.1
-Episode:918 Puntaje:1.0 e:0.1
-Episode:919 Puntaje:1.0 e:0.1
-Episode:920 Puntaje:1.0 e:0.1
-Episode:921 Puntaje:1.0 e:0.1
-Episode:922 Puntaje:1.0 e:0.1
-Episode:923 Puntaje:1.0 e:0.1
-Episode:924 Puntaje:1.0 e:0.1
-Episode:925 Puntaje:1.0 e:0.1
-Episode:926 Puntaje:1.0 e:0.1
-Episode:927 Puntaje:1.0 e:0.1
-Episode:928 Puntaje:0.0 e:0.1
-Episode:929 Puntaje:1.0 e:0.1
-Episode:930 Puntaje:1.0 e:0.1
-Episode:931 Puntaje:1.0 e:0.1
-Episode:932 Puntaje:1.0 e:0.1
-Episode:933 Puntaje:1.0 e:0.1
-Episode:934 Puntaje:1.0 e:0.1
-Episode:935 Puntaje:1.0 e:0.1
-Episode:936 Puntaje:1.0 e:0.1
-Episode:937 Puntaje:1.0 e:0.1
-Episode:938 Puntaje:1.0 e:0.1
-Episode:939 Puntaje:1.0 e:0.1
-Episode:940 Puntaje:1.0 e:0.1
-Episode:941 Puntaje:1.0 e:0.1
-Episode:942 Puntaje:1.0 e:0.1
-Episode:943 Puntaje:1.0 e:0.1
-Episode:944 Puntaje:1.0 e:0.1
-Episode:945 Puntaje:1.0 e:0.1
-Episode:946 Puntaje:1.0 e:0.1
-Episode:947 Puntaje:1.0 e:0.1
-Episode:948 Puntaje:1.0 e:0.1
-Episode:949 Puntaje:1.0 e:0.1
-Episode:950 Puntaje:1.0 e:0.1
-Episode:951 Puntaje:1.0 e:0.1
-Episode:952 Puntaje:1.0 e:0.1
-Episode:953 Puntaje:1.0 e:0.1
-Episode:954 Puntaje:1.0 e:0.1
-Episode:955 Puntaje:1.0 e:0.1
-Episode:956 Puntaje:1.0 e:0.1
-Episode:957 Puntaje:1.0 e:0.1
-Episode:958 Puntaje:1.0 e:0.1
-Episode:959 Puntaje:1.0 e:0.1
-Episode:960 Puntaje:1.0 e:0.1
-Episode:961 Puntaje:1.0 e:0.1
-Episode:962 Puntaje:1.0 e:0.1
-Episode:963 Puntaje:0.0 e:0.1
-Episode:964 Puntaje:1.0 e:0.1
-Episode:965 Puntaje:1.0 e:0.1
-Episode:966 Puntaje:1.0 e:0.1
-Episode:967 Puntaje:1.0 e:0.1
-Episode:968 Puntaje:1.0 e:0.1
-Episode:969 Puntaje:1.0 e:0.1
-Episode:970 Puntaje:1.0 e:0.1
-Episode:971 Puntaje:1.0 e:0.1
-Episode:972 Puntaje:1.0 e:0.1
-Episode:973 Puntaje:1.0 e:0.1
-Episode:974 Puntaje:1.0 e:0.1
-Episode:975 Puntaje:1.0 e:0.1
-Episode:976 Puntaje:1.0 e:0.1
-Episode:977 Puntaje:1.0 e:0.1
-Episode:978 Puntaje:1.0 e:0.1
-Episode:979 Puntaje:1.0 e:0.1
-Episode:980 Puntaje:1.0 e:0.1
-Episode:981 Puntaje:1.0 e:0.1
-Episode:982 Puntaje:1.0 e:0.1
-Episode:983 Puntaje:1.0 e:0.1
-Episode:984 Puntaje:1.0 e:0.1
-Episode:985 Puntaje:1.0 e:0.1
-Episode:986 Puntaje:1.0 e:0.1
-Episode:987 Puntaje:1.0 e:0.1
-Episode:988 Puntaje:1.0 e:0.1
-Episode:989 Puntaje:1.0 e:0.1
-Episode:990 Puntaje:1.0 e:0.1
-Episode:991 Puntaje:1.0 e:0.1
-Episode:992 Puntaje:1.0 e:0.1
-Episode:993 Puntaje:1.0 e:0.1
-Episode:994 Puntaje:1.0 e:0.1
-Episode:995 Puntaje:1.0 e:0.1
-Episode:996 Puntaje:1.0 e:0.1
-Episode:997 Puntaje:1.0 e:0.1
-Episode:998 Puntaje:1.0 e:0.1
-Episode:999 Puntaje:1.0 e:0.1
-Episode:1000 Puntaje:1.0 e:0.1
-Episode:1001 Puntaje:1.0 e:0.1
-Episode:1002 Puntaje:1.0 e:0.1
-Episode:1003 Puntaje:1.0 e:0.1
-Episode:1004 Puntaje:1.0 e:0.1
-Episode:1005 Puntaje:0.0 e:0.1
-Episode:1006 Puntaje:1.0 e:0.1
-Episode:1007 Puntaje:1.0 e:0.1
-Episode:1008 Puntaje:1.0 e:0.1
-Episode:1009 Puntaje:1.0 e:0.1
-Episode:1010 Puntaje:1.0 e:0.1
-Episode:1011 Puntaje:1.0 e:0.1
-Episode:1012 Puntaje:0.0 e:0.1
-Episode:1013 Puntaje:1.0 e:0.1
-Episode:1014 Puntaje:1.0 e:0.1
-Episode:1015 Puntaje:1.0 e:0.1
-Episode:1016 Puntaje:1.0 e:0.1
-Episode:1017 Puntaje:1.0 e:0.1
-Episode:1018 Puntaje:0.0 e:0.1
-Episode:1019 Puntaje:1.0 e:0.1
-Episode:1020 Puntaje:1.0 e:0.1
-Episode:1021 Puntaje:1.0 e:0.1
-Episode:1022 Puntaje:1.0 e:0.1
-Episode:1023 Puntaje:1.0 e:0.1
-Episode:1024 Puntaje:1.0 e:0.1
-Episode:1025 Puntaje:1.0 e:0.1
-Episode:1026 Puntaje:1.0 e:0.1
-Episode:1027 Puntaje:1.0 e:0.1
-Episode:1028 Puntaje:1.0 e:0.1
-Episode:1029 Puntaje:1.0 e:0.1
-Episode:1030 Puntaje:1.0 e:0.1
-Episode:1031 Puntaje:1.0 e:0.1
-Episode:1032 Puntaje:1.0 e:0.1
-Episode:1033 Puntaje:1.0 e:0.1
-Episode:1034 Puntaje:1.0 e:0.1
-Episode:1035 Puntaje:1.0 e:0.1
-Episode:1036 Puntaje:1.0 e:0.1
-Episode:1037 Puntaje:1.0 e:0.1
-Episode:1038 Puntaje:1.0 e:0.1
-Episode:1039 Puntaje:1.0 e:0.1
-Episode:1040 Puntaje:1.0 e:0.1
-Episode:1041 Puntaje:1.0 e:0.1
-Episode:1042 Puntaje:1.0 e:0.1
-Episode:1043 Puntaje:1.0 e:0.1
-Episode:1044 Puntaje:1.0 e:0.1
-Episode:1045 Puntaje:1.0 e:0.1
-Episode:1046 Puntaje:1.0 e:0.1
-Episode:1047 Puntaje:1.0 e:0.1
-Episode:1048 Puntaje:1.0 e:0.1
-Episode:1049 Puntaje:1.0 e:0.1
-Episode:1050 Puntaje:1.0 e:0.1
-Episode:1051 Puntaje:1.0 e:0.1
-Episode:1052 Puntaje:1.0 e:0.1
-Episode:1053 Puntaje:1.0 e:0.1
-Episode:1054 Puntaje:1.0 e:0.1
-Episode:1055 Puntaje:1.0 e:0.1
-Episode:1056 Puntaje:1.0 e:0.1
-Episode:1057 Puntaje:1.0 e:0.1
-Episode:1058 Puntaje:1.0 e:0.1
-Episode:1059 Puntaje:0.0 e:0.1
-Episode:1060 Puntaje:1.0 e:0.1
-Episode:1061 Puntaje:1.0 e:0.1
-Episode:1062 Puntaje:1.0 e:0.1
-Episode:1063 Puntaje:1.0 e:0.1
-Episode:1064 Puntaje:1.0 e:0.1
-Episode:1065 Puntaje:1.0 e:0.1
-Episode:1066 Puntaje:1.0 e:0.1
-Episode:1067 Puntaje:1.0 e:0.1
-Episode:1068 Puntaje:1.0 e:0.1
-Episode:1069 Puntaje:1.0 e:0.1
-Episode:1070 Puntaje:1.0 e:0.1
-Episode:1071 Puntaje:1.0 e:0.1
-Episode:1072 Puntaje:1.0 e:0.1
-Episode:1073 Puntaje:0.0 e:0.1
-Episode:1074 Puntaje:1.0 e:0.1
-Episode:1075 Puntaje:1.0 e:0.1
-Episode:1076 Puntaje:1.0 e:0.1
-Episode:1077 Puntaje:1.0 e:0.1
-Episode:1078 Puntaje:1.0 e:0.1
-Episode:1079 Puntaje:1.0 e:0.1
-Episode:1080 Puntaje:1.0 e:0.1
-Episode:1081 Puntaje:1.0 e:0.1
-Episode:1082 Puntaje:1.0 e:0.1
-Episode:1083 Puntaje:1.0 e:0.1
-Episode:1084 Puntaje:1.0 e:0.1
-Episode:1085 Puntaje:1.0 e:0.1
-Episode:1086 Puntaje:1.0 e:0.1
-Episode:1087 Puntaje:1.0 e:0.1
-Episode:1088 Puntaje:1.0 e:0.1
-Episode:1089 Puntaje:1.0 e:0.1
-Episode:1090 Puntaje:1.0 e:0.1
-Episode:1091 Puntaje:1.0 e:0.1
-Episode:1092 Puntaje:1.0 e:0.1
-Episode:1093 Puntaje:1.0 e:0.1
-Episode:1094 Puntaje:1.0 e:0.1
-Episode:1095 Puntaje:1.0 e:0.1
-Episode:1096 Puntaje:1.0 e:0.1
-Episode:1097 Puntaje:1.0 e:0.1
-Episode:1098 Puntaje:1.0 e:0.1
-Episode:1099 Puntaje:1.0 e:0.1
-Episode:1100 Puntaje:1.0 e:0.1
-Episode:1101 Puntaje:1.0 e:0.1
-Episode:1102 Puntaje:1.0 e:0.1
-Episode:1103 Puntaje:1.0 e:0.1
-Episode:1104 Puntaje:1.0 e:0.1
-Episode:1105 Puntaje:1.0 e:0.1
-Episode:1106 Puntaje:1.0 e:0.1
-Episode:1107 Puntaje:1.0 e:0.1
-Episode:1108 Puntaje:1.0 e:0.1
-Episode:1109 Puntaje:1.0 e:0.1
-Episode:1110 Puntaje:1.0 e:0.1
-Episode:1111 Puntaje:1.0 e:0.1
-Episode:1112 Puntaje:1.0 e:0.1
-Episode:1113 Puntaje:1.0 e:0.1
-Episode:1114 Puntaje:1.0 e:0.1
-Episode:1115 Puntaje:1.0 e:0.1
-Episode:1116 Puntaje:1.0 e:0.1
-Episode:1117 Puntaje:1.0 e:0.1
-Episode:1118 Puntaje:1.0 e:0.1
-Episode:1119 Puntaje:1.0 e:0.1
-Episode:1120 Puntaje:1.0 e:0.1
-Episode:1121 Puntaje:1.0 e:0.1
-Episode:1122 Puntaje:1.0 e:0.1
-Episode:1123 Puntaje:1.0 e:0.1
-Episode:1124 Puntaje:1.0 e:0.1
-Episode:1125 Puntaje:1.0 e:0.1
-Episode:1126 Puntaje:1.0 e:0.1
-Episode:1127 Puntaje:1.0 e:0.1
-Episode:1128 Puntaje:1.0 e:0.1
-Episode:1129 Puntaje:1.0 e:0.1
-Episode:1130 Puntaje:1.0 e:0.1
-Episode:1131 Puntaje:1.0 e:0.1
-Episode:1132 Puntaje:1.0 e:0.1
-Episode:1133 Puntaje:1.0 e:0.1
-Episode:1134 Puntaje:1.0 e:0.1
-Episode:1135 Puntaje:1.0 e:0.1
-Episode:1136 Puntaje:1.0 e:0.1
-Episode:1137 Puntaje:1.0 e:0.1
-Episode:1138 Puntaje:1.0 e:0.1
-Episode:1139 Puntaje:1.0 e:0.1
-Episode:1140 Puntaje:1.0 e:0.1
-Episode:1141 Puntaje:1.0 e:0.1
-Episode:1142 Puntaje:1.0 e:0.1
-Episode:1143 Puntaje:1.0 e:0.1
-Episode:1144 Puntaje:1.0 e:0.1
-Episode:1145 Puntaje:1.0 e:0.1
-Episode:1146 Puntaje:1.0 e:0.1
-Episode:1147 Puntaje:1.0 e:0.1
-Episode:1148 Puntaje:1.0 e:0.1
-Episode:1149 Puntaje:1.0 e:0.1
-Episode:1150 Puntaje:1.0 e:0.1
-Episode:1151 Puntaje:1.0 e:0.1
-Episode:1152 Puntaje:1.0 e:0.1
-Episode:1153 Puntaje:1.0 e:0.1
-Episode:1154 Puntaje:1.0 e:0.1
-Episode:1155 Puntaje:0.0 e:0.1
-Episode:1156 Puntaje:0.0 e:0.1
-Episode:1157 Puntaje:1.0 e:0.1
-Episode:1158 Puntaje:0.0 e:0.1
-Episode:1159 Puntaje:1.0 e:0.1
-Episode:1160 Puntaje:1.0 e:0.1
-Episode:1161 Puntaje:1.0 e:0.1
-Episode:1162 Puntaje:1.0 e:0.1
-Episode:1163 Puntaje:1.0 e:0.1
-Episode:1164 Puntaje:1.0 e:0.1
-Episode:1165 Puntaje:1.0 e:0.1
-Episode:1166 Puntaje:1.0 e:0.1
-Episode:1167 Puntaje:1.0 e:0.1
-Episode:1168 Puntaje:1.0 e:0.1
-Episode:1169 Puntaje:1.0 e:0.1
-Episode:1170 Puntaje:1.0 e:0.1
-Episode:1171 Puntaje:1.0 e:0.1
-Episode:1172 Puntaje:1.0 e:0.1
-Episode:1173 Puntaje:1.0 e:0.1
-Episode:1174 Puntaje:1.0 e:0.1
-Episode:1175 Puntaje:1.0 e:0.1
-Episode:1176 Puntaje:1.0 e:0.1
-Episode:1177 Puntaje:1.0 e:0.1
-Episode:1178 Puntaje:1.0 e:0.1
-Episode:1179 Puntaje:1.0 e:0.1
-Episode:1180 Puntaje:1.0 e:0.1
-Episode:1181 Puntaje:1.0 e:0.1
-Episode:1182 Puntaje:0.0 e:0.1
-Episode:1183 Puntaje:1.0 e:0.1
-Episode:1184 Puntaje:1.0 e:0.1
-Episode:1185 Puntaje:1.0 e:0.1
-Episode:1186 Puntaje:1.0 e:0.1
-Episode:1187 Puntaje:1.0 e:0.1
-Episode:1188 Puntaje:1.0 e:0.1
-Episode:1189 Puntaje:1.0 e:0.1
-Episode:1190 Puntaje:1.0 e:0.1
-Episode:1191 Puntaje:1.0 e:0.1
-Episode:1192 Puntaje:1.0 e:0.1
-Episode:1193 Puntaje:1.0 e:0.1
-Episode:1194 Puntaje:1.0 e:0.1
-Episode:1195 Puntaje:1.0 e:0.1
-Episode:1196 Puntaje:1.0 e:0.1
-Episode:1197 Puntaje:1.0 e:0.1
-Episode:1198 Puntaje:1.0 e:0.1
-Episode:1199 Puntaje:1.0 e:0.1
-Episode:1200 Puntaje:1.0 e:0.1
-Episode:1201 Puntaje:1.0 e:0.1
-Episode:1202 Puntaje:1.0 e:0.1
-Episode:1203 Puntaje:1.0 e:0.1
-Episode:1204 Puntaje:1.0 e:0.1
-Episode:1205 Puntaje:1.0 e:0.1
-Episode:1206 Puntaje:1.0 e:0.1
-Episode:1207 Puntaje:1.0 e:0.1
-Episode:1208 Puntaje:1.0 e:0.1
-Episode:1209 Puntaje:1.0 e:0.1
-Episode:1210 Puntaje:1.0 e:0.1
-Episode:1211 Puntaje:1.0 e:0.1
-Episode:1212 Puntaje:1.0 e:0.1
-Episode:1213 Puntaje:1.0 e:0.1
-Episode:1214 Puntaje:1.0 e:0.1
-Episode:1215 Puntaje:1.0 e:0.1
-Episode:1216 Puntaje:1.0 e:0.1
-Episode:1217 Puntaje:1.0 e:0.1
-Episode:1218 Puntaje:1.0 e:0.1
-Episode:1219 Puntaje:1.0 e:0.1
-Episode:1220 Puntaje:1.0 e:0.1
-Episode:1221 Puntaje:1.0 e:0.1
-Episode:1222 Puntaje:1.0 e:0.1
-Episode:1223 Puntaje:1.0 e:0.1
-Episode:1224 Puntaje:1.0 e:0.1
-Episode:1225 Puntaje:1.0 e:0.1
-Episode:1226 Puntaje:1.0 e:0.1
-Episode:1227 Puntaje:1.0 e:0.1
-Episode:1228 Puntaje:1.0 e:0.1
-Episode:1229 Puntaje:1.0 e:0.1
-Episode:1230 Puntaje:1.0 e:0.1
-Episode:1231 Puntaje:1.0 e:0.1
-Episode:1232 Puntaje:1.0 e:0.1
-Episode:1233 Puntaje:1.0 e:0.1
-Episode:1234 Puntaje:0.0 e:0.1
-Episode:1235 Puntaje:0.0 e:0.1
-Episode:1236 Puntaje:1.0 e:0.1
-Episode:1237 Puntaje:1.0 e:0.1
-Episode:1238 Puntaje:1.0 e:0.1
-Episode:1239 Puntaje:1.0 e:0.1
-Episode:1240 Puntaje:1.0 e:0.1
-Episode:1241 Puntaje:1.0 e:0.1
-Episode:1242 Puntaje:1.0 e:0.1
-Episode:1243 Puntaje:1.0 e:0.1
-Episode:1244 Puntaje:1.0 e:0.1
-Episode:1245 Puntaje:1.0 e:0.1
-Episode:1246 Puntaje:1.0 e:0.1
-Episode:1247 Puntaje:1.0 e:0.1
-Episode:1248 Puntaje:1.0 e:0.1
-Episode:1249 Puntaje:1.0 e:0.1
-Episode:1250 Puntaje:1.0 e:0.1
-Episode:1251 Puntaje:1.0 e:0.1
-Episode:1252 Puntaje:1.0 e:0.1
-Episode:1253 Puntaje:1.0 e:0.1
-Episode:1254 Puntaje:1.0 e:0.1
-Episode:1255 Puntaje:1.0 e:0.1
-Episode:1256 Puntaje:1.0 e:0.1
-Episode:1257 Puntaje:1.0 e:0.1
-Episode:1258 Puntaje:1.0 e:0.1
-Episode:1259 Puntaje:1.0 e:0.1
-Episode:1260 Puntaje:1.0 e:0.1
-Episode:1261 Puntaje:1.0 e:0.1
-Episode:1262 Puntaje:1.0 e:0.1
-Episode:1263 Puntaje:1.0 e:0.1
-Episode:1264 Puntaje:1.0 e:0.1
-Episode:1265 Puntaje:1.0 e:0.1
-Episode:1266 Puntaje:1.0 e:0.1
-Episode:1267 Puntaje:1.0 e:0.1
-Episode:1268 Puntaje:1.0 e:0.1
-Episode:1269 Puntaje:1.0 e:0.1
-Episode:1270 Puntaje:1.0 e:0.1
-Episode:1271 Puntaje:1.0 e:0.1
-Episode:1272 Puntaje:1.0 e:0.1
-Episode:1273 Puntaje:1.0 e:0.1
-Episode:1274 Puntaje:1.0 e:0.1
-Episode:1275 Puntaje:1.0 e:0.1
-Episode:1276 Puntaje:1.0 e:0.1
-Episode:1277 Puntaje:1.0 e:0.1
-Episode:1278 Puntaje:1.0 e:0.1
-Episode:1279 Puntaje:1.0 e:0.1
-Episode:1280 Puntaje:1.0 e:0.1
-Episode:1281 Puntaje:1.0 e:0.1
-Episode:1282 Puntaje:1.0 e:0.1
-Episode:1283 Puntaje:1.0 e:0.1
-Episode:1284 Puntaje:1.0 e:0.1
-Episode:1285 Puntaje:1.0 e:0.1
-Episode:1286 Puntaje:1.0 e:0.1
-Episode:1287 Puntaje:1.0 e:0.1
-Episode:1288 Puntaje:1.0 e:0.1
-Episode:1289 Puntaje:1.0 e:0.1
-Episode:1290 Puntaje:1.0 e:0.1
-Episode:1291 Puntaje:1.0 e:0.1
-Episode:1292 Puntaje:1.0 e:0.1
-Episode:1293 Puntaje:1.0 e:0.1
-Episode:1294 Puntaje:1.0 e:0.1
-Episode:1295 Puntaje:1.0 e:0.1
-Episode:1296 Puntaje:1.0 e:0.1
-Episode:1297 Puntaje:1.0 e:0.1
-Episode:1298 Puntaje:1.0 e:0.1
-Episode:1299 Puntaje:1.0 e:0.1
-Episode:1300 Puntaje:1.0 e:0.1
-Episode:1301 Puntaje:1.0 e:0.1
-Episode:1302 Puntaje:1.0 e:0.1
-Episode:1303 Puntaje:1.0 e:0.1
-Episode:1304 Puntaje:1.0 e:0.1
-Episode:1305 Puntaje:1.0 e:0.1
-Episode:1306 Puntaje:1.0 e:0.1
-Episode:1307 Puntaje:1.0 e:0.1
-Episode:1308 Puntaje:1.0 e:0.1
-Episode:1309 Puntaje:1.0 e:0.1
-Episode:1310 Puntaje:1.0 e:0.1
-Episode:1311 Puntaje:1.0 e:0.1
-Episode:1312 Puntaje:1.0 e:0.1
-Episode:1313 Puntaje:1.0 e:0.1
-Episode:1314 Puntaje:1.0 e:0.1
-Episode:1315 Puntaje:1.0 e:0.1
-Episode:1316 Puntaje:1.0 e:0.1
-Episode:1317 Puntaje:1.0 e:0.1
-Episode:1318 Puntaje:1.0 e:0.1
-Episode:1319 Puntaje:1.0 e:0.1
-Episode:1320 Puntaje:1.0 e:0.1
-Episode:1321 Puntaje:1.0 e:0.1
-Episode:1322 Puntaje:1.0 e:0.1
-Episode:1323 Puntaje:1.0 e:0.1
-Episode:1324 Puntaje:1.0 e:0.1
-Episode:1325 Puntaje:1.0 e:0.1
-Episode:1326 Puntaje:1.0 e:0.1
-Episode:1327 Puntaje:1.0 e:0.1
-Episode:1328 Puntaje:1.0 e:0.1
-Episode:1329 Puntaje:1.0 e:0.1
-Episode:1330 Puntaje:1.0 e:0.1
-Episode:1331 Puntaje:1.0 e:0.1
-Episode:1332 Puntaje:1.0 e:0.1
-Episode:1333 Puntaje:1.0 e:0.1
-Episode:1334 Puntaje:1.0 e:0.1
-Episode:1335 Puntaje:1.0 e:0.1
-Episode:1336 Puntaje:1.0 e:0.1
-Episode:1337 Puntaje:1.0 e:0.1
-Episode:1338 Puntaje:1.0 e:0.1
-Episode:1339 Puntaje:1.0 e:0.1
-Episode:1340 Puntaje:1.0 e:0.1
-Episode:1341 Puntaje:1.0 e:0.1
-Episode:1342 Puntaje:1.0 e:0.1
-Episode:1343 Puntaje:1.0 e:0.1
-Episode:1344 Puntaje:1.0 e:0.1
-Episode:1345 Puntaje:1.0 e:0.1
-Episode:1346 Puntaje:1.0 e:0.1
-Episode:1347 Puntaje:1.0 e:0.1
-Episode:1348 Puntaje:1.0 e:0.1
-Episode:1349 Puntaje:1.0 e:0.1
-Episode:1350 Puntaje:1.0 e:0.1
-Episode:1351 Puntaje:1.0 e:0.1
-Episode:1352 Puntaje:1.0 e:0.1
-Episode:1353 Puntaje:1.0 e:0.1
-Episode:1354 Puntaje:1.0 e:0.1
-Episode:1355 Puntaje:1.0 e:0.1
-Episode:1356 Puntaje:1.0 e:0.1
-Episode:1357 Puntaje:1.0 e:0.1
-Episode:1358 Puntaje:1.0 e:0.1
-Episode:1359 Puntaje:1.0 e:0.1
-Episode:1360 Puntaje:1.0 e:0.1
-Episode:1361 Puntaje:0.0 e:0.1
-Episode:1362 Puntaje:1.0 e:0.1
-Episode:1363 Puntaje:1.0 e:0.1
-Episode:1364 Puntaje:1.0 e:0.1
-Episode:1365 Puntaje:1.0 e:0.1
-Episode:1366 Puntaje:1.0 e:0.1
-Episode:1367 Puntaje:1.0 e:0.1
-Episode:1368 Puntaje:1.0 e:0.1
-Episode:1369 Puntaje:1.0 e:0.1
-Episode:1370 Puntaje:1.0 e:0.1
-Episode:1371 Puntaje:1.0 e:0.1
-Episode:1372 Puntaje:1.0 e:0.1
-Episode:1373 Puntaje:1.0 e:0.1
-Episode:1374 Puntaje:1.0 e:0.1
-Episode:1375 Puntaje:1.0 e:0.1
-Episode:1376 Puntaje:1.0 e:0.1
-Episode:1377 Puntaje:1.0 e:0.1
-Episode:1378 Puntaje:1.0 e:0.1
-Episode:1379 Puntaje:1.0 e:0.1
-Episode:1380 Puntaje:0.0 e:0.1
-Episode:1381 Puntaje:1.0 e:0.1
-Episode:1382 Puntaje:1.0 e:0.1
-Episode:1383 Puntaje:1.0 e:0.1
-Episode:1384 Puntaje:1.0 e:0.1
-Episode:1385 Puntaje:1.0 e:0.1
-Episode:1386 Puntaje:1.0 e:0.1
-Episode:1387 Puntaje:1.0 e:0.1
-Episode:1388 Puntaje:1.0 e:0.1
-Episode:1389 Puntaje:1.0 e:0.1
-Episode:1390 Puntaje:1.0 e:0.1
-Episode:1391 Puntaje:1.0 e:0.1
-Episode:1392 Puntaje:1.0 e:0.1
-Episode:1393 Puntaje:1.0 e:0.1
-Episode:1394 Puntaje:1.0 e:0.1
-Episode:1395 Puntaje:1.0 e:0.1
-Episode:1396 Puntaje:1.0 e:0.1
-Episode:1397 Puntaje:1.0 e:0.1
-Episode:1398 Puntaje:1.0 e:0.1
-Episode:1399 Puntaje:1.0 e:0.1
-Episode:1400 Puntaje:1.0 e:0.1
-Episode:1401 Puntaje:0.0 e:0.1
-Episode:1402 Puntaje:1.0 e:0.1
-Episode:1403 Puntaje:1.0 e:0.1
-Episode:1404 Puntaje:0.0 e:0.1
-Episode:1405 Puntaje:1.0 e:0.1
-Episode:1406 Puntaje:1.0 e:0.1
-Episode:1407 Puntaje:1.0 e:0.1
-Episode:1408 Puntaje:1.0 e:0.1
-Episode:1409 Puntaje:1.0 e:0.1
-Episode:1410 Puntaje:1.0 e:0.1
-Episode:1411 Puntaje:1.0 e:0.1
-Episode:1412 Puntaje:1.0 e:0.1
-Episode:1413 Puntaje:1.0 e:0.1
-Episode:1414 Puntaje:1.0 e:0.1
-Episode:1415 Puntaje:1.0 e:0.1
-Episode:1416 Puntaje:1.0 e:0.1
-Episode:1417 Puntaje:1.0 e:0.1
-Episode:1418 Puntaje:1.0 e:0.1
-Episode:1419 Puntaje:1.0 e:0.1
-Episode:1420 Puntaje:1.0 e:0.1
-Episode:1421 Puntaje:1.0 e:0.1
-Episode:1422 Puntaje:1.0 e:0.1
-Episode:1423 Puntaje:1.0 e:0.1
-Episode:1424 Puntaje:1.0 e:0.1
-Episode:1425 Puntaje:1.0 e:0.1
-Episode:1426 Puntaje:0.0 e:0.1
-Episode:1427 Puntaje:1.0 e:0.1
-Episode:1428 Puntaje:1.0 e:0.1
-Episode:1429 Puntaje:1.0 e:0.1
-Episode:1430 Puntaje:1.0 e:0.1
-Episode:1431 Puntaje:1.0 e:0.1
-Episode:1432 Puntaje:1.0 e:0.1
-Episode:1433 Puntaje:1.0 e:0.1
-Episode:1434 Puntaje:1.0 e:0.1
-Episode:1435 Puntaje:1.0 e:0.1
-Episode:1436 Puntaje:1.0 e:0.1
-Episode:1437 Puntaje:1.0 e:0.1
-Episode:1438 Puntaje:1.0 e:0.1
-Episode:1439 Puntaje:1.0 e:0.1
-Episode:1440 Puntaje:1.0 e:0.1
-Episode:1441 Puntaje:1.0 e:0.1
-Episode:1442 Puntaje:1.0 e:0.1
-Episode:1443 Puntaje:1.0 e:0.1
-Episode:1444 Puntaje:1.0 e:0.1
-Episode:1445 Puntaje:1.0 e:0.1
-Episode:1446 Puntaje:1.0 e:0.1
-Episode:1447 Puntaje:1.0 e:0.1
-Episode:1448 Puntaje:1.0 e:0.1
-Episode:1449 Puntaje:1.0 e:0.1
-Episode:1450 Puntaje:1.0 e:0.1
-Episode:1451 Puntaje:1.0 e:0.1
-Episode:1452 Puntaje:1.0 e:0.1
-Episode:1453 Puntaje:1.0 e:0.1
-Episode:1454 Puntaje:1.0 e:0.1
-Episode:1455 Puntaje:1.0 e:0.1
-Episode:1456 Puntaje:1.0 e:0.1
-Episode:1457 Puntaje:1.0 e:0.1
-Episode:1458 Puntaje:1.0 e:0.1
-Episode:1459 Puntaje:1.0 e:0.1
-Episode:1460 Puntaje:1.0 e:0.1
-Episode:1461 Puntaje:1.0 e:0.1
-Episode:1462 Puntaje:1.0 e:0.1
-Episode:1463 Puntaje:1.0 e:0.1
-Episode:1464 Puntaje:1.0 e:0.1
-Episode:1465 Puntaje:1.0 e:0.1
-Episode:1466 Puntaje:1.0 e:0.1
-Episode:1467 Puntaje:1.0 e:0.1
-Episode:1468 Puntaje:1.0 e:0.1
-Episode:1469 Puntaje:1.0 e:0.1
-Episode:1470 Puntaje:1.0 e:0.1
-Episode:1471 Puntaje:1.0 e:0.1
-Episode:1472 Puntaje:1.0 e:0.1
-Episode:1473 Puntaje:1.0 e:0.1
-Episode:1474 Puntaje:1.0 e:0.1
-Episode:1475 Puntaje:1.0 e:0.1
-Episode:1476 Puntaje:1.0 e:0.1
-Episode:1477 Puntaje:1.0 e:0.1
-Episode:1478 Puntaje:1.0 e:0.1
-Episode:1479 Puntaje:1.0 e:0.1
-Episode:1480 Puntaje:1.0 e:0.1
-Episode:1481 Puntaje:1.0 e:0.1
-Episode:1482 Puntaje:1.0 e:0.1
-Episode:1483 Puntaje:1.0 e:0.1
-Episode:1484 Puntaje:1.0 e:0.1
-Episode:1485 Puntaje:1.0 e:0.1
-Episode:1486 Puntaje:1.0 e:0.1
-Episode:1487 Puntaje:1.0 e:0.1
-Episode:1488 Puntaje:1.0 e:0.1
-Episode:1489 Puntaje:1.0 e:0.1
-Episode:1490 Puntaje:1.0 e:0.1
-Episode:1491 Puntaje:1.0 e:0.1
-Episode:1492 Puntaje:1.0 e:0.1
-Episode:1493 Puntaje:1.0 e:0.1
-Episode:1494 Puntaje:1.0 e:0.1
-Episode:1495 Puntaje:1.0 e:0.1
-Episode:1496 Puntaje:1.0 e:0.1
-Episode:1497 Puntaje:1.0 e:0.1
-Episode:1498 Puntaje:1.0 e:0.1
-Episode:1499 Puntaje:1.0 e:0.1
-Episode:1500 Puntaje:1.0 e:0.1
-Episode:1501 Puntaje:1.0 e:0.1
-Episode:1502 Puntaje:1.0 e:0.1
-Episode:1503 Puntaje:1.0 e:0.1
-Episode:1504 Puntaje:1.0 e:0.1
-Episode:1505 Puntaje:1.0 e:0.1
-Episode:1506 Puntaje:1.0 e:0.1
-Episode:1507 Puntaje:1.0 e:0.1
-Episode:1508 Puntaje:1.0 e:0.1
-Episode:1509 Puntaje:1.0 e:0.1
-Episode:1510 Puntaje:1.0 e:0.1
-Episode:1511 Puntaje:1.0 e:0.1
-Episode:1512 Puntaje:1.0 e:0.1
-Episode:1513 Puntaje:1.0 e:0.1
-Episode:1514 Puntaje:1.0 e:0.1
-Episode:1515 Puntaje:1.0 e:0.1
-Episode:1516 Puntaje:1.0 e:0.1
-Episode:1517 Puntaje:1.0 e:0.1
-Episode:1518 Puntaje:1.0 e:0.1
-Episode:1519 Puntaje:1.0 e:0.1
-Episode:1520 Puntaje:1.0 e:0.1
-Episode:1521 Puntaje:1.0 e:0.1
-Episode:1522 Puntaje:0.0 e:0.1
-Episode:1523 Puntaje:1.0 e:0.1
-Episode:1524 Puntaje:1.0 e:0.1
-Episode:1525 Puntaje:1.0 e:0.1
-Episode:1526 Puntaje:0.0 e:0.1
-Episode:1527 Puntaje:1.0 e:0.1
-Episode:1528 Puntaje:1.0 e:0.1
-Episode:1529 Puntaje:1.0 e:0.1
-Episode:1530 Puntaje:1.0 e:0.1
-Episode:1531 Puntaje:1.0 e:0.1
-Episode:1532 Puntaje:1.0 e:0.1
-Episode:1533 Puntaje:1.0 e:0.1
-Episode:1534 Puntaje:1.0 e:0.1
-Episode:1535 Puntaje:1.0 e:0.1
-Episode:1536 Puntaje:1.0 e:0.1
-Episode:1537 Puntaje:1.0 e:0.1
-Episode:1538 Puntaje:1.0 e:0.1
-Episode:1539 Puntaje:1.0 e:0.1
-Episode:1540 Puntaje:1.0 e:0.1
-Episode:1541 Puntaje:1.0 e:0.1
-Episode:1542 Puntaje:1.0 e:0.1
-Episode:1543 Puntaje:1.0 e:0.1
-Episode:1544 Puntaje:1.0 e:0.1
-Episode:1545 Puntaje:1.0 e:0.1
-Episode:1546 Puntaje:1.0 e:0.1
-Episode:1547 Puntaje:1.0 e:0.1
-Episode:1548 Puntaje:1.0 e:0.1
-Episode:1549 Puntaje:1.0 e:0.1
-Episode:1550 Puntaje:1.0 e:0.1
-Episode:1551 Puntaje:1.0 e:0.1
-Episode:1552 Puntaje:1.0 e:0.1
-Episode:1553 Puntaje:1.0 e:0.1
-Episode:1554 Puntaje:1.0 e:0.1
-Episode:1555 Puntaje:1.0 e:0.1
-Episode:1556 Puntaje:1.0 e:0.1
-Episode:1557 Puntaje:1.0 e:0.1
-Episode:1558 Puntaje:1.0 e:0.1
-Episode:1559 Puntaje:1.0 e:0.1
-Episode:1560 Puntaje:1.0 e:0.1
-Episode:1561 Puntaje:1.0 e:0.1
-Episode:1562 Puntaje:1.0 e:0.1
-Episode:1563 Puntaje:1.0 e:0.1
-Episode:1564 Puntaje:1.0 e:0.1
-Episode:1565 Puntaje:1.0 e:0.1
-Episode:1566 Puntaje:1.0 e:0.1
-Episode:1567 Puntaje:1.0 e:0.1
-Episode:1568 Puntaje:1.0 e:0.1
-Episode:1569 Puntaje:1.0 e:0.1
-Episode:1570 Puntaje:1.0 e:0.1
-Episode:1571 Puntaje:1.0 e:0.1
-Episode:1572 Puntaje:1.0 e:0.1
-Episode:1573 Puntaje:1.0 e:0.1
-Episode:1574 Puntaje:1.0 e:0.1
-Episode:1575 Puntaje:1.0 e:0.1
-Episode:1576 Puntaje:1.0 e:0.1
-Episode:1577 Puntaje:1.0 e:0.1
-Episode:1578 Puntaje:1.0 e:0.1
-Episode:1579 Puntaje:1.0 e:0.1
-Episode:1580 Puntaje:1.0 e:0.1
-Episode:1581 Puntaje:1.0 e:0.1
-Episode:1582 Puntaje:1.0 e:0.1
-Episode:1583 Puntaje:1.0 e:0.1
-Episode:1584 Puntaje:1.0 e:0.1
-Episode:1585 Puntaje:1.0 e:0.1
-Episode:1586 Puntaje:0.0 e:0.1
-Episode:1587 Puntaje:1.0 e:0.1
-Episode:1588 Puntaje:1.0 e:0.1
-Episode:1589 Puntaje:1.0 e:0.1
-Episode:1590 Puntaje:1.0 e:0.1
-Episode:1591 Puntaje:1.0 e:0.1
-Episode:1592 Puntaje:1.0 e:0.1
-Episode:1593 Puntaje:1.0 e:0.1
-Episode:1594 Puntaje:1.0 e:0.1
-Episode:1595 Puntaje:1.0 e:0.1
-Episode:1596 Puntaje:1.0 e:0.1
-Episode:1597 Puntaje:1.0 e:0.1
-Episode:1598 Puntaje:1.0 e:0.1
-Episode:1599 Puntaje:1.0 e:0.1
-Episode:1600 Puntaje:1.0 e:0.1
-Episode:1601 Puntaje:1.0 e:0.1
-Episode:1602 Puntaje:1.0 e:0.1
-Episode:1603 Puntaje:1.0 e:0.1
-Episode:1604 Puntaje:1.0 e:0.1
-Episode:1605 Puntaje:1.0 e:0.1
-Episode:1606 Puntaje:1.0 e:0.1
-Episode:1607 Puntaje:1.0 e:0.1
-Episode:1608 Puntaje:1.0 e:0.1
-Episode:1609 Puntaje:1.0 e:0.1
-Episode:1610 Puntaje:1.0 e:0.1
-Episode:1611 Puntaje:1.0 e:0.1
-Episode:1612 Puntaje:1.0 e:0.1
-Episode:1613 Puntaje:1.0 e:0.1
-Episode:1614 Puntaje:1.0 e:0.1
-Episode:1615 Puntaje:1.0 e:0.1
-Episode:1616 Puntaje:1.0 e:0.1
-Episode:1617 Puntaje:1.0 e:0.1
-Episode:1618 Puntaje:1.0 e:0.1
-Episode:1619 Puntaje:1.0 e:0.1
-Episode:1620 Puntaje:1.0 e:0.1
-Episode:1621 Puntaje:1.0 e:0.1
-Episode:1622 Puntaje:1.0 e:0.1
-Episode:1623 Puntaje:1.0 e:0.1
-Episode:1624 Puntaje:1.0 e:0.1
-Episode:1625 Puntaje:1.0 e:0.1
-Episode:1626 Puntaje:1.0 e:0.1
-Episode:1627 Puntaje:1.0 e:0.1
-Episode:1628 Puntaje:1.0 e:0.1
-Episode:1629 Puntaje:1.0 e:0.1
-Episode:1630 Puntaje:1.0 e:0.1
-Episode:1631 Puntaje:1.0 e:0.1
-Episode:1632 Puntaje:1.0 e:0.1
-Episode:1633 Puntaje:1.0 e:0.1
-Episode:1634 Puntaje:1.0 e:0.1
-Episode:1635 Puntaje:1.0 e:0.1
-Episode:1636 Puntaje:1.0 e:0.1
-Episode:1637 Puntaje:1.0 e:0.1
-Episode:1638 Puntaje:1.0 e:0.1
-Episode:1639 Puntaje:1.0 e:0.1
-Episode:1640 Puntaje:1.0 e:0.1
-Episode:1641 Puntaje:1.0 e:0.1
-Episode:1642 Puntaje:1.0 e:0.1
-Episode:1643 Puntaje:1.0 e:0.1
-Episode:1644 Puntaje:0.0 e:0.1
-Episode:1645 Puntaje:1.0 e:0.1
-Episode:1646 Puntaje:1.0 e:0.1
-Episode:1647 Puntaje:1.0 e:0.1
-Episode:1648 Puntaje:0.0 e:0.1
-Episode:1649 Puntaje:1.0 e:0.1
-Episode:1650 Puntaje:1.0 e:0.1
-Episode:1651 Puntaje:1.0 e:0.1
-Episode:1652 Puntaje:1.0 e:0.1
-Episode:1653 Puntaje:1.0 e:0.1
-Episode:1654 Puntaje:1.0 e:0.1
-Episode:1655 Puntaje:0.0 e:0.1
-Episode:1656 Puntaje:1.0 e:0.1
-Episode:1657 Puntaje:1.0 e:0.1
-Episode:1658 Puntaje:1.0 e:0.1
-Episode:1659 Puntaje:1.0 e:0.1
-Episode:1660 Puntaje:1.0 e:0.1
-Episode:1661 Puntaje:1.0 e:0.1
-Episode:1662 Puntaje:1.0 e:0.1
-Episode:1663 Puntaje:1.0 e:0.1
-Episode:1664 Puntaje:1.0 e:0.1
-Episode:1665 Puntaje:1.0 e:0.1
-Episode:1666 Puntaje:1.0 e:0.1
-Episode:1667 Puntaje:1.0 e:0.1
-Episode:1668 Puntaje:1.0 e:0.1
-Episode:1669 Puntaje:1.0 e:0.1
-Episode:1670 Puntaje:1.0 e:0.1
-Episode:1671 Puntaje:1.0 e:0.1
-Episode:1672 Puntaje:1.0 e:0.1
-Episode:1673 Puntaje:1.0 e:0.1
-Episode:1674 Puntaje:1.0 e:0.1
-Episode:1675 Puntaje:1.0 e:0.1
-Episode:1676 Puntaje:1.0 e:0.1
-Episode:1677 Puntaje:1.0 e:0.1
-Episode:1678 Puntaje:1.0 e:0.1
-Episode:1679 Puntaje:1.0 e:0.1
-Episode:1680 Puntaje:1.0 e:0.1
-Episode:1681 Puntaje:1.0 e:0.1
-Episode:1682 Puntaje:1.0 e:0.1
-Episode:1683 Puntaje:1.0 e:0.1
-Episode:1684 Puntaje:1.0 e:0.1
-Episode:1685 Puntaje:1.0 e:0.1
-Episode:1686 Puntaje:1.0 e:0.1
-Episode:1687 Puntaje:1.0 e:0.1
-Episode:1688 Puntaje:1.0 e:0.1
-Episode:1689 Puntaje:1.0 e:0.1
-Episode:1690 Puntaje:1.0 e:0.1
-Episode:1691 Puntaje:1.0 e:0.1
-Episode:1692 Puntaje:1.0 e:0.1
-Episode:1693 Puntaje:1.0 e:0.1
-Episode:1694 Puntaje:1.0 e:0.1
-Episode:1695 Puntaje:1.0 e:0.1
-Episode:1696 Puntaje:1.0 e:0.1
-Episode:1697 Puntaje:1.0 e:0.1
-Episode:1698 Puntaje:1.0 e:0.1
-Episode:1699 Puntaje:1.0 e:0.1
-Episode:1700 Puntaje:1.0 e:0.1
-Episode:1701 Puntaje:1.0 e:0.1
-Episode:1702 Puntaje:1.0 e:0.1
-Episode:1703 Puntaje:1.0 e:0.1
-Episode:1704 Puntaje:1.0 e:0.1
-Episode:1705 Puntaje:1.0 e:0.1
-Episode:1706 Puntaje:1.0 e:0.1
-Episode:1707 Puntaje:1.0 e:0.1
-Episode:1708 Puntaje:1.0 e:0.1
-Episode:1709 Puntaje:1.0 e:0.1
-Episode:1710 Puntaje:1.0 e:0.1
-Episode:1711 Puntaje:1.0 e:0.1
-Episode:1712 Puntaje:1.0 e:0.1
-Episode:1713 Puntaje:1.0 e:0.1
-Episode:1714 Puntaje:1.0 e:0.1
-Episode:1715 Puntaje:1.0 e:0.1
-Episode:1716 Puntaje:1.0 e:0.1
-Episode:1717 Puntaje:1.0 e:0.1
-Episode:1718 Puntaje:1.0 e:0.1
-Episode:1719 Puntaje:1.0 e:0.1
-Episode:1720 Puntaje:1.0 e:0.1
-Episode:1721 Puntaje:1.0 e:0.1
-Episode:1722 Puntaje:1.0 e:0.1
-Episode:1723 Puntaje:1.0 e:0.1
-Episode:1724 Puntaje:1.0 e:0.1
-Episode:1725 Puntaje:1.0 e:0.1
-Episode:1726 Puntaje:1.0 e:0.1
-Episode:1727 Puntaje:1.0 e:0.1
-Episode:1728 Puntaje:1.0 e:0.1
-Episode:1729 Puntaje:1.0 e:0.1
-Episode:1730 Puntaje:1.0 e:0.1
-Episode:1731 Puntaje:1.0 e:0.1
-Episode:1732 Puntaje:1.0 e:0.1
-Episode:1733 Puntaje:1.0 e:0.1
-Episode:1734 Puntaje:1.0 e:0.1
-Episode:1735 Puntaje:1.0 e:0.1
-Episode:1736 Puntaje:1.0 e:0.1
-Episode:1737 Puntaje:1.0 e:0.1
-Episode:1738 Puntaje:1.0 e:0.1
-Episode:1739 Puntaje:1.0 e:0.1
-Episode:1740 Puntaje:1.0 e:0.1
-Episode:1741 Puntaje:1.0 e:0.1
-Episode:1742 Puntaje:1.0 e:0.1
-Episode:1743 Puntaje:1.0 e:0.1
-Episode:1744 Puntaje:1.0 e:0.1
-Episode:1745 Puntaje:0.0 e:0.1
-Episode:1746 Puntaje:1.0 e:0.1
-Episode:1747 Puntaje:1.0 e:0.1
-Episode:1748 Puntaje:1.0 e:0.1
-Episode:1749 Puntaje:1.0 e:0.1
-Episode:1750 Puntaje:1.0 e:0.1
-Episode:1751 Puntaje:1.0 e:0.1
-Episode:1752 Puntaje:1.0 e:0.1
-Episode:1753 Puntaje:1.0 e:0.1
-Episode:1754 Puntaje:1.0 e:0.1
-Episode:1755 Puntaje:1.0 e:0.1
-Episode:1756 Puntaje:1.0 e:0.1
-Episode:1757 Puntaje:1.0 e:0.1
-Episode:1758 Puntaje:1.0 e:0.1
-Episode:1759 Puntaje:1.0 e:0.1
-Episode:1760 Puntaje:1.0 e:0.1
-Episode:1761 Puntaje:1.0 e:0.1
-Episode:1762 Puntaje:1.0 e:0.1
-Episode:1763 Puntaje:1.0 e:0.1
-Episode:1764 Puntaje:1.0 e:0.1
-Episode:1765 Puntaje:1.0 e:0.1
-Episode:1766 Puntaje:1.0 e:0.1
-Episode:1767 Puntaje:1.0 e:0.1
-Episode:1768 Puntaje:1.0 e:0.1
-Episode:1769 Puntaje:1.0 e:0.1
-Episode:1770 Puntaje:1.0 e:0.1
-Episode:1771 Puntaje:1.0 e:0.1
-Episode:1772 Puntaje:1.0 e:0.1
-Episode:1773 Puntaje:1.0 e:0.1
-Episode:1774 Puntaje:1.0 e:0.1
-Episode:1775 Puntaje:1.0 e:0.1
-Episode:1776 Puntaje:1.0 e:0.1
-Episode:1777 Puntaje:1.0 e:0.1
-Episode:1778 Puntaje:1.0 e:0.1
-Episode:1779 Puntaje:1.0 e:0.1
-Episode:1780 Puntaje:1.0 e:0.1
-Episode:1781 Puntaje:1.0 e:0.1
-Episode:1782 Puntaje:1.0 e:0.1
-Episode:1783 Puntaje:1.0 e:0.1
-Episode:1784 Puntaje:1.0 e:0.1
-Episode:1785 Puntaje:1.0 e:0.1
-Episode:1786 Puntaje:1.0 e:0.1
-Episode:1787 Puntaje:1.0 e:0.1
-Episode:1788 Puntaje:1.0 e:0.1
-Episode:1789 Puntaje:1.0 e:0.1
-Episode:1790 Puntaje:1.0 e:0.1
-Episode:1791 Puntaje:1.0 e:0.1
-Episode:1792 Puntaje:1.0 e:0.1
-Episode:1793 Puntaje:1.0 e:0.1
-Episode:1794 Puntaje:1.0 e:0.1
-Episode:1795 Puntaje:1.0 e:0.1
-Episode:1796 Puntaje:1.0 e:0.1
-Episode:1797 Puntaje:1.0 e:0.1
-Episode:1798 Puntaje:1.0 e:0.1
-Episode:1799 Puntaje:1.0 e:0.1
-Episode:1800 Puntaje:1.0 e:0.1
-Episode:1801 Puntaje:1.0 e:0.1
-Episode:1802 Puntaje:1.0 e:0.1
-Episode:1803 Puntaje:1.0 e:0.1
-Episode:1804 Puntaje:1.0 e:0.1
-Episode:1805 Puntaje:1.0 e:0.1
-Episode:1806 Puntaje:1.0 e:0.1
-Episode:1807 Puntaje:1.0 e:0.1
-Episode:1808 Puntaje:1.0 e:0.1
-Episode:1809 Puntaje:1.0 e:0.1
-Episode:1810 Puntaje:1.0 e:0.1
-Episode:1811 Puntaje:1.0 e:0.1
-Episode:1812 Puntaje:1.0 e:0.1
-Episode:1813 Puntaje:1.0 e:0.1
-Episode:1814 Puntaje:1.0 e:0.1
-Episode:1815 Puntaje:1.0 e:0.1
-Episode:1816 Puntaje:1.0 e:0.1
-Episode:1817 Puntaje:0.0 e:0.1
-Episode:1818 Puntaje:1.0 e:0.1
-Episode:1819 Puntaje:1.0 e:0.1
-Episode:1820 Puntaje:1.0 e:0.1
-Episode:1821 Puntaje:1.0 e:0.1
-Episode:1822 Puntaje:1.0 e:0.1
-Episode:1823 Puntaje:1.0 e:0.1
-Episode:1824 Puntaje:1.0 e:0.1
-Episode:1825 Puntaje:1.0 e:0.1
-Episode:1826 Puntaje:1.0 e:0.1
-Episode:1827 Puntaje:1.0 e:0.1
-Episode:1828 Puntaje:1.0 e:0.1
-Episode:1829 Puntaje:1.0 e:0.1
-Episode:1830 Puntaje:1.0 e:0.1
-Episode:1831 Puntaje:1.0 e:0.1
-Episode:1832 Puntaje:1.0 e:0.1
-Episode:1833 Puntaje:1.0 e:0.1
-Episode:1834 Puntaje:1.0 e:0.1
-Episode:1835 Puntaje:1.0 e:0.1
-Episode:1836 Puntaje:1.0 e:0.1
-Episode:1837 Puntaje:1.0 e:0.1
-Episode:1838 Puntaje:1.0 e:0.1
-Episode:1839 Puntaje:1.0 e:0.1
-Episode:1840 Puntaje:1.0 e:0.1
-Episode:1841 Puntaje:1.0 e:0.1
-Episode:1842 Puntaje:1.0 e:0.1
-Episode:1843 Puntaje:1.0 e:0.1
-Episode:1844 Puntaje:1.0 e:0.1
-Episode:1845 Puntaje:1.0 e:0.1
-Episode:1846 Puntaje:1.0 e:0.1
-Episode:1847 Puntaje:1.0 e:0.1
-Episode:1848 Puntaje:1.0 e:0.1
-Episode:1849 Puntaje:1.0 e:0.1
-Episode:1850 Puntaje:1.0 e:0.1
-Episode:1851 Puntaje:1.0 e:0.1
-Episode:1852 Puntaje:1.0 e:0.1
-Episode:1853 Puntaje:1.0 e:0.1
-Episode:1854 Puntaje:1.0 e:0.1
-Episode:1855 Puntaje:1.0 e:0.1
-Episode:1856 Puntaje:0.0 e:0.1
-Episode:1857 Puntaje:1.0 e:0.1
-Episode:1858 Puntaje:1.0 e:0.1
-Episode:1859 Puntaje:1.0 e:0.1
-Episode:1860 Puntaje:1.0 e:0.1
-Episode:1861 Puntaje:1.0 e:0.1
-Episode:1862 Puntaje:1.0 e:0.1
-Episode:1863 Puntaje:1.0 e:0.1
-Episode:1864 Puntaje:1.0 e:0.1
-Episode:1865 Puntaje:1.0 e:0.1
-Episode:1866 Puntaje:1.0 e:0.1
-Episode:1867 Puntaje:1.0 e:0.1
-Episode:1868 Puntaje:1.0 e:0.1
-Episode:1869 Puntaje:1.0 e:0.1
-Episode:1870 Puntaje:1.0 e:0.1
-Episode:1871 Puntaje:1.0 e:0.1
-Episode:1872 Puntaje:1.0 e:0.1
-Episode:1873 Puntaje:1.0 e:0.1
-Episode:1874 Puntaje:1.0 e:0.1
-Episode:1875 Puntaje:1.0 e:0.1
-Episode:1876 Puntaje:1.0 e:0.1
-Episode:1877 Puntaje:1.0 e:0.1
-Episode:1878 Puntaje:1.0 e:0.1
-Episode:1879 Puntaje:1.0 e:0.1
-Episode:1880 Puntaje:1.0 e:0.1
-Episode:1881 Puntaje:1.0 e:0.1
-Episode:1882 Puntaje:1.0 e:0.1
-Episode:1883 Puntaje:1.0 e:0.1
-Episode:1884 Puntaje:1.0 e:0.1
-Episode:1885 Puntaje:1.0 e:0.1
-Episode:1886 Puntaje:1.0 e:0.1
-Episode:1887 Puntaje:1.0 e:0.1
-Episode:1888 Puntaje:1.0 e:0.1
-Episode:1889 Puntaje:1.0 e:0.1
-Episode:1890 Puntaje:1.0 e:0.1
-Episode:1891 Puntaje:1.0 e:0.1
-Episode:1892 Puntaje:1.0 e:0.1
-Episode:1893 Puntaje:1.0 e:0.1
-Episode:1894 Puntaje:1.0 e:0.1
-Episode:1895 Puntaje:1.0 e:0.1
-Episode:1896 Puntaje:1.0 e:0.1
-Episode:1897 Puntaje:1.0 e:0.1
-Episode:1898 Puntaje:1.0 e:0.1
-Episode:1899 Puntaje:1.0 e:0.1
-Episode:1900 Puntaje:1.0 e:0.1
-Episode:1901 Puntaje:1.0 e:0.1
-Episode:1902 Puntaje:0.0 e:0.1
-Episode:1903 Puntaje:1.0 e:0.1
-Episode:1904 Puntaje:1.0 e:0.1
-Episode:1905 Puntaje:1.0 e:0.1
-Episode:1906 Puntaje:1.0 e:0.1
-Episode:1907 Puntaje:1.0 e:0.1
-Episode:1908 Puntaje:1.0 e:0.1
-Episode:1909 Puntaje:1.0 e:0.1
-Episode:1910 Puntaje:1.0 e:0.1
-Episode:1911 Puntaje:1.0 e:0.1
-Episode:1912 Puntaje:1.0 e:0.1
-Episode:1913 Puntaje:1.0 e:0.1
-Episode:1914 Puntaje:1.0 e:0.1
-Episode:1915 Puntaje:0.0 e:0.1
-Episode:1916 Puntaje:1.0 e:0.1
-Episode:1917 Puntaje:1.0 e:0.1
-Episode:1918 Puntaje:1.0 e:0.1
-Episode:1919 Puntaje:1.0 e:0.1
-Episode:1920 Puntaje:1.0 e:0.1
-Episode:1921 Puntaje:1.0 e:0.1
-Episode:1922 Puntaje:0.0 e:0.1
-Episode:1923 Puntaje:1.0 e:0.1
-Episode:1924 Puntaje:1.0 e:0.1
-Episode:1925 Puntaje:1.0 e:0.1
-Episode:1926 Puntaje:1.0 e:0.1
-Episode:1927 Puntaje:1.0 e:0.1
-Episode:1928 Puntaje:1.0 e:0.1
-Episode:1929 Puntaje:1.0 e:0.1
-Episode:1930 Puntaje:1.0 e:0.1
-Episode:1931 Puntaje:1.0 e:0.1
-Episode:1932 Puntaje:1.0 e:0.1
-Episode:1933 Puntaje:1.0 e:0.1
-Episode:1934 Puntaje:1.0 e:0.1
-Episode:1935 Puntaje:1.0 e:0.1
-Episode:1936 Puntaje:1.0 e:0.1
-Episode:1937 Puntaje:1.0 e:0.1
-Episode:1938 Puntaje:1.0 e:0.1
-Episode:1939 Puntaje:1.0 e:0.1
-Episode:1940 Puntaje:1.0 e:0.1
-Episode:1941 Puntaje:1.0 e:0.1
-Episode:1942 Puntaje:1.0 e:0.1
-Episode:1943 Puntaje:0.0 e:0.1
-Episode:1944 Puntaje:1.0 e:0.1
-Episode:1945 Puntaje:1.0 e:0.1
-Episode:1946 Puntaje:1.0 e:0.1
-Episode:1947 Puntaje:1.0 e:0.1
-Episode:1948 Puntaje:1.0 e:0.1
-Episode:1949 Puntaje:1.0 e:0.1
-Episode:1950 Puntaje:1.0 e:0.1
-Episode:1951 Puntaje:1.0 e:0.1
-Episode:1952 Puntaje:1.0 e:0.1
-Episode:1953 Puntaje:1.0 e:0.1
-Episode:1954 Puntaje:1.0 e:0.1
-Episode:1955 Puntaje:1.0 e:0.1
-Episode:1956 Puntaje:1.0 e:0.1
-Episode:1957 Puntaje:1.0 e:0.1
-Episode:1958 Puntaje:1.0 e:0.1
-Episode:1959 Puntaje:1.0 e:0.1
-Episode:1960 Puntaje:1.0 e:0.1
-Episode:1961 Puntaje:1.0 e:0.1
-Episode:1962 Puntaje:1.0 e:0.1
-Episode:1963 Puntaje:1.0 e:0.1
-Episode:1964 Puntaje:1.0 e:0.1
-Episode:1965 Puntaje:1.0 e:0.1
-Episode:1966 Puntaje:1.0 e:0.1
-Episode:1967 Puntaje:1.0 e:0.1
-Episode:1968 Puntaje:1.0 e:0.1
-Episode:1969 Puntaje:1.0 e:0.1
-Episode:1970 Puntaje:1.0 e:0.1
-Episode:1971 Puntaje:1.0 e:0.1
-Episode:1972 Puntaje:1.0 e:0.1
-Episode:1973 Puntaje:1.0 e:0.1
-Episode:1974 Puntaje:1.0 e:0.1
-Episode:1975 Puntaje:1.0 e:0.1
-Episode:1976 Puntaje:1.0 e:0.1
-Episode:1977 Puntaje:1.0 e:0.1
-Episode:1978 Puntaje:1.0 e:0.1
-Episode:1979 Puntaje:1.0 e:0.1
-Episode:1980 Puntaje:1.0 e:0.1
-Episode:1981 Puntaje:1.0 e:0.1
-Episode:1982 Puntaje:1.0 e:0.1
-Episode:1983 Puntaje:1.0 e:0.1
-Episode:1984 Puntaje:1.0 e:0.1
-Episode:1985 Puntaje:1.0 e:0.1
-Episode:1986 Puntaje:1.0 e:0.1
-Episode:1987 Puntaje:1.0 e:0.1
-Episode:1988 Puntaje:1.0 e:0.1
-Episode:1989 Puntaje:1.0 e:0.1
-Episode:1990 Puntaje:1.0 e:0.1
-Episode:1991 Puntaje:1.0 e:0.1
-Episode:1992 Puntaje:1.0 e:0.1
-Episode:1993 Puntaje:1.0 e:0.1
-Episode:1994 Puntaje:1.0 e:0.1
-Episode:1995 Puntaje:1.0 e:0.1
-Episode:1996 Puntaje:1.0 e:0.1
-Episode:1997 Puntaje:1.0 e:0.1
-Episode:1998 Puntaje:1.0 e:0.1
-Episode:1999 Puntaje:1.0 e:0.1
-Episode:2000 Puntaje:1.0 e:0.1
+<pre>Episode 100
+	Puntaje:0.0; Acciones:[&#39;Derecha&#39;, &#39;Abajo&#39;]
 </pre>
 </div>
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=9b135a9f" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">puntajes_ep</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scores en cada episodio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Episodio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Recompensa&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjcAAAHFCAYAAAAOmtghAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAA9hAAAPYQGoP6dpAAA9m0lEQVR4nO3de1yUdf7//+dwGhAFFRVEkSgrNTMVqsVjWpKH9bS1mZantI3STHHVzM9mWhtmJ91KtvLQZmZ2sLI0k7QszTQPlKXfrESxhFhRgTJR4f37ox+zjYAMwzAjV4/77Ta3W/Oe93Vdr+t9XTLPrtPYjDFGAAAAFuHn6wIAAAA8iXADAAAshXADAAAshXADAAAshXADAAAshXADAAAshXADAAAshXADAAAshXADAAAshXADeMDWrVs1ePBgtWjRQna7XZGRkUpMTNTkyZN9XRoq8cADD8hms/m6jHPyVY02m00PPPCA4/0LL7wgm82mAwcOeL0WoCoIN0A1rV69Wp06dVJBQYHmzp2rdevWaf78+ercubNWrFjh6/JgAWPHjtWWLVt8XYb69eunLVu2qGnTpr4uBTinAF8XANR2c+fOVVxcnN5//30FBPzvn9TNN9+suXPnerWWEydOqE6dOl5dJmpe8+bN1bx5c1+XocaNG6tx48a+LgOoFEdugGrKy8tTo0aNnIJNKT+/sv/EXn75ZSUmJqpu3bqqW7eu2rdvr0WLFjn1Wbx4sa644goFBwerYcOGGjx4sPbu3evUZ9SoUapbt652796tpKQk1atXT9dee60k6dSpU3rooYfUqlUr2e12NW7cWKNHj9Z///tfp3ls2LBB11xzjSIiIhQSEqIWLVrohhtu0IkTJypd7xUrVigxMVGhoaGqW7eurr/+eu3atavcGr/77jv17dtXdevWVUxMjCZPnqyioqJKl+HKeKWnp2vgwIFq3ry5goOD1bJlS91xxx06cuRImXmtXr1a7du3l91uV1xcnB577LFyl/nMM8+oW7duatKkiUJDQ3X55Zdr7ty5On36tEs1f/vttxo2bJiaNGkiu92u1q1b65lnnnHq89FHH8lms+mll15SSkqKoqKiFBISou7du5cZx/JOS7my7Y4ePaq77rpLzZo1U1BQkC688ELNmDGjzNgXFBTo9ttvV0REhOrWravevXtr3759ZdarotNSruyvgDcRboBqSkxM1NatWzVhwgRt3br1nF+A999/v2655RZFR0frhRde0JtvvqmRI0fq4MGDjj6pqakaM2aMLrvsMq1cuVLz58/Xl19+qcTERH377bdO8zt16pQGDBignj176u2339asWbNUUlKigQMHas6cORo2bJhWr16tOXPmKD09Xddcc41+/fVXSdKBAwfUr18/BQUFafHixVq7dq3mzJmj0NBQnTp16pzr/PDDD2vo0KFq06aNXn31VS1dulSFhYXq2rWr9uzZ49T39OnTGjBggK699lq9/fbbuu222/Tkk0/qkUceqXRsXRmv77//XomJiUpLS9O6det0//33a+vWrerSpYvTtli/fr0GDhyoevXq6ZVXXtGjjz6qV199VUuWLCmz3O+//17Dhg3T0qVL9e6772rMmDF69NFHdccdd1Ra8549e3TllVfqq6++0uOPP653331X/fr104QJEzRr1qwy/e+77z7t379fCxcu1MKFC3X48GFdc8012r9/f4XLcGXbnTx5Uj169NCLL76olJQUrV69Wrfeeqvmzp2rv/zlL455GWM0aNAgLV26VJMnT9abb76pP/3pT+rTp0+l6ypVbX8FvMYAqJYjR46YLl26GElGkgkMDDSdOnUyqampprCw0NFv//79xt/f39xyyy0VzuvYsWMmJCTE9O3b16k9KyvL2O12M2zYMEfbyJEjjSSzePFip77Lly83kswbb7zh1P75558bSWbBggXGGGNef/11I8lkZGRUaX2zsrJMQECAufvuu53aCwsLTVRUlLnpppvK1Pjqq6869e3bt6+59NJLz7kcV8brbCUlJeb06dPm4MGDRpJ5++23HZ9dffXVJjo62vz666+OtoKCAtOwYUNzrj+FxcXF5vTp0+bFF180/v7+5ujRo+es4frrrzfNmzc3+fn5Tu3jx483wcHBjuk//PBDI8l07NjRlJSUOPodOHDABAYGmrFjxzraZs6c6VSjK9vu3//+d7lj/8gjjxhJZt26dcYYY9577z0jycyfP9+p3z//+U8jycycOdPRtmTJEiPJZGZmGmOqtr8C3sSRG6CaIiIi9Mknn+jzzz/XnDlzNHDgQO3bt0/Tp0/X5Zdf7jg9kp6eruLiYo0bN67CeW3ZskW//vqrRo0a5dQeExOjnj17av369WWmueGGG5zev/vuu6pfv7769++vM2fOOF7t27dXVFSUPvroI0lS+/btFRQUpL/97W/6z3/+c84jBb/3/vvv68yZMxoxYoTT/IODg9W9e3fH/EvZbDb179/fqa1du3ZOR1/K48p4SVJubq6Sk5MVExOjgIAABQYGKjY2VpIcp0Z++eUXff755/rLX/6i4OBgx7T16tUrU5sk7dq1SwMGDFBERIT8/f0VGBioESNGqLi4uNzTNaVOnjyp9evXa/DgwapTp47T+PTt21cnT57UZ5995jTNsGHDnE45xcbGqlOnTvrwww8rXI4r227Dhg0KDQ3VjTfe6NReum+V7kuly7nlllvK1FUZd/ZXwBsIN4CHJCQkaNq0aXrttdd0+PBhTZo0SQcOHHBcVFx6vcu5LgzNy8uTpHLvRomOjnZ8XqpOnToKCwtzavvpp590/PhxBQUFKTAw0OmVk5PjCFsXXXSRPvjgAzVp0kTjxo3TRRddpIsuukjz588/53r+9NNPkqQrr7yyzPxXrFhR5lqXOnXqOAUKSbLb7Tp58uQ5l+PKeJWUlCgpKUkrV67U1KlTtX79em3bts0RIEpPwR07dkwlJSWKiooqM4+z27KystS1a1f9+OOPmj9/viO4ll4zUzrP8uTl5enMmTN66qmnyoxN3759JanM+FRU09nb+vdc2XZ5eXmKiooqc61OkyZNFBAQ4Jh/Xl6eAgICFBERUWld5a2v5Pr+CngLd0sBNSAwMFAzZ87Uk08+qa+++kqSHHeZ/PDDD4qJiSl3utIvmOzs7DKfHT58WI0aNXJqK+/ZJ40aNVJERITWrl1b7jLq1avn+O+uXbuqa9euKi4u1vbt2/XUU09p4sSJioyM1M0331zu9KU1vP76644jJDXBlfH66quv9MUXX+iFF17QyJEjHe3fffedU78GDRrIZrMpJyenzDzObnvrrbf0yy+/aOXKlU7rl5GRUWnNDRo0kL+/v4YPH17hEae4uLhzLr+07eywcbbKtl1ERIS2bt0qY4zTfpKbm6szZ844tmNERITOnDmjvLw8p2WWV9fZqrq/At7CkRugmsr7wy7975RIdHS0JCkpKUn+/v5KS0urcF6JiYkKCQnRSy+95NT+ww8/aMOGDY67oc7lz3/+s/Ly8lRcXKyEhIQyr0svvbTMNP7+/rr66qsdRyd27txZ4fyvv/56BQQE6Pvvvy93/gkJCZXW6ApXxqv0S9tutzu1P/vss07vQ0NDddVVV2nlypVOR4wKCwv1zjvvVDpPY4yef/75SmuuU6eOevTooV27dqldu3bljs3ZoWX58uUyxjjeHzx4UJ9++qmuueaaSpcnVbztrr32Wv3888966623nPq/+OKLjs8lqUePHpKkZcuWOfV7+eWXK122J/ZXoCZw5Aaopuuvv17NmzdX//791apVK5WUlCgjI0OPP/646tatq3vuuUeSdMEFF+i+++7Tgw8+qF9//VVDhw5VeHi49uzZoyNHjmjWrFmqX7++/vGPf+i+++7TiBEjNHToUOXl5WnWrFkKDg7WzJkzK63n5ptv1rJly9S3b1/dc889uuqqqxQYGKgffvhBH374oQYOHKjBgwfr3//+tzZs2KB+/fqpRYsWOnnypBYvXixJuu666yqc/wUXXKDZs2drxowZ2r9/v3r37q0GDRrop59+0rZt2xQaGlruXUFV5cp4tWrVShdddJHuvfdeGWPUsGFDvfPOO0pPTy8zvwcffFC9e/dWr169NHnyZBUXF+uRRx5RaGiojh496ujXq1cvBQUFaejQoZo6dapOnjyptLQ0HTt2zKW658+fry5duqhr16668847dcEFF6iwsFDfffed3nnnHW3YsMGpf25urgYPHqzbb79d+fn5mjlzpoKDgzV9+vQKl+HKthsxYoSeeeYZjRw5UgcOHNDll1+uTZs26eGHH1bfvn0d/ZKSktStWzdNnTpVv/zyixISErR582YtXbq00nX1xP4K1AjfXs8M1H4rVqwww4YNMxdffLGpW7euCQwMNC1atDDDhw83e/bsKdP/xRdfNFdeeaUJDg42devWNR06dDBLlixx6rNw4ULTrl07ExQUZMLDw83AgQPN119/7dRn5MiRJjQ0tNyaTp8+bR577DFzxRVXOJbTqlUrc8cdd5hvv/3WGGPMli1bzODBg01sbKyx2+0mIiLCdO/e3axatcql9X7rrbdMjx49TFhYmLHb7SY2NtbceOON5oMPPqi0xrPv/jmXysZrz549plevXqZevXqmQYMG5q9//avJysoqc6ePMcasWrXKMa4tWrQwc+bMKbeWd955xzF2zZo1M1OmTHHcVfThhx9WWnNmZqa57bbbTLNmzUxgYKBp3Lix6dSpk3nooYccfUrvllq6dKmZMGGCady4sbHb7aZr165m+/bt5xwvV7ddXl6eSU5ONk2bNjUBAQEmNjbWTJ8+3Zw8edKp3/Hjx81tt91m6tevb+rUqWN69epl/t//+3+V3i1VypX9FfAmmzG/Ox4KAPCKjz76SD169NBrr71W5o4mANXDNTcAAMBSCDcAAMBSOC0FAAAshSM3AADAUgg3AADAUgg3AADAUv5wD/ErKSnR4cOHVa9evXIfXQ8AAM4/xhgVFhYqOjpafn7nPjbzhws3hw8frvB3agAAwPnt0KFD5/xBXekPGG5KfzTw0KFDZX5NGQAAnJ8KCgoUExPj9OO/FfnDhZvSU1FhYWGEGwAAahlXLinhgmIAAGAphBsAAGAphBsAAGAphBsAAGAphBsAAGAphBsAAGAphBsAAGAphBsAAGAphBsAAGApf7gnFANwXXGJ0bbMo8otPKkm9YJ1VVxDSSrT5u/Hj9BWV3ljffa4eqpPef3iYxtox8FjXtmuru5X5bW5U5OrY+KtGj25HT2xru7y5rKqyqfh5uOPP9ajjz6qHTt2KDs7W2+++aYGDRp0zmk2btyolJQUff3114qOjtbUqVOVnJzsnYKBP5C1X2Vr1jt7lJ1/0tFWv06gJOn4idOOtqbhwZrZv416t23q9RqtoryxPntcPdWnon5+NqnE6JzT1dS6lrdfeWpfc3VMvFWjJ7ejJ9bVXd5cljtsxhhTebea8d5772nz5s3q2LGjbrjhhkrDTWZmptq2bavbb79dd9xxhzZv3qy77rpLy5cv1w033ODSMgsKChQeHq78/Hx+WwqowNqvsnXnSzvlyh+H0v9PS7u143nxR622qWisfz+ukjzSp3fbpi5v25rYrlXZrzxRkytje/Z8arJGT23r8tbdnXV1lzeX9XtV+f72abj5PZvNVmm4mTZtmlatWqW9e/c62pKTk/XFF19oy5YtLi2HcAOcW3GJUZdHNjj9H1llbJKiwoO1aVrP8+awdG1Q2VjbJEWG2SXZlFNQvT5R4cHaOKWHuj/6ocvb1pPb1Z39qjo1uTK2Z8+nJmv01LYub93dWVd3eXNZZ6vK93etuqB4y5YtSkpKcmq7/vrrtX37dp0+fbrcaYqKilRQUOD0AlCxbZlHq/zH3UjKzj+pbZlHa6Yoi6psrI2knIKiCr/sqtInO/+klm45UKVt68nt6s5+VZ2aXBnbs+dTkzV6aluXt+7urKu7vLms6qhV4SYnJ0eRkZFObZGRkTpz5oyOHDlS7jSpqakKDw93vGJiYrxRKlBr5Ra6/8e9OtP+EXl7vA4ePeHWdJ6o09PrWtn8XF3e7/vVZI2enPfZ83JnXT217JpcVnXUqnAj/Xb66vdKz6qd3V5q+vTpys/Pd7wOHTpU4zUCtVmTesE+mfaPyNvjFduwjlvTeaJOT69rZfNzdXm/71eTNXpy3mfPy5119dSya3JZ1VGrwk1UVJRycnKc2nJzcxUQEKCIiIhyp7Hb7QoLC3N6AajYVXEN1TQ8WFU5W27Tb3dKlN4aC9dUNtY2SVFhdkWFVb9P0/BgDU+8oErb1pPb1Z39qjo1uTK2Z8+nJmv01LYub93dWVd3eXNZ1VGrwk1iYqLS09Od2tatW6eEhAQFBgb6qCrAWvz9bJrZv40kufRHvrTPzP5tuJi4is411qXvHxhwmR4YUP0+M/u3UVCAn8vb1tPbtar7VXVrcmVsz55PTdboqW1d3rq7s67u8uayqsOn4ebnn39WRkaGMjIyJP12q3dGRoaysrIk/XZKacSIEY7+ycnJOnjwoFJSUrR3714tXrxYixYt0t///ndflA9YVu+2TZV2a0dFhTsfWq5fJ9DxbI9SUeHB3AZeDRWN9e/H1VN9zrW8s7+LamK7VmW/8sS+5uqYeKtGT25HT6yru7y5LHf59Fbwjz76SD169CjTPnLkSL3wwgsaNWqUDhw4oI8++sjx2caNGzVp0iTHQ/ymTZtWpYf4cSs44DqeUOw9PKGYJxRXt+bqTOcObz+huFY+58ZbCDcAANQ+ln3ODQAAQGUINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFIINwAAwFJ8Hm4WLFiguLg4BQcHKz4+Xp988sk5+y9btkxXXHGF6tSpo6ZNm2r06NHKy8vzUrUAAOB859Nws2LFCk2cOFEzZszQrl271LVrV/Xp00dZWVnl9t+0aZNGjBihMWPG6Ouvv9Zrr72mzz//XGPHjvVy5QAA4Hzl03DzxBNPaMyYMRo7dqxat26tefPmKSYmRmlpaeX2/+yzz3TBBRdowoQJiouLU5cuXXTHHXdo+/btXq4cAACcr3wWbk6dOqUdO3YoKSnJqT0pKUmffvppudN06tRJP/zwg9asWSNjjH766Se9/vrr6tevX4XLKSoqUkFBgdMLAABYl8/CzZEjR1RcXKzIyEin9sjISOXk5JQ7TadOnbRs2TINGTJEQUFBioqKUv369fXUU09VuJzU1FSFh4c7XjExMR5dDwAAcH7x+QXFNpvN6b0xpkxbqT179mjChAm6//77tWPHDq1du1aZmZlKTk6ucP7Tp09Xfn6+43Xo0CGP1g8AAM4vAb5acKNGjeTv71/mKE1ubm6ZozmlUlNT1blzZ02ZMkWS1K5dO4WGhqpr16566KGH1LRp0zLT2O122e12z68AAAA4L/nsyE1QUJDi4+OVnp7u1J6enq5OnTqVO82JEyfk5+dcsr+/v6TfjvgAAAD49LRUSkqKFi5cqMWLF2vv3r2aNGmSsrKyHKeZpk+frhEjRjj69+/fXytXrlRaWpr279+vzZs3a8KECbrqqqsUHR3tq9UAAADnEZ+dlpKkIUOGKC8vT7Nnz1Z2drbatm2rNWvWKDY2VpKUnZ3t9MybUaNGqbCwUE8//bQmT56s+vXrq2fPnnrkkUd8tQoAAOA8YzN/sPM5BQUFCg8PV35+vsLCwnxdDgAAcEFVvr99frcUAACAJxFuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApRBuAACApQS4O+Hrr7+uV199VVlZWTp16pTTZzt37qx2YQAAAO5w68jNv/71L40ePVpNmjTRrl27dNVVVykiIkL79+9Xnz59PF0jAACAy9wKNwsWLNBzzz2np59+WkFBQZo6darS09M1YcIE5efnV3lecXFxCg4OVnx8vD755JNz9i8qKtKMGTMUGxsru92uiy66SIsXL3ZnNQAAgAW5FW6ysrLUqVMnSVJISIgKCwslScOHD9fy5ctdns+KFSs0ceJEzZgxQ7t27VLXrl3Vp08fZWVlVTjNTTfdpPXr12vRokX65ptvtHz5crVq1cqd1QAAABbk1jU3UVFRysvLU2xsrGJjY/XZZ5/piiuuUGZmpowxLs/niSee0JgxYzR27FhJ0rx58/T+++8rLS1NqampZfqvXbtWGzdu1P79+9WwYUNJ0gUXXODOKgAAAIty68hNz5499c4770iSxowZo0mTJqlXr14aMmSIBg8e7NI8Tp06pR07digpKcmpPSkpSZ9++mm506xatUoJCQmaO3eumjVrpksuuUR///vf9euvv1a4nKKiIhUUFDi9AACAdbl15Oa5555TSUmJJCk5OVkNGzbUpk2b1L9/fyUnJ7s0jyNHjqi4uFiRkZFO7ZGRkcrJySl3mv3792vTpk0KDg7Wm2++qSNHjuiuu+7S0aNHK7zuJjU1VbNmzarC2gEAgNrMrXDj5+cnP7//HfS56aabdNNNN7lVgM1mc3pvjCnTVqqkpEQ2m03Lli1TeHi4pN9Obd1444165plnFBISUmaa6dOnKyUlxfG+oKBAMTExbtUKAADOf26dllq7dq02bdrkeP/MM8+offv2GjZsmI4dO+bSPBo1aiR/f/8yR2lyc3PLHM0p1bRpUzVr1swRbCSpdevWMsbohx9+KHcau92usLAwpxcAALAut8LNlClTHNeu7N69WykpKerbt6/279/vdJTkXIKCghQfH6/09HSn9vT0dMedWGfr3LmzDh8+rJ9//tnRtm/fPvn5+al58+burAoAALAYt8JNZmam2rRpI0l644031L9/fz388MNasGCB3nvvPZfnk5KSooULF2rx4sXau3evJk2apKysLMd1O9OnT9eIESMc/YcNG6aIiAiNHj1ae/bs0ccff6wpU6botttuK/eUFAAA+ONx65qboKAgnThxQpL0wQcfOAJIw4YNq3Q30pAhQ5SXl6fZs2crOztbbdu21Zo1axQbGytJys7OdnrmTd26dZWenq67775bCQkJioiI0E033aSHHnrIndUAAAAWZDNVeTDN/2/AgAE6deqUOnfurAcffFCZmZlq1qyZ1q1bp/Hjx2vfvn01UatHFBQUKDw8XPn5+Vx/AwBALVGV72+3Tks9/fTTCggI0Ouvv660tDQ1a9ZMkvTee++pd+/e7swSAADAI9w6clObceQGAIDapyrf325dcyP99syZ7777Trm5uY4H+pXq1q2bu7MFAACoFrfCzWeffaZhw4bp4MGDZX5Lymazqbi42CPFAQAAVJVb4SY5OVkJCQlavXq1mjZtWuEThQEAALzNrXDz7bff6vXXX1fLli09XQ8AAEC1uHW31NVXX63vvvvO07UAAABUm1tHbu6++25NnjxZOTk5uvzyyxUYGOj0ebt27TxSHAAAQFW5dSv4738R3DEjm83xi97n8wXF3AoOAEDtU+O3gmdmZrpVGAAAQE1zK9yU/vYTAADA+catC4olaenSpercubOio6N18OBBSdK8efP09ttve6w4AACAqnIr3KSlpSklJUV9+/bV8ePHHdfY1K9fX/PmzfNkfQAAAFXiVrh56qmn9Pzzz2vGjBny9/d3tCckJGj37t0eKw4AAKCq3Ao3mZmZ6tChQ5l2u92uX375pdpFAQAAuMutcBMXF6eMjIwy7e+9957atGlT3ZoAAADc5tbdUlOmTNG4ceN08uRJGWO0bds2LV++XKmpqVq4cKGnawQAAHCZW+Fm9OjROnPmjKZOnaoTJ05o2LBhatasmebPn6+bb77Z0zUCAAC4zK0nFP/ekSNHVFJSoiZNmniqphrFE4oBAKh9avwJxaVyc3P1zTffyGazyWazqXHjxtWZHQAAQLW5dUFxQUGBhg8frujoaHXv3l3dunVTdHS0br31VuXn53u6RgAAAJe5FW7Gjh2rrVu3avXq1Tp+/Ljy8/P17rvvavv27br99ts9XSMAAIDL3LrmJjQ0VO+//766dOni1P7JJ5+od+/e5/WzbrjmBgCA2qcq399uHbmJiIhQeHh4mfbw8HA1aNDAnVkCAAB4hFvh5v/+7/+UkpKi7OxsR1tOTo6mTJmif/zjHx4rDgAAoKrcOi3VoUMHfffddyoqKlKLFi0kSVlZWbLb7br44oud+u7cudMzlXoIp6UAAKh9avxW8EGDBrkzGQAAQI2r9kP8ahuO3AAAUPt47SF+kvTzzz+rpKTEqY3QAAAAfMWtC4ozMzPVr18/hYaGOu6QatCggerXr8/dUgAAwKfcOnJzyy23SJIWL16syMhI2Ww2jxYFAADgLrfCzZdffqkdO3bo0ksv9XQ9AAAA1eLWaakrr7xShw4d8nQtAAAA1ebWkZuFCxcqOTlZP/74o9q2bavAwECnz9u1a+eR4gAAAKrKrXDz3//+V99//71Gjx7taLPZbDLGyGazqbi42GMFAgAAVIVb4ea2225Thw4dtHz5ci4oBgAA5xW3ws3Bgwe1atUqtWzZ0tP1AAAAVItbFxT37NlTX3zxhadrAQAAqDa3jtz0799fkyZN0u7du3X55ZeXuaB4wIABHikOAACgqtz6bSk/v4oP+JzvFxTz21IAANQ+Nf7bUmf/lhQAAMD5wq1rbgAAAM5XboebjRs3qn///mrZsqUuvvhiDRgwQJ988oknawMAAKgyt8LNSy+9pOuuu0516tTRhAkTNH78eIWEhOjaa6/Vyy+/7OkaAQAAXObWBcWtW7fW3/72N02aNMmp/YknntDzzz+vvXv3eqxAT+OCYgAAap+qfH+7deRm//796t+/f5n2AQMGKDMz051ZAgAAeIRb4SYmJkbr168v075+/XrFxMRUuygAAAB3uXUr+OTJkzVhwgRlZGSoU6dOstls2rRpk1544QXNnz/f0zUCAAC4zK1wc+eddyoqKkqPP/64Xn31VUm/XYezYsUKDRw40KMFAgAAVIVbFxTXZlxQDABA7VPjFxR//vnn2rp1a5n2rVu3avv27e7MEgAAwCPcCjfjxo3ToUOHyrT/+OOPGjduXLWLAgAAcJdb4WbPnj3q2LFjmfYOHTpoz5491S4KAADAXW6FG7vdrp9++qlMe3Z2tgIC3LpGGQAAwCPcCje9evXS9OnTlZ+f72g7fvy47rvvPvXq1ctjxQEAAFSVW4dZHn/8cXXr1k2xsbHq0KGDJCkjI0ORkZFaunSpRwsEAACoCreO3DRr1kxffvml5s6dqzZt2ig+Pl7z58/X7t27q/yE4gULFiguLk7BwcGKj493+ZfFN2/erICAALVv396NNQAAAFbl0+fcrFixQsOHD9eCBQvUuXNnPfvss1q4cKH27NmjFi1aVDhdfn6+OnbsqJYtW+qnn35SRkaGy8vkOTcAANQ+Nf6cG0launSpunTpoujoaB08eFCS9OSTT+rtt992eR5PPPGExowZo7Fjx6p169aaN2+eYmJilJaWds7p7rjjDg0bNkyJiYnulg8AACzKrXCTlpamlJQU9enTR8eOHVNxcbEkqUGDBpo3b55L8zh16pR27NihpKQkp/akpCR9+umnFU63ZMkSff/995o5c6Y7pQMAAItzK9w89dRTev755zVjxgynW78TEhK0e/dul+Zx5MgRFRcXKzIy0qk9MjJSOTk55U7z7bff6t5779WyZctcvuW8qKhIBQUFTi8AAGBdboWbzMxMx11Sv2e32/XLL79UaV42m83pvTGmTJskFRcXa9iwYZo1a5YuueQSl+efmpqq8PBwx6uqFzwDAIDaxa1wExcXV+5FvO+9955at27t0jwaNWokf3//MkdpcnNzyxzNkaTCwkJt375d48ePV0BAgAICAjR79mx98cUXCggI0IYNG8pdTunzeEpf5f1sBAAAsA63nnMzZcoUjRs3TidPnpQxRtu2bdPy5cv18MMPa9GiRS7NIygoSPHx8UpPT9fgwYMd7enp6Ro4cGCZ/mFhYWVOeS1YsEAbNmzQ66+/rri4uHKXY7fbZbfbq7B2AACgNnMr3IwePVpnzpzR1KlTdeLECQ0bNkzNmjXTU089pa5du7o8n5SUFA0fPlwJCQlKTEzUc889p6ysLCUnJ0v67ajLjz/+qBdffFF+fn5q27at0/RNmjRRcHBwmXYAAPDH5fat4LfffrsOHjyo3Nxc5eTkaNu2bdq1a5datmzp8jyGDBmiefPmafbs2Wrfvr0+/vhjrVmzRrGxsZJ++62qrKwsd0sEAAB/QFV6iN/x48c1btw4rVu3ToGBgbr33ns1fvx4zZo1S4899pjatGmjlJQUDR06tCZrrhYe4gcAQO1Tle/vKp2Wuu+++/Txxx9r5MiRWrt2rSZNmqS1a9fq5MmTWrNmjbp3716twgEAAKqrSuFm9erVWrJkia677jrdddddatmypS655BKXH9wHAABQ06p0zc3hw4fVpk0bSdKFF16o4OBgjR07tkYKAwAAcEeVwk1JSYkCAwMd7/39/RUaGurxogAAANxVpdNSxhiNGjXK8dyYkydPKjk5uUzAWblypecqBAAAqIIqhZuRI0c6vb/11ls9WgwAAEB1VSncLFmypKbqAAAA8Ai3H+IHAABwPiLcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAASyHcAAAAS/F5uFmwYIHi4uIUHBys+Ph4ffLJJxX2XblypXr16qXGjRsrLCxMiYmJev/9971YLQAAON/5NNysWLFCEydO1IwZM7Rr1y517dpVffr0UVZWVrn9P/74Y/Xq1Utr1qzRjh071KNHD/Xv31+7du3ycuUAAOB8ZTPGGF8t/Oqrr1bHjh2VlpbmaGvdurUGDRqk1NRUl+Zx2WWXaciQIbr//vtd6l9QUKDw8HDl5+crLCzMrboBAIB3VeX722dHbk6dOqUdO3YoKSnJqT0pKUmffvqpS/MoKSlRYWGhGjZsWBMlAgCAWijAVws+cuSIiouLFRkZ6dQeGRmpnJwcl+bx+OOP65dfftFNN91UYZ+ioiIVFRU53hcUFLhXMAAAqBV8fkGxzWZzem+MKdNWnuXLl+uBBx7QihUr1KRJkwr7paamKjw83PGKiYmpds0AAOD85bNw06hRI/n7+5c5SpObm1vmaM7ZVqxYoTFjxujVV1/Vddddd86+06dPV35+vuN16NChatcOAADOXz4LN0FBQYqPj1d6erpTe3p6ujp16lThdMuXL9eoUaP08ssvq1+/fpUux263KywszOkFAACsy2fX3EhSSkqKhg8froSEBCUmJuq5555TVlaWkpOTJf121OXHH3/Uiy++KOm3YDNixAjNnz9ff/rTnxxHfUJCQhQeHu6z9QAAAOcPn4abIUOGKC8vT7Nnz1Z2drbatm2rNWvWKDY2VpKUnZ3t9MybZ599VmfOnNG4ceM0btw4R/vIkSP1wgsveLt8AABwHvLpc258gefcAABQ+9SK59wAAADUBMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwFMINAACwlABfF2AVxSVG2zKPKrfwpJrUC9ZVcQ0lyaktPraBdhw8Vqv6+Hr51OjbGq+Kayh/P9t5s+/7eoxqssbyxrq8sa2pPq5sW0+OkSvLr6weV5fvynh4s0ZPbUdX1tXV6VwZR0+thzf4PNwsWLBAjz76qLKzs3XZZZdp3rx56tq1a4X9N27cqJSUFH399deKjo7W1KlTlZyc7MWKy1r7VbZmvbNH2fknHW316wRKko6fOO1o87NJJUa1qo+vl0+Nvq2xaXiwZvZvo95tm6o83t73fT1GNVnj2WNd3tjWVJ/ylDedp8bIleW7Uo8ry3dlPLxdo6e2Y2Xr6up03txnvcVmjDGVd6sZK1as0PDhw7VgwQJ17txZzz77rBYuXKg9e/aoRYsWZfpnZmaqbdu2uv3223XHHXdo8+bNuuuuu7R8+XLdcMMNLi2zoKBA4eHhys/PV1hYWLXXYe1X2brzpZ3y2SACNaj0/7fSbu1Y5o8T+75n/X6sJZU7tjXRp7wvnZretpUt35P1uDIe3q7RU9uxspq9uR0rqrGq43guVfn+9mm4ufrqq9WxY0elpaU52lq3bq1BgwYpNTW1TP9p06Zp1apV2rt3r6MtOTlZX3zxhbZs2eLSMj0ZbopLjLo8ssEppQJWY5MUFR6sTdN6Og4vs+/XDJukyDC7JJtyCsofW0/2OXu7St7bthUt/2yeqMeV8fB2jZ7ajhXVvHFKD3V/9EOvbEd397Wqqsr3t88uKD516pR27NihpKQkp/akpCR9+umn5U6zZcuWMv2vv/56bd++XadPny53mqKiIhUUFDi9PGVb5lH+uMPyjKTs/JPalnnU0ca+XzOMpJyConN+kXmyz9nbVfLetq1o+WfzRD2ujEdF09VUjZ7ajuVNk51/Uku3HPDadnR3X6tJPgs3R44cUXFxsSIjI53aIyMjlZOTU+40OTk55fY/c+aMjhw5Uu40qampCg8Pd7xiYmI8swKScgv5444/jt/v7+z71nH2tvT2tq1seefDvlYbajzbwaMnfF1CGd4cJ5/fCm6zOR+iMsaUaausf3ntpaZPn678/HzH69ChQ9Ws+H+a1Av22LyA893v93f2fes4e1t6e9tWtrzzYV+rDTWeLbZhHV+XUIY3x8ln4aZRo0by9/cvc5QmNze3zNGZUlFRUeX2DwgIUERERLnT2O12hYWFOb085aq4hmoaHiz3zyAC5z+bfrvjofRWUIl9v6bYJEWF2RUVVvHYerLP2dtV8t62rWj5Z/NEPa6Mh7dr9NR2LG+apuHBGp54gde2o7v7Wk3yWbgJCgpSfHy80tPTndrT09PVqVOncqdJTEws03/dunVKSEhQYGBgjdVaEX8/m2b2byNJ/JGHJZXu1zP7t3G6EJB93/NKx/GBAZfpgQHlj62n+5y9XSXvbNtzLf9s1a3HlfHwdo2e2o7nqjkowM9r29Hdfa0m+fS0VEpKihYuXKjFixdr7969mjRpkrKyshzPrZk+fbpGjBjh6J+cnKyDBw8qJSVFe/fu1eLFi7Vo0SL9/e9/99UqqHfbpkq7taOiwp0Pt9WvE+h4LkCps7drbejj6+VTo29rjAoPrvAWTl/s+74eo5qs8fdjXdHY1kSf8lQ0nafGqLLlu1qPK8t3ZTy8XaOntuO51vVcNdXEdnR3X6spPr0VXPrtIX5z585Vdna22rZtqyeffFLdunWTJI0aNUoHDhzQRx995Oi/ceNGTZo0yfEQv2nTplXpIX6efs5NKZ5QTI1WrJEnFPOEYp5Q7PkaeUKxe2rNc258oabCDQAAqDm14jk3AAAANYFwAwAALIVwAwAALIVwAwAALIVwAwAALIVwAwAALIVwAwAALIVwAwAALIVwAwAALCXA1wV4W+kDmQsKCnxcCQAAcFXp97YrP6zwhws3hYWFkqSYmBgfVwIAAKqqsLBQ4eHh5+zzh/ttqZKSEh0+fFj16tWTzebZn18vKChQTEyMDh06xO9W1TDG2nsYa+9hrL2HsfYeT421MUaFhYWKjo6Wn9+5r6r5wx258fPzU/PmzWt0GWFhYfxj8RLG2nsYa+9hrL2HsfYeT4x1ZUdsSnFBMQAAsBTCDQAAsBTCjQfZ7XbNnDlTdrvd16VYHmPtPYy19zDW3sNYe48vxvoPd0ExAACwNo7cAAAASyHcAAAASyHcAAAASyHcAAAASyHceMiCBQsUFxen4OBgxcfH65NPPvF1SbVeamqqrrzyStWrV09NmjTRoEGD9M033zj1McbogQceUHR0tEJCQnTNNdfo66+/9lHF1pGamiqbzaaJEyc62hhrz/nxxx916623KiIiQnXq1FH79u21Y8cOx+eMtWecOXNG//d//6e4uDiFhITowgsv1OzZs1VSUuLow1i77+OPP1b//v0VHR0tm82mt956y+lzV8a2qKhId999txo1aqTQ0FANGDBAP/zwQ/WLM6i2V155xQQGBprnn3/e7Nmzx9xzzz0mNDTUHDx40Nel1WrXX3+9WbJkifnqq69MRkaG6devn2nRooX5+eefHX3mzJlj6tWrZ9544w2ze/duM2TIENO0aVNTUFDgw8prt23btpkLLrjAtGvXztxzzz2OdsbaM44ePWpiY2PNqFGjzNatW01mZqb54IMPzHfffefow1h7xkMPPWQiIiLMu+++azIzM81rr71m6tata+bNm+fow1i7b82aNWbGjBnmjTfeMJLMm2++6fS5K2ObnJxsmjVrZtLT083OnTtNjx49zBVXXGHOnDlTrdoINx5w1VVXmeTkZKe2Vq1amXvvvddHFVlTbm6ukWQ2btxojDGmpKTEREVFmTlz5jj6nDx50oSHh5t///vfviqzVissLDQXX3yxSU9PN927d3eEG8bac6ZNm2a6dOlS4eeMtef069fP3HbbbU5tf/nLX8ytt95qjGGsPenscOPK2B4/ftwEBgaaV155xdHnxx9/NH5+fmbt2rXVqofTUtV06tQp7dixQ0lJSU7tSUlJ+vTTT31UlTXl5+dLkho2bChJyszMVE5OjtPY2+12de/enbF307hx49SvXz9dd911Tu2MteesWrVKCQkJ+utf/6omTZqoQ4cOev755x2fM9ae06VLF61fv1779u2TJH3xxRfatGmT+vbtK4mxrkmujO2OHTt0+vRppz7R0dFq27Zttcf/D/fDmZ525MgRFRcXKzIy0qk9MjJSOTk5PqrKeowxSklJUZcuXdS2bVtJcoxveWN/8OBBr9dY273yyivauXOnPv/88zKfMdaes3//fqWlpSklJUX33Xeftm3bpgkTJshut2vEiBGMtQdNmzZN+fn5atWqlfz9/VVcXKx//vOfGjp0qCT265rkytjm5OQoKChIDRo0KNOnut+fhBsPsdlsTu+NMWXa4L7x48fryy+/1KZNm8p8xthX36FDh3TPPfdo3bp1Cg4OrrAfY119JSUlSkhI0MMPPyxJ6tChg77++mulpaVpxIgRjn6MdfWtWLFCL730kl5++WVddtllysjI0MSJExUdHa2RI0c6+jHWNcedsfXE+HNaqpoaNWokf3//MikzNze3TGKFe+6++26tWrVKH374oZo3b+5oj4qKkiTG3gN27Nih3NxcxcfHKyAgQAEBAdq4caP+9a9/KSAgwDGejHX1NW3aVG3atHFqa926tbKysiSxX3vSlClTdO+99+rmm2/W5ZdfruHDh2vSpElKTU2VxFjXJFfGNioqSqdOndKxY8cq7OMuwk01BQUFKT4+Xunp6U7t6enp6tSpk4+qsgZjjMaPH6+VK1dqw4YNiouLc/o8Li5OUVFRTmN/6tQpbdy4kbGvomuvvVa7d+9WRkaG45WQkKBbbrlFGRkZuvDCCxlrD+ncuXOZRxrs27dPsbGxktivPenEiRPy83P+mvP393fcCs5Y1xxXxjY+Pl6BgYFOfbKzs/XVV19Vf/yrdTkyjDH/uxV80aJFZs+ePWbixIkmNDTUHDhwwNel1Wp33nmnCQ8PNx999JHJzs52vE6cOOHoM2fOHBMeHm5Wrlxpdu/ebYYOHcptnB7y+7uljGGsPWXbtm0mICDA/POf/zTffvutWbZsmalTp4556aWXHH0Ya88YOXKkadasmeNW8JUrV5pGjRqZqVOnOvow1u4rLCw0u3btMrt27TKSzBNPPGF27drleAyKK2ObnJxsmjdvbj744AOzc+dO07NnT24FP58888wzJjY21gQFBZmOHTs6bleG+ySV+1qyZImjT0lJiZk5c6aJiooydrvddOvWzezevdt3RVvI2eGGsfacd955x7Rt29bY7XbTqlUr89xzzzl9zlh7RkFBgbnnnntMixYtTHBwsLnwwgvNjBkzTFFRkaMPY+2+Dz/8sNy/0SNHjjTGuDa2v/76qxk/frxp2LChCQkJMX/+859NVlZWtWuzGWNM9Y79AAAAnD+45gYAAFgK4QYAAFgK4QYAAFgK4QYAAFgK4QYAAFgK4QYAAFgK4QYAAFgK4QbAee/AgQOy2WzKyMiosWWMGjVKgwYNcry/5pprNHHixBpbHoCaQ7gBUONGjRolm81W5tW7d2+Xpo+JiVF2drbatm1bw5X+z8qVK/Xggw96bXkAPCfA1wUA+GPo3bu3lixZ4tRmt9tdmtbf39/xK8Pe0rBhQ68uD4DncOQGgFfY7XZFRUU5vRo0aCBJstlsSktLU58+fRQSEqK4uDi99tprjmnPPi117Ngx3XLLLWrcuLFCQkJ08cUXOwWn3bt3q2fPngoJCVFERIT+9re/6eeff3Z8XlxcrJSUFNWvX18RERGaOnWqzv4lmrNPSx07dkwjRoxQgwYNVKdOHfXp00fffvttDYwUgOoi3AA4L/zjH//QDTfcoC+++EK33nqrhg4dqr1791bYd8+ePXrvvfe0d+9epaWlqVGjRpKkEydOqHfv3mrQoIE+//xzvfbaa/rggw80fvx4x/SPP/64Fi9erEWLFmnTpk06evSo3nzzzXPWN2rUKG3fvl2rVq3Sli1bZIxR3759dfr0ac8NAgDPqPZPbwJAJUaOHGn8/f1NaGio02v27NnGmN9+AT45OdlpmquvvtrceeedxhhjMjMzjSSza9cuY4wx/fv3N6NHjy53Wc8995xp0KCB+fnnnx1tq1evNn5+fiYnJ8cYY0zTpk3NnDlzHJ+fPn3aNG/e3AwcONDR9vtfRd+3b5+RZDZv3uz4/MiRIyYkJMS8+uqr7g0KgBrDNTcAvKJHjx5KS0tzavv9dS2JiYlOnyUmJlZ4d9Sdd96pG264QTt37lRSUpIGDRqkTp06SZL27t2rK664QqGhoY7+nTt3VklJib755hsFBwcrOzvbaXkBAQFKSEgoc2qq1N69exUQEKCrr77a0RYREaFLL720wqNLAHyHcAPAK0JDQ9WyZcsqTWOz2cpt79Onjw4ePKjVq1frgw8+0LXXXqtx48bpsccekzGmwukqaq9MRaHnXMsC4DtccwPgvPDZZ5+Ved+qVasK+zdu3FijRo3SSy+9pHnz5um5556TJLVp00YZGRn65ZdfHH03b94sPz8/XXLJJQoPD1fTpk2dlnfmzBnt2LGjwmW1adNGZ86c0datWx1teXl52rdvn1q3bl3ldQVQszhyA8ArioqKlJOT49QWEBDguBD4tddeU0JCgrp06aJly5Zp27ZtWrRoUbnzuv/++xUfH6/LLrtMRUVFevfddx0h45ZbbtHMmTM1cuRIPfDAA/rvf/+ru+++W8OHD1dkZKQk6Z577tGcOXN08cUXq3Xr1nriiSd0/PjxCmu/+OKLNXDgQN1+++169tlnVa9ePd17771q1qyZBg4c6IHRAeBJHLkB4BVr165V06ZNnV5dunRxfD5r1iy98sorateunf7zn/9o2bJlatOmTbnzCgoK0vTp09WuXTt169ZN/v7+euWVVyRJderU0fvvv6+jR4/qyiuv1I033qhrr71WTz/9tGP6yZMna8SIERo1apQSExNVr149DR48+Jz1L1myRPHx8frzn/+sxMREGWO0Zs0aBQYGemB0AHiSzVR0MhkAvMRms+nNN990+vkDAHAXR24AAIClEG4AAIClcEExAJ/j7DgAT+LIDQAAsBTCDQAAsBTCDQAAsBTCDQAAsBTCDQAAsBTCDQAAsBTCDQAAsBTCDQAAsBTCDQAAsJT/D2OctXubJBNkAAAAAElFTkSuQmCC"
+class="
+"
+>
+</div>
+
 </div>
 
 </div>
@@ -17675,10 +15754,10 @@ Episode:2000 Puntaje:1.0 e:0.1
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[55]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Q_table</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">Q_table</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Izquierda&#39;</span><span class="p">,</span> <span class="s1">&#39;Abajo&#39;</span><span class="p">,</span> <span class="s1">&#39;Derecha&#39;</span><span class="p">,</span> <span class="s1">&#39;Arriba&#39;</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -17694,28 +15773,151 @@ Episode:2000 Puntaje:1.0 e:0.1
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[55]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 
 
 
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([[4.85383214e-01, 9.99999980e-01, 1.43815434e-01, 3.59948534e-01],
-       [4.89524813e-01, 0.00000000e+00, 2.37424057e-05, 2.81712324e-03],
-       [6.04624099e-03, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [5.88240744e-01, 9.99999997e-01, 0.00000000e+00, 5.06135743e-01],
-       [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [5.13266049e-01, 1.00000000e+00, 4.84297879e-01, 6.58438116e-01],
-       [9.36516736e-01, 9.99996281e-03, 0.00000000e+00, 0.00000000e+00],
-       [4.68677038e-01, 1.98999049e-02, 0.00000000e+00, 0.00000000e+00],
-       [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
-       [6.76770597e-01, 4.87787526e-01, 1.00000000e+00, 6.18542014e-01],
-       [5.00824296e-01, 5.61685783e-01, 1.00000000e+00, 3.83370935e-01],
-       [7.32430076e-01, 5.18751037e-01, 1.00000000e+00, 1.71729960e-01],
-       [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]])</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Izquierda</th>
+      <th>Abajo</th>
+      <th>Derecha</th>
+      <th>Arriba</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.982011</td>
+      <td>0.995040</td>
+      <td>0.999982</td>
+      <td>0.997014</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.995936</td>
+      <td>0.000000</td>
+      <td>0.999988</td>
+      <td>0.985112</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.978925</td>
+      <td>0.999991</td>
+      <td>0.954103</td>
+      <td>0.995505</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.998937</td>
+      <td>0.122738</td>
+      <td>0.852224</td>
+      <td>0.690136</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.428628</td>
+      <td>0.903808</td>
+      <td>0.000000</td>
+      <td>0.999740</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.000000</td>
+      <td>0.999992</td>
+      <td>0.930017</td>
+      <td>0.964474</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.411164</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.968456</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.391208</td>
+      <td>0.996588</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.916456</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.536965</td>
+      <td>0.999995</td>
+      <td>0.000000</td>
+      <td>0.988984</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.369315</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.000000</td>
+      <td>0.709178</td>
+      <td>0.999999</td>
+      <td>0.867545</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
@@ -17740,11 +15942,10 @@ Episode:2000 Puntaje:1.0 e:0.1
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FrozenLake-v1&quot;</span><span class="p">,</span><span class="n">desc</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SFFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FHFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFH&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFG&quot;</span><span class="p">],</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;FrozenLake-v1&quot;</span><span class="p">,</span><span class="n">desc</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SFFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FHFF&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFH&quot;</span><span class="p">,</span> <span class="s2">&quot;FFFG&quot;</span><span class="p">],</span> <span class="n">is_slippery</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -17757,32 +15958,29 @@ Episode:2000 Puntaje:1.0 e:0.1
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[60]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_episodes_t</span> <span class="o">=</span> <span class="mi">5</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_episodes_t</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_episodes_t</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-    
-    <span class="c1"># Siscretize state into buckets</span>
+    <span class="c1">#Estado inicial</span>
     <span class="n">current_state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
-
+    <span class="n">actions</span>
     <span class="k">while</span> <span class="n">done</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
-        
-        <span class="c1"># policy action </span>
-        <span class="n">action</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">current_state</span><span class="p">)</span> <span class="c1"># exploit</span>
-         
-        <span class="c1"># act in the enviroment</span>
+        <span class="c1">#Elije acción de acuerdo a política </span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">Q_table</span><span class="p">)</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">action_names</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
+        <span class="c1">#Actúa en el ambiente y cálcula recompensa</span>
         <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-        <span class="n">new_state</span> <span class="o">=</span> <span class="n">obs</span>
-        
+        <span class="n">new_state</span> <span class="o">=</span> <span class="n">obs</span>        
         <span class="n">score</span> <span class="o">+=</span> <span class="n">reward</span>
-      
+        <span class="c1">#Actualiza el estado</span>
         <span class="n">current_state</span> <span class="o">=</span> <span class="n">new_state</span>
 
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Episodio:</span><span class="si">{}</span><span class="s1"> Puntaje:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Episodio: </span><span class="si">{}</span><span class="se">\n\t</span><span class="s1">Acciones: </span><span class="si">{}</span><span class="s1">; Puntaje: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
     
 <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
@@ -17804,11 +16002,12 @@ Episode:2000 Puntaje:1.0 e:0.1
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Episodio:1 Puntaje:1.0
-Episodio:2 Puntaje:1.0
-Episodio:3 Puntaje:1.0
-Episodio:4 Puntaje:1.0
-Episodio:5 Puntaje:1.0
+<pre>Episodio: 1
+	Acciones: [&#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;]; Puntaje: 1.0
+Episodio: 2
+	Acciones: [&#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;]; Puntaje: 1.0
+Episodio: 3
+	Acciones: [&#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Derecha&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Abajo&#39;, &#39;Derecha&#39;]; Puntaje: 1.0
 </pre>
 </div>
 </div>
@@ -17817,6 +16016,18 @@ Episodio:5 Puntaje:1.0
 
 </div>
 
+</div>
+<div id="cell-id=83fd4172" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="Images/SolFrozenLake.gif" alt="image" /></p>
+
+</div>
+</div>
+</div>
 </div>
 <div id="cell-id=94514a2a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
