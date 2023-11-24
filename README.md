@@ -59,6 +59,7 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
         1. [k-Medias](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/06%20kMeans.html)
     5. Aprendizaje por refuerzo
         1. [Q-Learning](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/07%20QLearning.html)
+        2. [Iteración de política](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/08%20PolicyIteration.html)
 
 
 
