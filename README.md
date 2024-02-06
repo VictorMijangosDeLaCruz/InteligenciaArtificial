@@ -25,15 +25,15 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
         4. [Búsqueda A* Bidireccional](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/08%20BidirectionalAStar.html)
         5. [Búsqueda por Haz (Beam Search)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/09%20BeamSearch.html)
     3. [Resumen de algoritmos de búsqueda](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/02%20Busqueda/10%20ResumenBusqueda.html)
-3. Búsqueda por optimización y satifacción de restricciones
+3. Búsqueda adversaria
+    1. [Juego del gato](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/05%20Gato.html)
+    2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/06%20Minimax.html)
+    3. [Algoritmo alpha-beta](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/07%20AlphaBeta.html)
+4. Búsqueda por optimización y satifacción de restricciones
     1. [Problema de las 8 reinas](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/01%208Queens.html)
     2. [Algoritmo de ascenso de la colina](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/02%20HillClimbing.html)
     3. [Algoritmos genéticos](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/03%20Genetic.html)
     4. [Satisfacción de restricciones: Sudoku](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/04%20Sudoku.html)
-4. Búsqueda adversaria
-    1. [Juego del gato](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/05%20Gato.html)
-    2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/06%20Minimax.html)
-    3. [Algoritmo alpha-beta](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/07%20AlphaBeta.html)
 5. Modelos probabilísticos
     1. Redes bayesianas
         1. [Red Bayesiana para el problema de Monty Hall](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/01%20MontyHall.html)
