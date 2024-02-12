@@ -1,0 +1,2753 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html xml:lang="es" > 
+<head><title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="02-Agentes.tex"> 
+<link rel="stylesheet" type="text/css" href="02-Agentes.css"> 
+</head><body 
+>
+   <h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Agentes inteligentes</h3>
+<!--l. 31--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>Concepto de agente</h4>
+<!--l. 33--><p class="noindent" >En IA se necesita representar entidades que sea <span 
+class="ptmb7t-">inteligentes</span>. El referente de la inteligencia es
+el <span 
+class="ptmb7t-">ser humano</span>. Cabe preguntarse ¿qué caracteriza las acciones inteligentes de los seres
+humanos?
+<!--l. 36--><p class="indent" >   Los seres humanos cuentan con diferentes formas de actuar, pero de manera general
+<span 
+class="ptmb7t-">act</span>ú<span 
+class="ptmb7t-">an </span>a través de órganos (brazos, piernas, etc.) que les permiten interactuar con un <span 
+class="ptmb7t-">ambiente</span>
+(el entorno en el que vive, o de forma más general el mundo en el que habita); estas acciones
+se dicen <span 
+class="ptmb7t-">inteligentes </span>cuando responden a un razonamiento que el agente realiza a partir de
+conocimiento previamente adquirido. Este conocimiento se da por su interacción con el
+mundo, por medio de <span 
+class="ptmb7t-">sensaciones</span>, las cuales son concebidas por el ser humano por medio de
+sus órganos <span 
+class="ptmb7t-">sensores</span>.
+<!--l. 38--><p class="indent" >   Esta narrativa simplifica las acciones inteligentes de los seres humanos. Lo que nos
+interesa es mapear esta abstracción a un sistema computacional. Por tanto, podemos tomar los
+siguientes elementos con los que esperamos que un sistema computacional &#8220;inteligente&#8221;
+cuente:
+<!--l. 40--><p class="indent" >
+     <dl class="description"><dt class="description">
+     <!--l. 41--><p class="noindent" >
+<span 
+class="ptmb7t-">Sensores:</span> </dt><dd 
+class="description">
+     <!--l. 41--><p class="noindent" >Los sensores son los componentes de entrada de un agente, aquellos elementos
+     del agente que le permiten reconocer su ambiente.
+     </dd><dt class="description">
+     <!--l. 42--><p class="noindent" >
+<span 
+class="ptmb7t-">Actuadores:</span> </dt><dd 
+class="description">
+     <!--l. 42--><p class="noindent" >Los actuadores son los componentes de salida de un agente, aquellos elementos
+     que le permiten interactuar con su ambiente.
+     </dd><dt class="description">
+     <!--l. 43--><p class="noindent" >
+<span 
+class="ptmb7t-">Percepci</span>ó<span 
+class="ptmb7t-">n:</span> </dt><dd 
+class="description">
+     <!--l. 43--><p class="noindent" >Es la entrada que recibe un agente, aquello que es captado por los sensores del
+     agente.
+     </dd><dt class="description">
+
+     <!--l. 44--><p class="noindent" >
+<span 
+class="ptmb7t-">Ambiente:</span> </dt><dd 
+class="description">
+     <!--l. 44--><p class="noindent" >El  ambiente  se  compone  de  los  elementos  o  condiciones  en  que  el  agente  se
+     desenvuelve y con los cuales puede interactuar a través de sus actuadores.</dd></dl>
+<!--l. 47--><p class="indent" >   La Figura&#x00A0;<a 
+href="#x1-2001r1">1<!--tex4ht:ref: fig:AgentEsc --></a> muestra la estructura de un agente en forma gráfica.
+<!--l. 49--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+
+<a 
+ id="x1-2001r1"></a>
+
+<!--l. 51--><p class="noindent" ><img 
+src="images/AgenteEsc.jpg" alt="PIC"  
+width="36" height="36" >
+<br /> <div class="caption" 
+><span class="id">Figura&#x00A0;1: </span><span  
+class="content">Diagrama de un agente y de su ambiente</span></div><!--tex4ht:label?: x1-2001r1 -->
+
+<!--l. 54--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 56--><p class="indent" >   Con lo anterior en mente, podemos pasar a definir lo que entendemos por un
+agente:
+   <div class="newtheorem">
+<!--l. 58--><p class="noindent" ><span class="head">
+<a 
+ id="x1-2002r1"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 1 </span>(Agente)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un agente es cualquier entidad que </span><span 
+class="ptmbi7t-">percibe </span><span 
+class="ptmri7t-">su </span><span 
+class="ptmbi7t-">ambiente </span><span 
+class="ptmri7t-">a trav</span>é<span 
+class="ptmri7t-">s</span>
+<span 
+class="ptmri7t-">de </span><span 
+class="ptmbi7t-">sensores</span><span 
+class="ptmri7t-">, y que act</span>ú<span 
+class="ptmri7t-">a en el ambiente a trav</span>é<span 
+class="ptmri7t-">s de </span><span 
+class="ptmbi7t-">actuadores</span><span 
+class="ptmri7t-">.</span>
+   </div>
+<!--l. 60--><p class="indent" >
+<!--l. 62--><p class="indent" >   El agente tendrá un <span 
+class="ptmb7t-">conocimiento previo </span>que se manifiesta en el siguiente concepto:
+   <div class="newtheorem">
+<!--l. 64--><p class="noindent" ><span class="head">
+<a 
+ id="x1-2003r2"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 2 </span>(Secuencia de percepciones)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Una  secuencia  de  percepci</span>ó<span 
+class="ptmri7t-">n  es  la  historia</span>
+<span 
+class="ptmri7t-">completa  de  lo  que  el  agente  ha  percibido  hasta  el  momento  actual.  Sea  </span><span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7m-x-x-74">i</span></sub>  <span 
+class="ptmri7t-">la</span>
+<span 
+class="ptmri7t-">representaci</span>ó<span 
+class="ptmri7t-">n de la percepci</span>ó<span 
+class="ptmri7t-">n </span><span 
+class="zptmcm7m-">i</span><span 
+class="ptmri7t-">, la secuencia de percepciones es entonces la secuencia</span>
+<span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7t-x-x-74">1</span></sub><span 
+class="zptmcm7m-">,p</span><sub><span 
+class="zptmcm7t-x-x-74">2</span></sub><span 
+class="zptmcm7m-">,...,p</span><sub><span 
+class="zptmcm7m-x-x-74">t</span></sub><span 
+class="ptmri7t-">; es decir, las representaciones de las percepciones hasta el momento </span><span 
+class="zptmcm7m-">t</span><span 
+class="ptmri7t-">.</span>
+   </div>
+<!--l. 66--><p class="indent" >
+<!--l. 68--><p class="indent" >   El objetivo de un agente será llevar a cabo una acción que sea considerada inteligente. Por
+acción entendemos:
+   <div class="newtheorem">
+<!--l. 70--><p class="noindent" ><span class="head">
+<a 
+ id="x1-2004r3"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 3 </span>(Acción)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">La  acci</span>ó<span 
+class="ptmri7t-">n  de  un  agente  es  la  interacci</span>ó<span 
+class="ptmri7t-">n  de  </span>é<span 
+class="ptmri7t-">ste,  a  partir  de  los</span>
+<span 
+class="ptmri7t-">actuadores  con  el  ambiente,  y  depende  del  conocimiento  construido  a  partir  de  la</span>
+<span 
+class="ptmri7t-">secuencia de percepciones.</span>
+   </div>
+<!--l. 72--><p class="indent" >
+<!--l. 74--><p class="indent" >   Para manifestar la acción, debemos definir una función que &#8220;traduzca&#8221; el conocimiento
+previo en la acción misma, la interacción con el ambiente. Esta función se conoce como <span 
+class="ptmb7t-">funci</span>ó<span 
+class="ptmb7t-">n</span>
+<span 
+class="ptmb7t-">del agente</span>:
+   <div class="newtheorem">
+<!--l. 77--><p class="noindent" ><span class="head">
+<a 
+ id="x1-2005r4"></a>
+
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 4 </span>(Función del agente)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">La funci</span>ó<span 
+class="ptmri7t-">n del agente es aquella funci</span>ó<span 
+class="ptmri7t-">n que toma como</span>
+<span 
+class="ptmri7t-">entrada la secuencia de percepciones y emite como salida una acci</span>ó<span 
+class="ptmri7t-">n:</span>
+<!--l. 80--><p class="indent" >
+   <div class="math-display" >
+<img 
+src="02-Agentes0x.png" alt="f(p1,p2,..,pt)= a
+" class="math-display" ></div>
+<!--l. 81--><p class="indent" >   <span 
+class="ptmri7t-">Tal que </span><span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7m-x-x-74">i</span></sub><span 
+class="ptmri7t-">, </span><span 
+class="zptmcm7m-">i </span><span 
+class="zptmcm7t-">= 1</span><span 
+class="zptmcm7m-">,...,t</span><span 
+class="ptmri7t-">, son percepciones, y </span><span 
+class="zptmcm7m-">a </span><span 
+class="ptmri7t-">es una acci</span>ó<span 
+class="ptmri7t-">n.</span>
+   </div>
+<!--l. 82--><p class="indent" >
+<!--l. 84--><p class="indent" >   La función del agente se implementa por medio de un programa (computacional) que se
+conoce como el <span 
+class="ptmb7t-">programa del agente</span>:
+   <div class="newtheorem">
+<!--l. 86--><p class="noindent" ><span class="head">
+<a 
+ id="x1-2006r5"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 5 </span>(Programa del agente)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">El  programa  del  agente  es  una  caracterizaci</span>ó<span 
+class="ptmri7t-">n</span>
+<span 
+class="ptmri7t-">interna  de  la  funci</span>ó<span 
+class="ptmri7t-">n  del  agente.  Se  trata  de  un  programa  que  ejecuta  la  funci</span>ó<span 
+class="ptmri7t-">n  del</span>
+<span 
+class="ptmri7t-">agente.</span>
+   </div>
+<!--l. 88--><p class="indent" >
+   <div class="newtheorem">
+<!--l. 92--><p class="noindent" ><span class="head">
+<a 
+ id="x1-2007r1"></a>
+<span 
+class="ptmb7t-">Ejemplo 1.</span>  </span><span 
+class="ptmri7t-">Un ejemplo cl</span>á<span 
+class="ptmri7t-">sico para la construcci</span>ó<span 
+class="ptmri7t-">n de un agente es el mundo de la</span>
+<span 
+class="ptmri7t-">aspiradora. Se cuenta con un agente aspiradora que act</span>ú<span 
+class="ptmri7t-">a sobre un ambiente dividido</span>
+<span 
+class="ptmri7t-">en cuartos; en el caso m</span>á<span 
+class="ptmri7t-">s simple se cuenta con dos cuartos. Los elementos de este</span>
+<span 
+class="ptmri7t-">mundo son entonces:</span>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 96--><p class="noindent" ><span 
+class="ptmri7t-">Sensores: El agente puede percibir si hay suciedad o no en el cuarto en que se</span>
+     <span 
+class="ptmri7t-">encuentra.</span>
+
+     </li>
+     <li class="itemize">
+     <!--l. 97--><p class="noindent" ><span 
+class="ptmri7t-">Actuadores: El agente cuenta con la opci</span>ó<span 
+class="ptmri7t-">n de limpiar, una aspiradora, o bien</span>
+     <span 
+class="ptmri7t-">moverse, a partir de elementos mec</span>á<span 
+class="ptmri7t-">nicos.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 98--><p class="noindent" ><span 
+class="ptmri7t-">Percepci</span>ó<span 
+class="ptmri7t-">n: El agente puede percibir si hay suciedad o no. Estas percepciones</span>
+     <span 
+class="ptmri7t-">se  simbolizan  con  1  (sucio)  y  0  (limpio).  Se  puede  tener  una  secuencia  de</span>
+     <span 
+class="ptmri7t-">percepciones en </span><span 
+class="zptmcm7y-">{</span><span 
+class="zptmcm7t-">0</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">1</span><span 
+class="zptmcm7y-">}</span><sup><span 
+class="zptmcm7y-x-x-74">*</span></sup><span 
+class="ptmri7t-">.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 99--><p class="noindent" ><span 
+class="ptmri7t-">Ambiente:  El  ambiente  est</span>á  <span 
+class="ptmri7t-">conformado  de  cuartos.  Los  cuartos  se  describen</span>
+     <span 
+class="ptmri7t-">como cuadrados generalmente numerados con letras, A, B, etc.</span></li></ul>
+   </div>
+<!--l. 101--><p class="indent" >
+<!--l. 103--><p class="indent" >   La Figura&#x00A0;<a 
+href="#x1-2008r2">2<!--tex4ht:ref: fig:vacuumWolrd --></a> muestra un ejemplo de mundo de la aspiradora con sólo dos cuartos A y B. En
+este caso, la aspiradora está en el cuadro A, y ambos cuartos están sucios.
+<!--l. 105--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+
+<a 
+ id="x1-2008r2"></a>
+
+<!--l. 107--><p class="noindent" ><img 
+src="images/vacuumCleaner.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figura&#x00A0;2: </span><span  
+class="content">Mundo de la aspiradora con dos cuartos</span></div><!--tex4ht:label?: x1-2008r2 -->
+
+<!--l. 110--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 112--><p class="indent" >   En este mundo de la aspiradora con dos cuadros, podemos definir un programa en base al
+siguiente algoritmo.
+   <div class="algorithm">
+
+<!--l. 114--><p class="indent" >   <a 
+ id="x1-2009r1"></a><hr class="float"><div class="float" 
+>
+
+ <div class="caption" 
+><span class="id">Algorithm : </span><span  
+class="content">Mundo de la aspiradora</span></div><!--tex4ht:label?: x1-2009r1 -->
+<div class="algorithmic">
+       <span class="label-11.99997pt">
+ <span 
+class="ptmr7t-x-x-80">1:</span> </span>&#xA0;<span 
+class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">procedure</span>&#x00A0;<span 
+class="ptmrc7t-"><span 
+class="small-caps">d</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">i</span><span 
+class="small-caps">d</span><span 
+class="small-caps">e</span></span>(location, dirt)        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">2:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">if</span>&#x00A0;(<span 
+class="zptmcm7m-">location </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7m-">A </span><span 
+class="ptmb7t-">or </span><span 
+class="zptmcm7m-">location </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7m-">B</span>) <span 
+class="ptmb7t-">and </span><span 
+class="zptmcm7m-">dirt </span><span 
+class="zptmcm7t-">= 1</span>&#x00A0;<span 
+class="ptmb7t-">then</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">3:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="ptmb7t-">return </span>Limpia        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">4:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">if</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">5:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">if</span>&#x00A0;<span 
+class="zptmcm7m-">location </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7m-">A </span><span 
+class="ptmb7t-">and </span><span 
+class="zptmcm7m-">dirt </span><span 
+class="zptmcm7t-">= 0</span>&#x00A0;<span 
+class="ptmb7t-">then</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">6:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="ptmb7t-">return </span>Derecha        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">7:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">if</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">8:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">if</span>&#x00A0;<span 
+class="zptmcm7m-">location </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7m-">B </span><span 
+class="ptmb7t-">and </span><span 
+class="zptmcm7m-">dirt </span><span 
+class="zptmcm7t-">= 0</span>&#x00A0;<span 
+class="ptmb7t-">then</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">9:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="ptmb7t-">return </span>Izquierda        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">10:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">if</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">11:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">procedure</span></span>
+</div>
+
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 134--><p class="indent" >   Este algoritmo revisa las percepciones que consisten en la localización del agente
+(<span 
+class="ptmri7t-">location</span>) y si el ambiente está o no sucio (<span 
+class="ptmri7t-">dirt</span>). Si la percepción implica que el cuarto está
+sucio, entonces se ejecutará la acción de limpiar. Por su parte si el agente se encuentra
+se encuentra en el cuadro A, ejecutará la acción &#8216;Derecha&#8217; para moverse hacia el
+cuarto B; si está en el cuarto B, la acción que ejecutará será izquierda para moverse a
+A.
+<!--l. 136--><p class="indent" >   Si bien en este ejemplo podemos garantizar que el agente limpiará todos los cuartos,
+podemos ver que conforme el número de cuartos aumente y la disposición de estos se haga más
+intrincada, definir un algoritmo de este tipo será más complejo. En este ejemplo, tenemos 4
+situaciones: 1) el agente está en A y A está sucio; 2) el agente está en B y B está sucio; 3) el
+agente está en A y A está limpio; y 4) el agente está en B y B está limpio. Podemos escribir estos
+estados como <span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">L</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">]</span>, donde <span 
+class="zptmcm7m-">L</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub> es la locación del agente y <span 
+class="zptmcm7m-">l </span><span 
+class="zptmcm7y-">&#x2208;{</span><span 
+class="zptmcm7t-">0</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">1</span><span 
+class="zptmcm7y-">} </span>nos dice si el
+cuadro está o no limpio.
+<!--l. 138--><p class="indent" >   Si el número de cuadros aumenta, por ejemplo con 4 cuadros, tendremos
+   <div class="math-display" >
+<img 
+src="02-Agentes1x.png" alt="[(A,dA),(B,dB),(C,dC),(D,dD)LA ]
+" class="math-display" ></div>
+<!--l. 138--><p class="indent" >   Como vemos, en este caso tenemos <span 
+class="zptmcm7t-">2</span><sup><span 
+class="zptmcm7t-x-x-74">4</span></sup> <span 
+class="zptmcm7t-">= 16 </span>posibles configuraciones del entorno, además
+de las 4 posibles posiciones en que el agente puede estar localizado; por lo que el total de
+estados que tendremos será <span 
+class="zptmcm7t-">4</span><span 
+class="zptmcm7y-">&#x22C5;</span><span 
+class="zptmcm7t-">16 = 64 </span>posibles estados. En general, para un mundo de
+aspiradora con <span 
+class="zptmcm7m-">n </span>cuadros, tendremos <span 
+class="zptmcm7m-">n</span><span 
+class="zptmcm7y-">&#x22C5;</span><span 
+class="zptmcm7t-">2</span><sup><span 
+class="zptmcm7m-x-x-74">n</span></sup> estados. Cuando <span 
+class="zptmcm7m-">n </span>es muy grande, definir un
+programa como el anterior se vuelve casi imposible.
+   <h4 class="likesubsectionHead"><a 
+ id="x1-3000"></a>Agentes racionales</h4>
+<!--l. 142--><p class="noindent" >Las acciones realizadas por agentes, por ejemplo los seres humanos, no siempre llevan a
+resultados satisfactorios. Dentro del espectro de las acciones humanas podemos
+considerar acciones impulsivas, que respondan a costumbres o sentimientos, sesgadas,
+etc.
+<!--l. 144--><p class="indent" >   Cuando nos enfocamos en generar sistemas computacionales inteligentes, este tipo de
+decisiones deben ser evitadas. No buscamos que un sistema de inteligencia artificial tenga
+sesgos.
+<!--l. 146--><p class="indent" >   De forma general, buscamos que estos sistemas nos lleven a solucionar problemas
+específicos (modelo estándar) de la forma más eficiente posible, buscamos que las decisiones
+que el agente tome sean óptimas y que los sesgos se reduzcan lo más posible.
+
+<!--l. 148--><p class="indent" >   Para buscar que los agentes dentro de los sistemas computacionales de IA sean lo más
+efectivos posibles, nos enfocamos únicamente en un tipo particular de agentes, los <span 
+class="ptmb7t-">agentes</span>
+<span 
+class="ptmb7t-">racionales</span>:
+   <div class="newtheorem">
+<!--l. 150--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3001r6"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 6 </span>(Agente racional)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un  agente  racional  es  un  agente  que  realiza  las</span>
+<span 
+class="ptmri7t-">acciones </span>ó<span 
+class="ptmri7t-">ptimas con base en la informaci</span>ó<span 
+class="ptmri7t-">n que tiene disponible.</span>
+   </div>
+<!--l. 152--><p class="indent" >
+<!--l. 154--><p class="indent" >   Para entender lo que se quiere decir por &#8216;óptimo&#8217; se suele recurrir a la teoría <span 
+class="ptmb7t-">consecuencialista</span>,
+la cual señala que el comportamiento de un agente se puede evaluar a partir de las
+consecuencias que tienen sus acciones. Para medir el impacto de las consecuencias de un
+agente se tiene una regla general:
+<!--l. 156--><p class="indent" >
+     <blockquote class="quote">
+     <!--l. 157--><p class="noindent" >Es mejor medir la utilidad de acuerdo con lo que se quiere para el entorno,
+     más que de acuerdo con cómo se cree que el agente debe comportarse.</blockquote>
+<!--l. 160--><p class="indent" >   Sin embargo, este tipo de reglas dependen tanto del entorno como de un sujeto que evalúe
+aquello que se quiere para el entorno. En busca de formalizar más la medición de estas
+consecuencias introducimos el concepto de <span 
+class="ptmb7t-">medida de rendimiento</span>, la cual evalúa (de
+acuerdo a un criterio dado) una secuencia de estados del ambiente que es resultado de una
+secuencia de acciones del agente.
+<!--l. 163--><p class="indent" >   La medida de rendimiento toma en cuenta la regla del consecuensialismo, y como se
+apunta aquí debe prevalecer un criterio. Por lo general, buscaremos que este criterio responda
+al problema de alineación de valores; es decir, que responda a intereses de las personas que
+crean al sistema de IA.
+   <div class="newtheorem">
+<!--l. 165--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3002r2"></a>
+<span 
+class="ptmb7t-">Ejemplo 2.</span>  </span><span 
+class="ptmri7t-">Consideremos como ejemplo el mundo de la aspiradora. En este entorno</span>
+<span 
+class="ptmri7t-">podemos tomar diferentes medidas de rendimiento:</span>
+     <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-3004x1">
+     <!--l. 168--><p class="noindent" ><span 
+class="ptmri7t-">El n</span>ú<span 
+class="ptmri7t-">mero de cuadros que ha limpiado el agente en un tiempo dado.</span>
+
+     </li>
+<li 
+  class="enumerate" id="x1-3006x2">
+     <!--l. 169--><p class="noindent" ><span 
+class="ptmri7t-">El qu</span>é <span 
+class="ptmri7t-">tan limpio resulta el entorno despu</span>é<span 
+class="ptmri7t-">s de que el agente ha ejecutado sus</span>
+     <span 
+class="ptmri7t-">acciones.</span>
+     </li>
+<li 
+  class="enumerate" id="x1-3008x3">
+     <!--l. 170--><p class="noindent" ><span 
+class="ptmri7t-">Una combinaci</span>ó<span 
+class="ptmri7t-">n de los anteriores; es decir, el que tan limpio resulta el ambiente</span>
+     <span 
+class="ptmri7t-">despu</span>é<span 
+class="ptmri7t-">s de la ejecuci</span>ó<span 
+class="ptmri7t-">n de las acciones del agente y el que tanto tiempo le toma al</span>
+     <span 
+class="ptmri7t-">agente maximizar la limpieza del ambiente.</span></li></ol>
+   </div>
+<!--l. 172--><p class="indent" >
+<!--l. 175--><p class="indent" >   En particular la <span 
+class="ptmb7t-">racionalidad </span>dependerá de cuatro elementos:
+<!--l. 177--><p class="indent" >
+     <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-3010x1">
+     <!--l. 178--><p class="noindent" >La medida de rendimiento que define el criterio de éxito del agente.
+     </li>
+<li 
+  class="enumerate" id="x1-3012x2">
+     <!--l. 179--><p class="noindent" >El conocimiento previo que el agente tiene del entorno.
+     </li>
+<li 
+  class="enumerate" id="x1-3014x3">
+     <!--l. 180--><p class="noindent" >Las acciones que el agente puede realizar.
+     </li>
+<li 
+  class="enumerate" id="x1-3016x4">
+     <!--l. 181--><p class="noindent" >La secuencia de percepciones del agente has el momento actual.</li></ol>
+<!--l. 184--><p class="indent" >   La Figura&#x00A0;<a 
+href="#x1-3017r3">3<!--tex4ht:ref: fig:RationalCycle --></a> ilustra la interaccción de estos cuatro elementos en los agentes racionales.
+<!--l. 186--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+
+<a 
+ id="x1-3017r3"></a>
+
+<!--l. 188--><p class="noindent" ><img 
+src="images/RationalCycle.png" alt="PIC"  
+width="65" height="65" >
+<br /> <div class="caption" 
+><span class="id">Figura&#x00A0;3: </span><span  
+class="content">Interacción de los 4 componentes de la racionalidad en los agentes</span></div><!--tex4ht:label?: x1-3017r3 -->
+
+<!--l. 191--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 193--><p class="indent" >   Para formalizar un agente racional, necesitamos entender qué es una meida de rendimiento
+en términos matemáticos:
+   <div class="newtheorem">
+<!--l. 195--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3018r7"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 7 </span>(Medida de rendimiento)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">La  medida  de  rendimiento  es  una  funci</span>ó<span 
+class="ptmri7t-">n  </span><span 
+class="zptmcm7m-">R </span><span 
+class="zptmcm7t-">:</span>
+<span 
+class="zptmcm7m-">S</span><span 
+class="zptmcm7y-">&#x00D7;</span><span 
+class="zptmcm7m-">A</span><span 
+class="zptmcm7y-">&#x00D7;</span><span 
+class="zptmcm7m-">S </span><span 
+class="zptmcm7y-">&#x2192; </span><span 
+class="msbm-10">&#x211D; </span><span 
+class="ptmri7t-">que toma una una acci</span>ó<span 
+class="ptmri7t-">n de un estado hacia un estado resultante y le</span>
+<span 
+class="ptmri7t-">asigna un valor de rendimiento, que determina qu</span>é <span 
+class="ptmri7t-">tan bien aceptamos dicha acci</span>ó<span 
+class="ptmri7t-">n con</span>
+<span 
+class="ptmri7t-">su resultado.</span>
+   </div>
+<!--l. 197--><p class="indent" >
+<!--l. 199--><p class="indent" >   Esta función de rendimiento dependerá de diferentes factores:
+     <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-3020x1">
+     <!--l. 202--><p class="noindent" >El problema que buscamos resolver.
+     </li>
+<li 
+  class="enumerate" id="x1-3022x2">
+     <!--l. 203--><p class="noindent" >Qué consideramos como criterio de éxito para el agente.
+     </li>
+<li 
+  class="enumerate" id="x1-3024x3">
+     <!--l. 204--><p class="noindent" >Que el éxito del agente se corresponda a los valores de quienes programan a éste.</li></ol>
+<!--l. 207--><p class="indent" >   Se debe hacer una distinción entre el <span 
+class="ptmb7t-">rendimiento absoluto </span>y el <span 
+class="ptmb7t-">rendimiento esperado</span>.
+Por rendimiento absoluto entendemos el rendimiento real en un problema; es decir, lo que
+haría el agente es maximizar el rendimiento conociendo con exactitud cuál es el rendimiento en
+cada estado-acción del problema. Por lo que se buscaría:
+<!--l. 209--><p class="indent" >
+   <div class="math-display" >
+<img 
+src="02-Agentes2x.png" alt="arg m&#x02CA;axR(s,a,s&#x2032;)
+   a&#x2208;A
+" class="math-display" ></div>
+<!--l. 211--><p class="indent" >   Sin embargo, en la mayoría de los problemas no se conoce con exactitud el rendimiento de
+cada acción, pues puede haber factores que impidan este conocimiento, como la incertidumbre,
+la dinamicidad de los ambientes, etc.
+<!--l. 213--><p class="indent" >   Por tanto, un agente racional buscará <span 
+class="ptmb7t-">maximizar el rendimiento esperado</span>, es decir, el
+valor esperado del rendimiento:
+<!--l. 215--><p class="indent" >
+   <div class="math-display" >
+<img 
+src="02-Agentes3x.png" alt="    &#x02CA;               &#x2032;
+argmaa&#x2208;AxE~p(s&#x2032;|s,a)[R(s,a,s)]
+" class="math-display" ></div>
+<!--l. 217--><p class="indent" >   Finalmente, esto nos permite definir de manera más precisa el concepto de agente
+racional.
+   <div class="newtheorem">
+<!--l. 219--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3025r8"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 8 </span>(Agente racional)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un agente racional es un agente que selecciona, dada</span>
+<span 
+class="ptmri7t-">una secuencia de percepciones y su conocimiento previo, la acci</span>ó<span 
+class="ptmri7t-">n que maximice la</span>
+<span 
+class="ptmri7t-">medida de rendimiento.</span>
+   </div>
+<!--l. 221--><p class="indent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-4000"></a>Entornos y estructura de agentes</h3>
+<!--l. 229--><p class="noindent" >Ante la perspectiva de los agentes racionales, surgen las siguientes preguntas:
+<!--l. 231--><p class="indent" >
+     <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-4002x1">
+     <!--l. 232--><p class="noindent" >¿Qué  tipo  de  problemas  se  consideran  bajo  el  modelo  estándar  de  la  IA?
+     Esto  lo  responde  el  concepto  de  <span 
+class="ptmb7t-">ambiente  </span>o  entorno,  pues  los  problemas  se
+     conceptualizan dentro de los entornos en los que los agentes interactúan.
+
+     </li>
+<li 
+  class="enumerate" id="x1-4004x2">
+     <!--l. 233--><p class="noindent" >¿Qué tipo de agentes se pueden diseñar según el tipo de problema (entorno) se tenga?
+     Esto tiene que ver con los tipos de agentes.</li></ol>
+<!--l. 237--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-5000"></a>Entornos</h4>
+<!--l. 239--><p class="noindent" >Para el diseño de un agente de Inteligencia Artificial es esencial el entendimiento del entorno
+de trabajo:
+   <div class="newtheorem">
+<!--l. 241--><p class="noindent" ><span class="head">
+<a 
+ id="x1-5001r9"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 9 </span>(Entorno de trabajo)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">El entorno de trabajo se espec</span>í<span 
+class="ptmri7t-">fica por medio de cuatro</span>
+<span 
+class="ptmri7t-">elementos conocidos como REAS (o PEAS en ingl</span>é<span 
+class="ptmri7t-">s) que son:</span>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 244--><p class="noindent" ><span 
+class="ptmri7t-">Medida de rendimiento</span>
+     </li>
+     <li class="itemize">
+     <!--l. 245--><p class="noindent" ><span 
+class="ptmri7t-">Entorno</span>
+     </li>
+     <li class="itemize">
+     <!--l. 246--><p class="noindent" ><span 
+class="ptmri7t-">Actuadores</span>
+     </li>
+     <li class="itemize">
+     <!--l. 247--><p class="noindent" ><span 
+class="ptmri7t-">Sensores</span></li></ul>
+   </div>
+<!--l. 249--><p class="indent" >
+   <div class="newtheorem">
+<!--l. 251--><p class="noindent" ><span class="head">
+<a 
+ id="x1-5002r3"></a>
+
+<span 
+class="ptmb7t-">Ejemplo 3.</span>  </span><span 
+class="ptmri7t-">En el mundo de la aspiradora, podemos pensar que tenemos el siguiente</span>
+<span 
+class="ptmri7t-">entorno de trabajo (Tabla</span><span 
+class="ptmri7t-">&#x00A0;</span><a 
+href="#x1-5003r1"><span 
+class="ptmri7t-">1</span><!--tex4ht:ref: tab:REASVacuum --></a><span 
+class="ptmri7t-">):</span>
+   <div class="table">
+<!--l. 254--><p class="indent" >   <a 
+ id="x1-5003r1"></a><hr class="float"><div class="float" 
+> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-1" class="tabular" 
+ 
+><colgroup id="TBL-1-1g"><col 
+id="TBL-1-1"><col 
+id="TBL-1-2"><col 
+id="TBL-1-3"><col 
+id="TBL-1-4"><col 
+id="TBL-1-5"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-1-1-"><td  style="white-space:normal; text-align:left;" id="TBL-1-1-1"  
+class="td11"><!--l. 257--><p class="noindent" ><span 
+class="ptmb7t-">Agente</span>           </td><td  style="white-space:normal; text-align:left;" id="TBL-1-1-2"  
+class="td11"><!--l. 257--><p class="noindent" ><span 
+class="ptmb7t-">Medida      de</span>
+<span 
+class="ptmb7t-">rendimiento</span>  </td><td  style="white-space:normal; text-align:left;" id="TBL-1-1-3"  
+class="td11"><!--l. 257--><p class="noindent" ><span 
+class="ptmb7t-">Entorno</span>         </td><td  style="white-space:normal; text-align:left;" id="TBL-1-1-4"  
+class="td11"><!--l. 257--><p class="noindent" ><span 
+class="ptmb7t-">Actuadores</span>   </td><td  style="white-space:normal; text-align:left;" id="TBL-1-1-5"  
+class="td11"><!--l. 257--><p class="noindent" ><span 
+class="ptmb7t-">Sensores</span>        </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-2-"><td  style="white-space:normal; text-align:left;" id="TBL-1-2-1"  
+class="td11"><!--l. 258--><p class="noindent" >Aspiradora      </td><td  style="white-space:normal; text-align:left;" id="TBL-1-2-2"  
+class="td11"><!--l. 258--><p class="noindent" >Limpieza   del
+entrono
+/   tiempo   de
+ejecución         </td><td  style="white-space:normal; text-align:left;" id="TBL-1-2-3"  
+class="td11"><!--l. 258--><p class="noindent" >Estructura   de
+cuadros          </td><td  style="white-space:normal; text-align:left;" id="TBL-1-2-4"  
+class="td11"><!--l. 258--><p class="noindent" >Mecanismo
+de    aspiración,
+llantas            </td><td  style="white-space:normal; text-align:left;" id="TBL-1-2-5"  
+class="td11"><!--l. 258--><p class="noindent" >Cámaras
+que   observan
+la suciedad     </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-3-"><td  style="white-space:normal; text-align:left;" id="TBL-1-3-1"  
+class="td11">           </td></tr></table></div>
+<br /><div class="caption" 
+><span class="id">Cuadro&#x00A0;1: </span><span  
+class="content">REAS para el mundo de la aspiradora</span></div><!--tex4ht:label?: x1-5003r1 -->
+   </div><hr class="endfloat" />
+   </div>
+   </div>
+<!--l. 263--><p class="indent" >
+<!--l. 266--><p class="indent" >   Para poder diseñar el agente en base al RAES es importante entender la naturaleza de los
+entornos, pues estos definen los problemas que queremos resolver, los objetivos y la medida
+de rendimiento.
+<!--l. 268--><p class="noindent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-6000"></a>Tipos de entornos</h5>
+<!--l. 270--><p class="noindent" >Los entornos se dividen según diferentes aspectos que los constituyen:
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 273--><p class="noindent" ><span 
+class="ptmb7t-">Observabilidad</span>. Según qué tanta información se puede obtener del ambiente
+     tenemos:
+         <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-6002x1">
+         <!--l. 275--><p class="noindent" ><span 
+class="ptmb7t-">Entorno totalmente observable: </span>El entorno de trabajo es completamente
+         observable si los sensores del agente tienen acceso a la información total de
+         un estado del ambiente en un tiempo dado.
+         </li>
+<li 
+  class="enumerate" id="x1-6004x2">
+         <!--l. 276--><p class="noindent" ><span 
+class="ptmb7t-">Entorno parcialmente observable: </span>El entorno de trabajo es parcialmente
+         observable si se tiene información parcial del ambiente.
+         </li>
+
+<li 
+  class="enumerate" id="x1-6006x3">
+         <!--l. 277--><p class="noindent" ><span 
+class="ptmb7t-">Entorno               efectivamente               totalmente               observable:</span>
+         Un entorno es efectivamente totalmente observable si el agente detecta los
+         aspectos relevantes para realizar una acción.
+         </li>
+<li 
+  class="enumerate" id="x1-6008x4">
+         <!--l. 278--><p class="noindent" ><span 
+class="ptmb7t-">Entorno no observable: </span>Si el agente no tiene sensores, el entorno es no
+         observable.</li></ol>
+     </li>
+     <li class="itemize">
+     <!--l. 281--><p class="noindent" ><span 
+class="ptmb7t-">N</span>ú<span 
+class="ptmb7t-">mero de agentes</span>. Según el número de agentes que interactúan en el entorno,
+     tenemos:
+         <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-6010x1">
+         <!--l. 283--><p class="noindent" ><span 
+class="ptmb7t-">Entorno de agente individual: </span>Un agente individual implica que hay un
+         sólo agente que interactúa con el ambiente.
+         </li>
+<li 
+  class="enumerate" id="x1-6012x2">
+         <!--l. 284--><p class="noindent" ><span 
+class="ptmb7t-">Entorno multiagente: </span>Hablamos de multiagentes cuando se tienen dos o más
+         agentes que se afectan entre sí. En este caso, se pueden considerar dos
+         subtipos:
+             <ol  class="enumerate2" >
+<li 
+  class="enumerate" id="x1-6014x1">
+             <!--l. 286--><p class="noindent" ><span 
+class="ptmri7t-">Entorno competitivo: </span>Maximizar el rendimiento de un agente implica
+             minimizar el rendimiento de otro(s) agente(s). Por ejemplo, ajedrez.
+             </li>
+<li 
+  class="enumerate" id="x1-6016x2">
+             <!--l. 287--><p class="noindent" ><span 
+class="ptmri7t-">Entorno  coperativo:  </span>Las  acciones  de  cada  agente  se  orientan  a
+             maximizar el rendimiento de todos los agentes. Por ejemplo, autos sin
+             conductor.</li></ol>
+         </li></ol>
+     </li>
+     <li class="itemize">
+     <!--l. 291--><p class="noindent" ><span 
+class="ptmb7t-">Determinismo</span>. Según si el entorno tiene un comportamiento o no predecible
+     tenemos:
+
+         <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-6018x1">
+         <!--l. 293--><p class="noindent" ><span 
+class="ptmb7t-">Entorno determinista: </span>Un entorno es determinista si el estado de éste está
+         determinado completamente por las acciones del agente y el estado previo.
+         </li>
+<li 
+  class="enumerate" id="x1-6020x2">
+         <!--l. 294--><p class="noindent" ><span 
+class="ptmb7t-">Entorno  estoc</span>á<span 
+class="ptmb7t-">stico:  </span>Es  un  entorno  no-determinista  donde  los  estados
+         siguientes  pueden  tener  varias  salidas  o  bien  donde  existen  aspectos  no
+         observables.
+         </li>
+<li 
+  class="enumerate" id="x1-6022x3">
+         <!--l. 295--><p class="noindent" ><span 
+class="ptmb7t-">Entorno estrat</span>é<span 
+class="ptmb7t-">gico: </span>Si el entorno es determinista, excepto por las acciones
+         de otros agentes, decimos que es estratégico.</li></ol>
+     </li>
+     <li class="itemize">
+     <!--l. 298--><p class="noindent" ><span 
+class="ptmb7t-">Secuencialidad</span>. Según la forma en que se den las secuencias de situaciones del entorno
+     se divide en:
+         <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-6024x1">
+         <!--l. 300--><p class="noindent" ><span 
+class="ptmb7t-">Entorno  epis</span>ó<span 
+class="ptmb7t-">dico:  </span>En  un  entorno  episódico  consiste,  la  experiencia  del
+         agente se divide en episodios, en cada uno de los cuales el agente recibe
+         una percepción y ejecuta una acción en base en ésta.
+         </li>
+<li 
+  class="enumerate" id="x1-6026x2">
+         <!--l. 301--><p class="noindent" ><span 
+class="ptmb7t-">Entorno  secuencial:  </span>En  un  entorno  secuencial,  la  decisión  actual  puede
+         afectar a las futuras decisiones del agente.</li></ol>
+     </li>
+     <li class="itemize">
+     <!--l. 304--><p class="noindent" ><span 
+class="ptmb7t-">Dinamicidad. </span>Según cómo se dan los cambios en el entorno se tienen los siguientes
+     casos:
+         <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-6028x1">
+         <!--l. 306--><p class="noindent" ><span 
+class="ptmb7t-">Entorno est</span>á<span 
+class="ptmb7t-">tico: </span>Se dice que un entorno es estático si éste no cambia cuando
+         el agente delibera.
+
+         </li>
+<li 
+  class="enumerate" id="x1-6030x2">
+         <!--l. 307--><p class="noindent" ><span 
+class="ptmb7t-">Entorno din</span>á<span 
+class="ptmb7t-">mico: </span>Se dice que un entorno es dinámico si éste puede cambiar
+         mientras el agente delibera.</li></ol>
+     </li>
+     <li class="itemize">
+     <!--l. 310--><p class="noindent" ><span 
+class="ptmb7t-">Continuidad. </span>Según la estructura del entorno se da:
+         <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-6032x1">
+         <!--l. 312--><p class="noindent" ><span 
+class="ptmb7t-">Entorno discreto: </span>Se dice que un entorno es discreto cuando sus estados,
+         las percepciones y las acciones son discretas.
+         </li>
+<li 
+  class="enumerate" id="x1-6034x2">
+         <!--l. 313--><p class="noindent" ><span 
+class="ptmb7t-">Entorno continuo: </span>Cuando el entorno se configura de tal forma que sus
+         estados se dan de manera continua.</li></ol>
+     </li>
+     <li class="itemize">
+     <!--l. 316--><p class="noindent" ><span 
+class="ptmb7t-">Informaci</span>ó<span 
+class="ptmb7t-">n</span>. Según la información que se tenga del entorno, tenemos:
+         <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-6036x1">
+         <!--l. 318--><p class="noindent" ><span 
+class="ptmb7t-">Entorno conocido: </span>Diremos que un entorno es conocido si los resultados
+         de las acciones de los agentes se conocen de antemano.
+         </li>
+<li 
+  class="enumerate" id="x1-6038x2">
+         <!--l. 319--><p class="noindent" ><span 
+class="ptmb7t-">Entorno desconocido: </span>Un entorno es desconocido cuando no se conocen
+         los resultados de las acciones de los agentes.</li></ol>
+     </li></ul>
+   <div class="newtheorem">
+<!--l. 323--><p class="noindent" ><span class="head">
+<a 
+ id="x1-6039r4"></a>
+<span 
+class="ptmb7t-">Ejemplo 4.</span>  </span><span 
+class="ptmri7t-">El mundo de la aspiradora cuenta con un entorno que se define por las</span>
+<span 
+class="ptmri7t-">siguientes caracter</span>í<span 
+class="ptmri7t-">sticas:</span>
+
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 326--><p class="noindent" ><span 
+class="ptmri7t-">Entorno completamente observable: en todo momento el agente tiene informaci</span>ó<span 
+class="ptmri7t-">n</span>
+     <span 
+class="ptmri7t-">de lo que sucede en el mundo.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 327--><p class="noindent" ><span 
+class="ptmri7t-">Entorno de agente individual: el </span>ú<span 
+class="ptmri7t-">nico agente que interact</span>ú<span 
+class="ptmri7t-">a en el mundo es la</span>
+     <span 
+class="ptmri7t-">aspiradora.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 328--><p class="noindent" ><span 
+class="ptmri7t-">Entorno determinista: el estado del mundo est</span>á <span 
+class="ptmri7t-">completamente determinado por</span>
+     <span 
+class="ptmri7t-">las acciones de la aspiradora y el estado previo.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 329--><p class="noindent" ><span 
+class="ptmri7t-">Entorno epis</span>ó<span 
+class="ptmri7t-">dico: las acciones se dividen en episodios, y no hay afectaci</span>ó<span 
+class="ptmri7t-">n en los</span>
+     <span 
+class="ptmri7t-">estados futuros por decisiones pasadas.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 330--><p class="noindent" ><span 
+class="ptmri7t-">Entorno est</span>á<span 
+class="ptmri7t-">tico: el mundo s</span>ó<span 
+class="ptmri7t-">lo cambia cuando el agente realiza una acci</span>ó<span 
+class="ptmri7t-">n.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 331--><p class="noindent" ><span 
+class="ptmri7t-">Entorno discreto: como lo hemos planteado, el mundo se divide en cuadros que</span>
+     <span 
+class="ptmri7t-">tienen  un  entorno  discreto.  Aunque  si  plantearnos  un  agente  aspiradora  que</span>
+     <span 
+class="ptmri7t-">actuara en el mundo real, podr</span>í<span 
+class="ptmri7t-">amos pensar que el entorno es continuo.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 332--><p class="noindent" ><span 
+class="ptmri7t-">Entorno  conocido:  los  resultados  a  cada  acci</span>ó<span 
+class="ptmri7t-">n  del  agente  son  conocidas  de</span>
+     <span 
+class="ptmri7t-">antemano,  sabemos  que  si  se  aspira  un  cuadro  este  se  limpiar</span>á<span 
+class="ptmri7t-">,  as</span>í  <span 
+class="ptmri7t-">como  los</span>
+     <span 
+class="ptmri7t-">estados resultantes de los desplazamientos del agente.</span></li></ul>
+   </div>
+<!--l. 334--><p class="indent" >
+
+<!--l. 336--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-7000"></a>Estructura de agentes</h4>
+<!--l. 338--><p class="noindent" >Ya hemos hablado del programa del agente, que es la implementación de la función del agente,
+la cuya mapea una secuencia de percepciones hacia una acción o un conjunto de acciones. El
+programa del agente es parte de la estructura de éste, pero también debemos contar con una
+arquitectura:
+   <div class="newtheorem">
+<!--l. 340--><p class="noindent" ><span class="head">
+<a 
+ id="x1-7001r10"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 10 </span>(Arquitectura del agente)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">La   arquitectura   del   agente   es   el   o   los</span>
+<span 
+class="ptmri7t-">elementos f</span>í<span 
+class="ptmri7t-">sicos que conforman a </span>é<span 
+class="ptmri7t-">ste, y el cual cuenta con sensores y actuadores. La</span>
+<span 
+class="ptmri7t-">arquitectura del agente se encargar</span>á <span 
+class="ptmri7t-">de ejecutar el programa del agente.</span>
+   </div>
+<!--l. 342--><p class="indent" >
+<!--l. 344--><p class="indent" >   De esta forma, entenderemos a un agente como la suma de su programa y de su
+arquitectura; esto es:
+   <table 
+class="equation"><tr><td>
+   <div class="math-display" >
+<img 
+src="02-Agentes4x.png" alt="A gente= Program a+A rquitectura
+" class="math-display" ><a 
+ id="x1-7002r1"></a></div>
+   </td><td class="equation-label">(1)</td></tr></table>
+<!--l. 348--><p class="nopar" >
+<!--l. 350--><p class="indent" >   De esta forma, las decisiones del agente se basarán en una secuencia de pasos: primero, los
+sensores, que forman parte de la arquitectura, recibirán las percepciones del ambiente;
+posteriormente, las percepciones se transmitirán al programa para que este seleccione las
+acciones; finalmente, las acciones se ejecutará por medio de los actuadores. En resumen, se
+tiene la secuencia:
+<!--l. 352--><p class="indent" >
+
+   <div class="math-display" >
+<img 
+src="02-Agentes5x.png" alt="Sensores&#x2192;  Percepciones&#x2192; Program a&#x2192;  Acciones&#x2192; A ctuadores
+" class="math-display" ></div>
+<!--l. 354--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-8000"></a>Tipos de agentes</h4>
+<!--l. 356--><p class="noindent" >A partir del programa del agente podemos hacer una clasificación en varios tipos de agentes
+según la forma en que se deciden las acciones de acuerdo a las percepciones.
+<!--l. 358--><p class="noindent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-9000"></a>Agente dirigido mediante tabla</h5>
+   <div class="newtheorem">
+<!--l. 360--><p class="noindent" ><span class="head">
+<a 
+ id="x1-9001r11"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 11 </span>(Agente dirigido mediante tabla)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un agente dirigido mediante tabla se</span>
+<span 
+class="ptmri7t-">trata  de  un  agente  el  cual  cuenta  con  una  tabla  que  contiene  la  asociaci</span>ó<span 
+class="ptmri7t-">n  de  una</span>
+<span 
+class="ptmri7t-">secuencia de percepciones con una acci</span>ó<span 
+class="ptmri7t-">n. De esta forma, el agente dirigido mediante</span>
+<span 
+class="ptmri7t-">tabla, al recibir una percepci</span>ó<span 
+class="ptmri7t-">n, revisa la tabla y regresa la acci</span>ó<span 
+class="ptmri7t-">n correspondiente en</span>
+é<span 
+class="ptmri7t-">sta.</span>
+   </div>
+<!--l. 362--><p class="indent" >
+<!--l. 364--><p class="noindent" >En este sentido, el agente dirigido mediante tabla es un agente cuya información de las
+acciones le es dada por el programador mediante una tabla que le diga cómo actuar en cada
+caso. Esto requiere que el programador conozca las acciones esperadas ante cada secuencia
+de percepciones. Este tipo de tablas son del siguiente tipo:
+<div class="center" 
+>
+<!--l. 366--><p class="noindent" >
+<div class="tabular"> <table id="TBL-2" class="tabular" 
+ 
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"><col 
+id="TBL-2-2"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-1"  
+class="td11"><span 
+class="ptmb7t-">Cadena de percepciones</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-2"  
+class="td11"><span 
+class="ptmb7t-">Acci</span>ó<span 
+class="ptmb7t-">n</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-1"  
+class="td11">         <span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7t-x-x-74">1</span></sub>                   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-2"  
+class="td11"> <span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7t-x-x-74">1</span></sub>   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-1"  
+class="td11">         <span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7t-x-x-74">2</span></sub>                   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-2"  
+class="td11"> <span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7t-x-x-74">2</span></sub>   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-1"  
+class="td11">          <img 
+src="02-Agentes6x.png" alt="..."  class="vdots" >                     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-2"  
+class="td11">  <img 
+src="02-Agentes7x.png" alt="..."  class="vdots" >    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-1"  
+class="td11">        <span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7t-x-x-74">1</span></sub><span 
+class="zptmcm7m-">,p</span><sub><span 
+class="zptmcm7t-x-x-74">2</span></sub>                </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-2"  
+class="td11"> <span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">t</span><span 
+class="zptmcm7t-x-x-74">+1</span></sub> </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-1"  
+class="td11">      <span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7t-x-x-74">1</span></sub><span 
+class="zptmcm7m-">,....,p</span><sub><span 
+class="zptmcm7m-x-x-74">t</span></sub>            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-2"  
+class="td11"> <span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">T</span> </sub>  </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-1"  
+class="td11">                    </td></tr></table></div></div>
+
+<!--l. 377--><p class="indent" >   En este caso, cada <span 
+class="zptmcm7m-">p</span><sub><span 
+class="zptmcm7m-x-x-74">i</span></sub>, <span 
+class="zptmcm7m-">i </span><span 
+class="zptmcm7t-">= 1</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">2</span><span 
+class="zptmcm7m-">,...,t </span>es una percepción. Como se ve, se consideran
+secuencias de percpeciones, pues esto mejora la acción a elegir. Un esbozo del código de un
+agente dirigido mediante tabla es el siguiente:
+   <div class="algorithm">
+
+<!--l. 380--><p class="indent" >   <a 
+ id="x1-9002r2"></a><hr class="float"><div class="float" 
+>
+
+ <div class="caption" 
+><span class="id">Algorithm : </span><span  
+class="content">Agente dirigido mediante tabla</span></div><!--tex4ht:label?: x1-9002r2 -->
+<div class="algorithmic">
+       <span class="label-11.99997pt">
+ <span 
+class="ptmr7t-x-x-80">1:</span> </span>&#xA0;<span 
+class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">procedure</span>&#x00A0;<span 
+class="ptmrc7t-">T<span 
+class="small-caps">a</span><span 
+class="small-caps">b</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span>-D<span 
+class="small-caps">r</span><span 
+class="small-caps">i</span><span 
+class="small-caps">v</span><span 
+class="small-caps">e</span><span 
+class="small-caps">n</span></span>(percept, tabla)        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">2:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">Variables est</span>á<span 
+class="ptmb7t-">ticas: </span>tabla; <span 
+class="zptmcm7m-">percepciones </span><span 
+class="zptmcm7y-">&#x2190;{}</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">3:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">percepciones </span><span 
+class="zptmcm7y-">&#x2190; </span><span 
+class="zptmcm7m-">percept</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">4:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      acción <span 
+class="zptmcm7y-">&#x2190; </span><span 
+class="ptmrc7t-">C<span 
+class="small-caps">o</span><span 
+class="small-caps">n</span><span 
+class="small-caps">s</span><span 
+class="small-caps">u</span><span 
+class="small-caps">l</span><span 
+class="small-caps">t</span><span 
+class="small-caps">a</span></span>(percepciones, tabla)        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">5:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">return </span>acción        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">6:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">procedure</span></span>
+</div>
+
+   </div><hr class="endfloat" />
+   </div>
+   <div class="newtheorem">
+<!--l. 394--><p class="noindent" ><span class="head">
+<a 
+ id="x1-9003r5"></a>
+<span 
+class="ptmb7t-">Ejemplo 5.</span>  </span><span 
+class="ptmri7t-">Consideremos de nuevo el mundo de la aspiradora con dos cuadros. En</span>
+<span 
+class="ptmri7t-">este caso, podemos plantear una tabla simple que sea de la forma:</span>
+<div class="center" 
+>
+<!--l. 397--><p class="noindent" >
+<div class="tabular"> <table id="TBL-3" class="tabular" 
+ 
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1"><col 
+id="TBL-3-2"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-1"  
+class="td11">    <span 
+class="ptmbi7t-">Percepci</span>ó<span 
+class="ptmbi7t-">n         </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-2"  
+class="td11">      <span 
+class="ptmbi7t-">Acci</span>ó<span 
+class="ptmbi7t-">n              </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-1"  
+class="td11">    <span 
+class="ptmri7t-">(A, limpio)         </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-2"  
+class="td11"> <span 
+class="ptmri7t-">Moverse a la derecha </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-1"  
+class="td11">     <span 
+class="ptmri7t-">(A, sucio)          </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-2"  
+class="td11">      <span 
+class="ptmri7t-">Limpiar            </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-1"  
+class="td11">    <span 
+class="ptmri7t-">(B, limpio)         </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-2"  
+class="td11"><span 
+class="ptmri7t-">Moverse a la izquierda</span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-5-1"  
+class="td11">     <span 
+class="ptmri7t-">(B, sucio)          </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-5-2"  
+class="td11">      <span 
+class="ptmri7t-">Limpiar            </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-6-1"  
+class="td11"><span 
+class="ptmri7t-">(A, sucio), (B, limpio)</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-6-2"  
+class="td11"><span 
+class="ptmri7t-">Moverse a la izquierda</span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-7-1"  
+class="td11"><span 
+class="ptmri7t-">(B, sucio), (A, limpio)</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-7-2"  
+class="td11"> <span 
+class="ptmri7t-">Moverse a la derecha </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-8-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-8-1"  
+class="td11"> <span 
+class="ptmri7t-">(A, sucio), (B, sucio) </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-8-2"  
+class="td11">      <span 
+class="ptmri7t-">Limpiar            </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-9-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-9-1"  
+class="td11"> <span 
+class="ptmri7t-">(B, sucio), (A, sucio) </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-9-2"  
+class="td11">      <span 
+class="ptmri7t-">Limpiar            </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-10-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-10-1"  
+class="td11">                 </td></tr></table></div></div>
+<!--l. 412--><p class="indent" >   <span 
+class="ptmri7t-">En este caso, si el agente se encuentra en A y este est</span>á <span 
+class="ptmri7t-">limpio se mover</span>á <span 
+class="ptmri7t-">al cuadro B, e</span>
+<span 
+class="ptmri7t-">inversamente si est</span>á <span 
+class="ptmri7t-">en B y este cuadro est</span>á <span 
+class="ptmri7t-">limpio, se mover</span>á <span 
+class="ptmri7t-">hacia A. Pero si el cuadro en el</span>
+<span 
+class="ptmri7t-">que se encuentra esta sucio entonces ejecutar</span>á <span 
+class="ptmri7t-">la acci</span>ó<span 
+class="ptmri7t-">n de limpiar.</span>
+   </div>
+<!--l. 413--><p class="indent" >
+<!--l. 415--><p class="indent" >   El <span 
+class="ptmb7t-">problema </span>de un agente dirigido mediante tabla es el número de búsquedas que debe
+hacer en la tabla; estas son: <span 
+class="zptmcm7v-">&#x2211;</span><sub><span 
+class="zptmcm7m-x-x-74">t</span><span 
+class="zptmcm7t-x-x-74">=1</span></sub><sup><span 
+class="zptmcm7m-x-x-74">T</span> </sup><span 
+class="zptmcm7y-">|<img 
+src="zptmcm7y-50.png" alt="P" class="x-x-50" />|</span><sup><span 
+class="zptmcm7m-x-x-74">t</span></sup> (<span 
+class="zptmcm7y-"><img 
+src="zptmcm7y-50.png" alt="P" class="x-x-50" /> </span>conjunto de posibles percepciones, <span 
+class="zptmcm7m-">T </span>tiempo de
+vida del agente). Por ejemplo, en el ajedrez, tenemos que <span 
+class="zptmcm7v-">&#x2211;</span><sub><span 
+class="zptmcm7m-x-x-74">t</span><span 
+class="zptmcm7t-x-x-74">=1</span></sub><sup><span 
+class="zptmcm7m-x-x-74">T</span> </sup><span 
+class="zptmcm7y-">|<img 
+src="zptmcm7y-50.png" alt="P" class="x-x-50" />|</span><sup><span 
+class="zptmcm7m-x-x-74">t</span></sup> <span 
+class="zptmcm7t-">= 10</span><sup><span 
+class="zptmcm7t-x-x-74">150</span></sup>.
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-10000"></a>Agente reactivo simple</h5>
+   <div class="newtheorem">
+<!--l. 420--><p class="noindent" ><span class="head">
+<a 
+ id="x1-10001r12"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 12 </span>(Agente reactivo simple)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un  agente  reactivo  simple  es  un  agente  que</span>
+<span 
+class="ptmri7t-">decide las acciones a partir </span>ú<span 
+class="ptmri7t-">nicamente de la percepci</span>ó<span 
+class="ptmri7t-">n actual, ignorando la historia de</span>
+<span 
+class="ptmri7t-">percepciones.</span>
+   </div>
+<!--l. 422--><p class="indent" >
+
+<!--l. 424--><p class="noindent" >Un agente reactivo simple se basa, entonces, en condiciones de tipo &#8220;Si... entonces...&#8221; o en
+forma lógica <span 
+class="zptmcm7m-">X </span><span 
+class="zptmcm7y-">&#x2192; </span><span 
+class="zptmcm7m-">Y </span>. Estas condiciones se manifiestan en el programa por medio de
+reglas &#8216;if... then... else...&#8217;. Estas reglas requieren de un conocimiento previo del
+programador, quien debe conocer las respuestas a las acciones del agente, para poder
+manifestarla en este tipo de reglas. De tal forma, que se requiere de un entorno
+conocido y, preferentemente, completamente observable, así como estático (pues un
+cambio en el entorno mientras el agente no puede ser expresado en este tipo de
+reglas) y por tanto determinista. Es decir, este tipo de agentes funciona para entornos
+simples.
+<!--l. 426--><p class="indent" >   Una estructura simple para el programa del agente se muestra a continuación:
+   <div class="algorithm">
+
+<!--l. 428--><p class="indent" >   <a 
+ id="x1-10002r3"></a><hr class="float"><div class="float" 
+>
+
+ <div class="caption" 
+><span class="id">Algorithm : </span><span  
+class="content">Agente reactivo simple</span></div><!--tex4ht:label?: x1-10002r3 -->
+<div class="algorithmic">
+       <span class="label-11.99997pt">
+ <span 
+class="ptmr7t-x-x-80">1:</span> </span>&#xA0;<span 
+class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">procedure</span>&#x00A0;<span 
+class="ptmrc7t-">S<span 
+class="small-caps">i</span><span 
+class="small-caps">m</span><span 
+class="small-caps">p</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span>-R<span 
+class="small-caps">e</span><span 
+class="small-caps">fl</span><span 
+class="small-caps">e</span><span 
+class="small-caps">x</span></span>(percept)        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">2:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">Variables est</span>á<span 
+class="ptmb7t-">ticas: </span>reglas de condición-acción        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">3:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">state </span><span 
+class="zptmcm7y-">&#x2190;</span> <span 
+class="ptmrc7t-">I<span 
+class="small-caps">n</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span><span 
+class="small-caps">r</span><span 
+class="small-caps">p</span><span 
+class="small-caps">r</span><span 
+class="small-caps">e</span><span 
+class="small-caps">t</span>-I<span 
+class="small-caps">n</span><span 
+class="small-caps">p</span><span 
+class="small-caps">u</span><span 
+class="small-caps">t</span></span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">percept</span><span 
+class="zptmcm7t-">)</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">4:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">rule </span><span 
+class="zptmcm7y-">&#x2190;</span> <span 
+class="ptmrc7t-">R<span 
+class="small-caps">u</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span>-M<span 
+class="small-caps">a</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span><span 
+class="small-caps">h</span></span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">state,rules</span><span 
+class="zptmcm7t-">)</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">5:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">action </span><span 
+class="zptmcm7y-">&#x2190; </span><span 
+class="zptmcm7m-">rule.</span><span 
+class="ptmrc7t-">A<span 
+class="small-caps">c</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">o</span><span 
+class="small-caps">n</span></span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">6:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">return </span>action        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">7:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">procedure</span></span>
+</div>
+
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 443--><p class="indent" >   Los agentes reactivos simples no son útiles más que cuando la acción depende
+únicamente de la percepción actual, lo que no es común en muchos problemas complejos de
+IA.
+   <div class="newtheorem">
+<!--l. 445--><p class="noindent" ><span class="head">
+<a 
+ id="x1-10003r6"></a>
+<span 
+class="ptmb7t-">Ejemplo 6.</span>  </span><span 
+class="ptmri7t-">En el mundo de la aspiradora con dos cuadros podemos dar un conjunto de</span>
+<span 
+class="ptmri7t-">reglas condici</span>ó<span 
+class="ptmri7t-">n-acci</span>ó<span 
+class="ptmri7t-">n para generar el agente reactivo simple: </span><div class="algorithm">
+<!--l. 447--><p class="indent" >   <a 
+ id="x1-10004r4"></a><hr class="float"><div class="float" 
+>
+<br /> <div class="caption" 
+><span class="id">Algorithm : </span><span  
+class="content">Mundo de la aspiradora</span></div><!--tex4ht:label?: x1-10004r4 -->
+<div class="algorithmic">
+       <span class="label-11.99997pt">
+ <span 
+class="ptmr7t-x-x-80">1:</span> </span>&#xA0;<span 
+class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">procedure</span>&#x00A0;<span 
+class="ptmrc7t-"><span 
+class="small-caps">d</span><span 
+class="small-caps">e</span><span 
+class="small-caps">c</span><span 
+class="small-caps">i</span><span 
+class="small-caps">d</span><span 
+class="small-caps">e</span></span>(percept)        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">2:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">action </span><span 
+class="zptmcm7y-">&#x2190; </span><span 
+class="zptmcm7m-">None</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">3:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">if</span>&#x00A0;<span 
+class="zptmcm7m-">percept.dirt </span><span 
+class="zptmcm7t-">= 1</span>&#x00A0;<span 
+class="ptmb7t-">then</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">4:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="zptmcm7m-">action </span><span 
+class="zptmcm7y-">&#x2190; </span><span 
+class="zptmcm7m-">Limpiar</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">5:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">else</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">6:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="ptmb7t-">if</span>&#x00A0;<span 
+class="zptmcm7m-">percept.location </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7m-">A</span>&#x00A0;<span 
+class="ptmb7t-">then</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">7:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;                  <span 
+class="ptmb7t-">return </span>Derecha        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">8:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">if</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">9:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="ptmb7t-">if</span>&#x00A0;<span 
+class="zptmcm7m-">percept.location </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7m-">B</span>&#x00A0;<span 
+class="ptmb7t-">then</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">10:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;                  <span 
+class="ptmb7t-">return </span>Izquierda        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">11:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;            <span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">if</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">12:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">if</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">13:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">procedure</span></span>
+<!--l. 467--><p class="noindent" ></div>
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 470--><p class="indent" >   <span 
+class="ptmri7t-">Extender este agente al caso de m</span>á<span 
+class="ptmri7t-">s cuadros es tambi</span>é<span 
+class="ptmri7t-">n muy sencillo. Sin embargo, cuando</span>
+
+<span 
+class="ptmri7t-">se cuenta con muchos cuadros el conjunto de reglas de condici</span>ó<span 
+class="ptmri7t-">n-acci</span>ó<span 
+class="ptmri7t-">n se puede volver</span>
+<span 
+class="ptmri7t-">tedioso.</span>
+   </div>
+<!--l. 471--><p class="indent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-11000"></a>Agente basado en objetivos</h5>
+   <div class="newtheorem">
+<!--l. 476--><p class="noindent" ><span class="head">
+<a 
+ id="x1-11001r13"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 13 </span>(Agente basado en objetivos)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Una  agente  basado  en  objetivo  es  aquel</span>
+<span 
+class="ptmri7t-">que  cuenta  con  informaci</span>ó<span 
+class="ptmri7t-">n  de  un  objetivo  que  describe  la  situaci</span>ó<span 
+class="ptmri7t-">n  que  se  desea</span>
+<span 
+class="ptmri7t-">alcanzar con sus acciones.</span>
+   </div>
+<!--l. 478--><p class="indent" >
+<!--l. 480--><p class="noindent" >Los agentes basados en objetivos se enfocan, entonces, en alcanzar una meta previamente
+definida de la manera más efectiva. Por ejemplo, un agente basado en objetivos puede ser un
+agente que trace una ruta en un mapa para llegar del punto A al punto B; la meta será el
+punto B y el agente buscará las acciones más afectivas que lo pueden llevar hasta
+allí.
+<!--l. 482--><p class="indent" >   Los agentes basados en objetivos refieren a la parte de <span 
+class="ptmb7t-">planeaci</span>ó<span 
+class="ptmb7t-">n </span>y <span 
+class="ptmb7t-">b</span>ú<span 
+class="ptmb7t-">squeda</span>. Estos serán
+revisado con mayor profundidad en los temas de agentes de búsqueda.
+<!--l. 489--><p class="noindent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-12000"></a>Agente reactivo basado en modelos</h5>
+<!--l. 491--><p class="noindent" >Para salvar las restricciones del agente reactivo simple, se propone un <span 
+class="ptmb7t-">estado interno </span>del
+agente que refleje la historia y los aspectos no observados del estado actual. En particular se
+busca modelar el ambiente por medio de dos modelos complementarios; el primero de ellos
+es el modelo de transición:
+   <div class="newtheorem">
+<!--l. 493--><p class="noindent" ><span class="head">
+<a 
+ id="x1-12001r14"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 14 </span>(Modelo de transición)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un modelo de transici</span>ó<span 
+class="ptmri7t-">n refleja el c</span>ó<span 
+class="ptmri7t-">mo los estados del</span>
+<span 
+class="ptmri7t-">ambiente cambian, por lo que busca modelar dos factores:</span>
+     <ol  class="enumerate1" >
+
+<li 
+  class="enumerate" id="x1-12003x1">
+     <!--l. 496--><p class="noindent" ><span 
+class="ptmri7t-">el c</span>ó<span 
+class="ptmri7t-">mo el mundo (ambiente) cambia conforme el paso del tiempo;</span>
+     </li>
+<li 
+  class="enumerate" id="x1-12005x2">
+     <!--l. 497--><p class="noindent" ><span 
+class="ptmri7t-">c</span>ó<span 
+class="ptmri7t-">mo cambia el mundo dependiendo de las acciones del agente.</span></li></ol>
+   </div>
+<!--l. 499--><p class="indent" >
+<!--l. 501--><p class="indent" >   El segundo modelo es el modelo sensor:
+   <div class="newtheorem">
+<!--l. 503--><p class="noindent" ><span class="head">
+<a 
+ id="x1-12006r15"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 15.</span>  </span><span 
+class="ptmri7t-">Modelo  de  sensor  Un  modelo  de  sensor  modela  el  c</span>ó<span 
+class="ptmri7t-">mo  el  mundo  se</span>
+<span 
+class="ptmri7t-">refleja en las percepciones del agente.</span>
+   </div>
+<!--l. 505--><p class="indent" >
+<!--l. 507--><p class="indent" >   En este sentido, el modelo de transición le dice al agente cómo cambia el mundo, ya sea de
+forma dinámica o por medio de las acciones; refleja las transiciones entre los estados del
+modelo. Por su parte, el modelo sensor es un modelo de las percepciones del agente.
+Combinando estos dos modelos para definir un estado interno del agente tenemos el agente
+reactivo basado en modelos.
+   <div class="newtheorem">
+<!--l. 509--><p class="noindent" ><span class="head">
+<a 
+ id="x1-12007r16"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 16 </span>(Agente reactivo basado en modelos)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un agente reactivo basado en modelos</span>
+<span 
+class="ptmri7t-">es un agente que se basa en un modelo del mundo determinado por:</span>
+     <ol  class="enumerate1" >
+<li 
+  class="enumerate" id="x1-12009x1">
+     <!--l. 512--><p class="noindent" ><span 
+class="ptmri7t-">un modelo de transici</span>ó<span 
+class="ptmri7t-">n; y</span>
+     </li>
+<li 
+  class="enumerate" id="x1-12011x2">
+     <!--l. 513--><p class="noindent" ><span 
+class="ptmri7t-">un modelo de sensor.</span></li></ol>
+
+<!--l. 515--><p class="noindent" ><span 
+class="ptmri7t-">Esta informaci</span>ó<span 
+class="ptmri7t-">n se guarda en un estado interno, que se modifica por los modelos y la informaci</span>ó<span 
+class="ptmri7t-">n</span>
+<span 
+class="ptmri7t-">de la percepci</span>ó<span 
+class="ptmri7t-">n actual.</span>
+   </div>
+<!--l. 516--><p class="indent" >
+<!--l. 518--><p class="indent" >   El modelo basado en modelos cuenta entonces con información previa relevante sobre el
+mundo en el que interactúa. Esta información puede irse modificando a través del tiempo según las
+percepciones del agente y los estados del mundo. Por tanto, este tipo de agentes puede
+interactuar con entornos dinámicos y estocásticos.
+<!--l. 520--><p class="indent" >   Un esquema de programa para este tipo de agentes se meustra a continuación:
+   <div class="algorithm">
+
+<!--l. 522--><p class="indent" >   <a 
+ id="x1-12012r5"></a><hr class="float"><div class="float" 
+>
+
+ <div class="caption" 
+><span class="id">Algorithm : </span><span  
+class="content">Agente reactivo basado en modelos</span></div><!--tex4ht:label?: x1-12012r5 -->
+<div class="algorithmic">
+       <span class="label-11.99997pt">
+ <span 
+class="ptmr7t-x-x-80">1:</span> </span>&#xA0;<span 
+class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">procedure</span>&#x00A0;<span 
+class="ptmrc7t-">M<span 
+class="small-caps">o</span><span 
+class="small-caps">d</span><span 
+class="small-caps">e</span><span 
+class="small-caps">l</span>-B<span 
+class="small-caps">a</span><span 
+class="small-caps">s</span><span 
+class="small-caps">e</span><span 
+class="small-caps">d</span></span>(percept)        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">2:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">Variables est</span>á<span 
+class="ptmb7t-">ticas: </span>state, transition_model, sensor_model, rules, action        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">3:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">state </span><span 
+class="zptmcm7y-">&#x2190;</span> <span 
+class="ptmrc7t-">U<span 
+class="small-caps">p</span><span 
+class="small-caps">d</span><span 
+class="small-caps">a</span><span 
+class="small-caps">t</span><span 
+class="small-caps">e</span></span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">percept,state,action,transition</span>_<span 
+class="zptmcm7m-">model,sensor</span>_<span 
+class="zptmcm7m-">model</span><span 
+class="zptmcm7t-">)</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">4:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">rule </span><span 
+class="zptmcm7y-">&#x2190;</span> <span 
+class="ptmrc7t-">R<span 
+class="small-caps">u</span><span 
+class="small-caps">l</span><span 
+class="small-caps">e</span>-M<span 
+class="small-caps">a</span><span 
+class="small-caps">c</span><span 
+class="small-caps">t</span><span 
+class="small-caps">h</span></span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">state,rules</span><span 
+class="zptmcm7t-">)</span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">5:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="zptmcm7m-">action </span><span 
+class="zptmcm7y-">&#x2190; </span><span 
+class="zptmcm7m-">rule.</span><span 
+class="ptmrc7t-">A<span 
+class="small-caps">c</span><span 
+class="small-caps">t</span><span 
+class="small-caps">i</span><span 
+class="small-caps">o</span><span 
+class="small-caps">n</span></span>        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">6:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;      <span 
+class="ptmb7t-">return </span>action        </span><br class="algorithmic"/><span class="label-11.99997pt">  <span 
+class="ptmr7t-x-x-80">7:</span> </span>&#xA0;<span  class="algorithmic">&#x00A0;<span 
+class="ptmb7t-">end</span>&#x00A0;<span 
+class="ptmb7t-">procedure</span></span>
+</div>
+
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 537--><p class="indent" >   Un tipo de agente basado en modelos se puede representar por medio de un
+modelo gráfico probabilístico; estos se revisarán con más detalle en la parte de modelos
+probabilísticos.
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-13000"></a>Agentes basados en utilidad</h5>
+<!--l. 542--><p class="noindent" >Ciertas características del entorno como la observabilidad parcial y/o el no determinismo
+implican decisiones que deben hacerse con incertidumbre. Para esto, se adopta el principio de
+utilitarismo:
+   <div class="newtheorem">
+<!--l. 544--><p class="noindent" ><span class="head">
+<a 
+ id="x1-13001r17"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 17 </span>(Principio de utilitarismo)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">La    utilidad    indica    cu</span>á<span 
+class="ptmri7t-">les    acciones    son</span>
+<span 
+class="ptmri7t-">preferibles al comparar los resultados que </span>é<span 
+class="ptmri7t-">stas tienen en el mundo.</span>
+   </div>
+<!--l. 546--><p class="indent" >
+<!--l. 548--><p class="indent" >   Para cuantificar este principio se utiliza una función de utilidad:
+   <div class="newtheorem">
+<!--l. 550--><p class="noindent" ><span class="head">
+<a 
+ id="x1-13002r18"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 18 </span>(Función de utilidad)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Una   funci</span>ó<span 
+class="ptmri7t-">n   de   utilidad   es   una   medida   de</span>
+<span 
+class="ptmri7t-">rendimiento que indica la utilidad de las acciones del agente.</span>
+   </div>
+<!--l. 552--><p class="indent" >
+<!--l. 554--><p class="indent" >   De esta forma, podemos definir un agente basado en utilidad de la siguiente
+forma:
+   <div class="newtheorem">
+<!--l. 556--><p class="noindent" ><span class="head">
+<a 
+ id="x1-13003r19"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 19 </span>(Agente basado en utilidad)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un agente basado en utilidad es aquel que,</span>
+<span 
+class="ptmri7t-">dada una funci</span>ó<span 
+class="ptmri7t-">n de utilidad, busca maximizar el valor esperado de esta funci</span>ó<span 
+class="ptmri7t-">n.</span>
+   </div>
+<!--l. 558--><p class="indent" >
+
+<!--l. 560--><p class="indent" >   Este tipo de agente pueden también pensarse dentro de agentes de aprendizaje (como
+Q-Learning), así como parte de los modelos probabilísticos, de los que hablaremos más
+adelante.
+<!--l. 563--><p class="noindent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-14000"></a>Agentes que aprenden</h5>
+<!--l. 565--><p class="noindent" >En problemas complejos, como en entornos parcialmente observables, dinámicos, estocásticos,
+etc., los agentes deben adaptarse al entorno por medio de la exploración y de esta forma
+aprender. Entenderemos por aprender:
+   <div class="newtheorem">
+<!--l. 567--><p class="noindent" ><span class="head">
+<a 
+ id="x1-14001r20"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 20.</span>  </span><span 
+class="ptmri7t-">Se aprende cuando un agente que opera sobre un entorno desconocido</span>
+<span 
+class="ptmri7t-">mejora  su  rendimiento  a  partir  de  observar  resultados  previos  de  sus  acciones  y</span>
+<span 
+class="ptmri7t-">evaluarlos.</span>
+   </div>
+<!--l. 569--><p class="indent" >
+<!--l. 571--><p class="indent" >   El aprendizaje se puede basar en una <span 
+class="ptmb7t-">recompensa </span>o <span 
+class="ptmb7t-">penalizaci</span>ó<span 
+class="ptmb7t-">n </span>que generan una
+respuesta en el comportamiento del agente. Cualquier tipo de agente (reactivo simple,
+basado en modelos, basado en objetivos o basado en utilidad) puede incorporar el
+aprendizaje.
+   <div class="newtheorem">
+<!--l. 574--><p class="noindent" ><span class="head">
+<a 
+ id="x1-14002r21"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 21.</span>  </span><span 
+class="ptmri7t-">Un agente que aprende es un agente que mejora su rendimiento a partir de</span>
+<span 
+class="ptmri7t-">observar resultados previos. Este agente cuenta con:</span>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 577--><p class="noindent" ><span 
+class="ptmri7t-">Elemento de aprendizaje: Determina c</span>ó<span 
+class="ptmri7t-">mo actuar en base a la cr</span>í<span 
+class="ptmri7t-">tica.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 578--><p class="noindent" ><span 
+class="ptmri7t-">Elemento de actuaci</span>ó<span 
+class="ptmri7t-">n: Decide la acci</span>ó<span 
+class="ptmri7t-">n (agente).</span>
+     </li>
+     <li class="itemize">
+     <!--l. 579--><p class="noindent" ><span 
+class="ptmri7t-">Cr</span>í<span 
+class="ptmri7t-">tica: Se</span>ñ<span 
+class="ptmri7t-">ala que tan bien est</span>á <span 
+class="ptmri7t-">actuando en base al nivel de actuaci</span>ó<span 
+class="ptmri7t-">n.</span>
+
+     </li>
+     <li class="itemize">
+     <!--l. 580--><p class="noindent" ><span 
+class="ptmri7t-">Generador de problemas: Sugiere acciones exploratorias, que permitan mejorar</span>
+     <span 
+class="ptmri7t-">el rendimiento.</span></li></ul>
+   </div>
+<!--l. 582--><p class="indent" >
+<!--l. 585--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-15000"></a>Representación del agente y su entorno</h3>
+<!--l. 587--><p class="noindent" >Considérese de nuevo el mundo de la aspiradora, en donde se cuenta con un agente racional, la
+aspiradora, cuyo objetivo es limpiar su entorno. Su medida de rendimiento se basará en qué tan
+limpio deja el entorno en el menor tiempo posible. Por tanto podemos decir que la medida de
+rendimiento adopta los siguientes valores:
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 590--><p class="noindent" >+1 si el agente limpia un cuarto sucio o se mueve a un cuarto sucio.
+     </li>
+     <li class="itemize">
+     <!--l. 591--><p class="noindent" >-1 si el agente limpia un cuarto limpio o se mueve a un cuarto limpio.</li></ul>
+<!--l. 594--><p class="indent" >   De esta forma, maximizar el rendimiento equivale a limpiar todos los cuartos de la forma
+más rápida posible. Por ejemplo, consideremos el mundo de la aspiradora con cuatro
+cuartos:
+   <div class="table">
+
+<!--l. 596--><p class="indent" >   <hr class="float"><div class="float" 
+>
+
+<div class="tabular"> <table id="TBL-4" class="tabular" 
+ 
+><colgroup id="TBL-4-1g"><col 
+id="TBL-4-1"></colgroup><colgroup id="TBL-4-2g"><col 
+id="TBL-4-2"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-1"  
+class="td11">A</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-2"  
+class="td11">B</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-1"  
+class="td11"> C </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-2"  
+class="td11">D</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-1"  
+class="td11">  </td></tr></table>
+</div>
+
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 604--><p class="indent" >   Un agente reactivo simple podría tomar las siguientes instrucciones:
+
+   <pre class="verbatim" id="verbatim-1">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;s&#x00A0;=&#x00A0;sucio&#x00A0;then&#x00A0;{
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;limpia
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;else{
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;s.location&#x00A0;=&#x00A0;A&#x00A0;{
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mover&#x00A0;a&#x00A0;la&#x00A0;derecha
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;s.location&#x00A0;=&#x00A0;B&#x00A0;{
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mover&#x00A0;abajo
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;s.location&#x00A0;=&#x00A0;D{
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mover&#x00A0;a&#x00A0;la&#x00A0;izquierda
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;s.location&#x00A0;=&#x00A0;C{
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mover&#x00A0;arriba
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+</pre>
+<!--l. 624--><p class="nopar" >
+<!--l. 626--><p class="indent" >   Estas instrucciones garantizan que el agente siempre termine de limpiar todo el entorno;
+sin embargo, la limpieza no siempre se hará en el menor tiempo posible. Por ejemplo, si sólo los
+cuartos A y C están sucios, la mejor estrategia es, iniciando en A, limpiar este cuarto y
+moverse hacia abajo para limpiar C; pero en este caso, el agente siempre revisará todos los
+cuadros empezando por A.
+<!--l. 628--><p class="indent" >   Este agente carece de una exploración y una planeación, pues si bien puede solucionar el
+problema, no lo hace de la manera más efectiva. Ahora bien, si en lugar de tener 4 cuartos, se
+cuenta con un mayor número, por ejemplo 64, o 81 o o incluso más, la carencia de una
+planeación se hará más patente.
+<!--l. 630--><p class="indent" >   Para esto, se buscan diferentes estrategias que permitan, además de <span 
+class="ptmb7t-">solucionar el</span>
+<span 
+class="ptmb7t-">problema</span>, hacerlo de la manera <span 
+class="ptmb7t-">m</span>á<span 
+class="ptmb7t-">s eficiente</span>. Para poder aplicar estas estrategias se necesita
+de una <span 
+class="ptmb7t-">formalizaci</span>ó<span 
+class="ptmb7t-">n </span>del problema; es decir, describir el problema en términos matemáticos
+precisos.
+<!--l. 633--><p class="indent" >   Para caracterizar nuestro problema debemos tomar en cuenta las siguientes
+consideraciones:
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 636--><p class="noindent" >En  cada  momento  de  tiempo  el  estado  puede  estar  bajo  una  configuración
+     particular, a esta le llamamos <span 
+class="ptmb7t-">estado</span>. Generalmente comenzaremos de un estado
+     particular, o <span 
+class="ptmb7t-">estado inicial</span>.
+     </li>
+     <li class="itemize">
+
+     <!--l. 637--><p class="noindent" >Según la configuración, el agente puede interactuar con el mundo a partir de una
+     <span 
+class="ptmb7t-">acci</span>ó<span 
+class="ptmb7t-">n </span>específica.
+     </li>
+     <li class="itemize">
+     <!--l. 638--><p class="noindent" >Las acciones tienen consecuencias en los estados del mundo, cambiando estos
+     estados en nuevos estados, a esto lo llamamos <span 
+class="ptmb7t-">transici</span>ó<span 
+class="ptmb7t-">n</span>.
+     </li>
+     <li class="itemize">
+     <!--l. 639--><p class="noindent" >Como de lo que se trata es de minimizar una función de rendimiento, diremos que
+     cada acción tiene un <span 
+class="ptmb7t-">costo</span>.</li></ul>
+   <div class="newtheorem">
+<!--l. 642--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15001r7"></a>
+<span 
+class="ptmb7t-">Ejemplo 7.</span>  </span><span 
+class="ptmri7t-">Podemos  pensar  en  el  mundo  de  la  aspiradora,  comenzando  con  el</span>
+<span 
+class="ptmri7t-">entorno con dos cuadros; en este caso tendremos lo siguiente:</span>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 646--><p class="noindent" ><span 
+class="ptmri7t-">Por estado entenderemos una configuraci</span>ó<span 
+class="ptmri7t-">n del ambiente, esto implica dos cosas:</span>
+     <span 
+class="ptmri7t-">1) la posici</span>ó<span 
+class="ptmri7t-">n del agente; y 2) sabe qu</span>é <span 
+class="ptmri7t-">cuadros est</span>á<span 
+class="ptmri7t-">n sucios y cu</span>á<span 
+class="ptmri7t-">les limpios. Por</span>
+     <span 
+class="ptmri7t-">ejemplo, un estado es cuando el agente est</span>á <span 
+class="ptmri7t-">en el cuarto A, y el cuarto A est</span>á <span 
+class="ptmri7t-">limpio</span>
+     <span 
+class="ptmri7t-">y el cuarto B sucio.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 647--><p class="noindent" ><span 
+class="ptmri7t-">El estado inicial depende de c</span>ó<span 
+class="ptmri7t-">mo se encuentra el mundo, el estado, cuando el</span>
+     <span 
+class="ptmri7t-">agente comienza a interactuar con el. Por ejemplo, si ambos cuartos est</span>á<span 
+class="ptmri7t-">n sucios</span>
+     <span 
+class="ptmri7t-">y el agente comienza en el cuarto A, esta configuraci</span>ó<span 
+class="ptmri7t-">n ser</span>á <span 
+class="ptmri7t-">el estado inicial.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 648--><p class="noindent" ><span 
+class="ptmri7t-">Las  acciones  est</span>á<span 
+class="ptmri7t-">n  determinadas  por  las  capacidades  que  tiene  el  agente  de</span>
+     <span 
+class="ptmri7t-">interactuar  con  el  mundo.  Hasta  ahora  hemos  asumido  que  el  agente  puede</span>
+     <span 
+class="ptmri7t-">moverse  a  la  izquierda  (I)  o  a  la  derecha  (D),  con  m</span>á<span 
+class="ptmri7t-">s  cuartos  tambi</span>é<span 
+class="ptmri7t-">n  podr</span>í<span 
+class="ptmri7t-">a</span>
+     <span 
+class="ptmri7t-">desplazarse hacia arriba o hacia abajo, y adem</span>á<span 
+class="ptmri7t-">s tiene la capacidad de aspirar</span>
+     <span 
+class="ptmri7t-">(A).</span>
+     </li>
+     <li class="itemize">
+
+     <!--l. 649--><p class="noindent" ><span 
+class="ptmri7t-">Las transiciones se definen en la forma en que los estados se ven afectados por</span>
+     <span 
+class="ptmri7t-">las acciones del agente. Por ejemplo, si pensamos que el estado inicia con ambos</span>
+     <span 
+class="ptmri7t-">cuartos sucios y </span>é<span 
+class="ptmri7t-">ste posicionado en el cuarto A, la acci</span>ó<span 
+class="ptmri7t-">n de aspirar nos llevar</span>á
+     <span 
+class="ptmri7t-">a un nuevo estado donde el cuarto A ahora est</span>á <span 
+class="ptmri7t-">limpio. Por su parte, la acci</span>ó<span 
+class="ptmri7t-">n de</span>
+     <span 
+class="ptmri7t-">moverse a la derecha nos llevar</span>á <span 
+class="ptmri7t-">al estado donde el agente est</span>á <span 
+class="ptmri7t-">posicionado en</span>
+     <span 
+class="ptmri7t-">el cuarto B. Finalmente, si la acci</span>ó<span 
+class="ptmri7t-">n que se ejecuta es moverse a la izquierda,</span>
+     <span 
+class="ptmri7t-">no  habr</span>á  <span 
+class="ptmri7t-">un  cambio  en  la  configuraci</span>ó<span 
+class="ptmri7t-">n  del  entorno,  por  lo  que  diremos  que</span>
+     <span 
+class="ptmri7t-">permanecemos en el mismo estado. Un diagrama de las transiciones puede verse</span>
+     <span 
+class="ptmri7t-">en la Figura</span><span 
+class="ptmri7t-">&#x00A0;</span><a 
+href="#x1-15002r4"><span 
+class="ptmri7t-">4</span><!--tex4ht:ref: fig:VacuumGraph --></a><span 
+class="ptmri7t-">.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 650--><p class="noindent" ><span 
+class="ptmri7t-">Necesitamos  uno  o  m</span>á<span 
+class="ptmri7t-">s  estados  </span><span 
+class="ptmbi7t-">meta</span><span 
+class="ptmri7t-">;  es  decir,  aquellas  configuraciones  del</span>
+     <span 
+class="ptmri7t-">mundo en las que deseamos terminar; en este caso, un estado meta ser</span>í<span 
+class="ptmri7t-">a uno en</span>
+     <span 
+class="ptmri7t-">que todos los cuartos se encuentren limpios, sin importar la posici</span>ó<span 
+class="ptmri7t-">n del agente</span>
+     <span 
+class="ptmri7t-">(por lo que tenemos dos estados finales).</span>
+     </li>
+     <li class="itemize">
+     <!--l. 651--><p class="noindent" ><span 
+class="ptmri7t-">El costo tiene que ver con el rendimiento que buscamos que tenga el agente al</span>
+     <span 
+class="ptmri7t-">resolver el problema. En principio, podemos pensar que el cada acci</span>ó<span 
+class="ptmri7t-">n tiene un</span>
+     <span 
+class="ptmri7t-">costo de +1, de tal forma que el rendimiento estar</span>á <span 
+class="ptmri7t-">basado en pagar un menor</span>
+     <span 
+class="ptmri7t-">costo. Por ejemplo, si el agente realice muchas acciones que lo lleven a un mismo</span>
+     <span 
+class="ptmri7t-">estado, el costo aumentar</span>á<span 
+class="ptmri7t-">, si realiza s</span>ó<span 
+class="ptmri7t-">lo las acciones necesarias para completar</span>
+     <span 
+class="ptmri7t-">la tarea, el costo ser</span>á <span 
+class="ptmri7t-">m</span>í<span 
+class="ptmri7t-">nimo.</span></li></ul>
+<!--l. 654--><p class="indent" >   <hr class="figure"><div class="figure" 
+><a 
+ id="x1-15002r4"></a><img 
+src="images/VaccuumGraph.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figura&#x00A0;4: </span><span  
+class="content">Gráfica del problema para el mundo de la aspiradora</span></div><!--tex4ht:label?: x1-15002r4 -->
+<!--l. 659--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 661--><p class="indent" >   <span 
+class="ptmri7t-">La funci</span>ó<span 
+class="ptmri7t-">n de rendimiento puede pensarse como el n</span>ú<span 
+class="ptmri7t-">mero de cuartos limpios menos el</span>
+<span 
+class="ptmri7t-">costo total. De esta forma, el rendimiento m</span>á<span 
+class="ptmri7t-">ximo se alcanzar</span>á <span 
+class="ptmri7t-">cuando el agente haya limpiado</span>
+<span 
+class="ptmri7t-">todos los cuartos en el menor n</span>ú<span 
+class="ptmri7t-">mero de pasos posibles.</span>
+   </div>
+<!--l. 663--><p class="indent" >
+<!--l. 665--><p class="indent" >   Lo que hemos trazado nos lleva a pensar en los conceptos de planeación, puesto que
+buscamos que el agente puede hacer una planeación que lo lleve a solucionar un problema de
+la mejor manera.
+   <div class="newtheorem">
+<!--l. 667--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15003r22"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 22 </span>(Planeación)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Una planeaci</span>ó<span 
+class="ptmri7t-">n es una secuencia de acciones que permitan</span>
+<span 
+class="ptmri7t-">al agente llegar a un objetivo dado.</span>
+
+   </div>
+<!--l. 669--><p class="indent" >
+<!--l. 671--><p class="indent" >   De esta forma, definiremos a un agente de resolución de problemas como aquel agente que
+haga una planeación:
+   <div class="newtheorem">
+<!--l. 673--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15004r23"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 23 </span>(Agente de resolución de problemas)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un</span>
+<span 
+class="ptmri7t-">agente para resoluci</span>ó<span 
+class="ptmri7t-">n de problemas es un agente basado en objetivos, el cual realiza</span>
+<span 
+class="ptmri7t-">una planeaci</span>ó<span 
+class="ptmri7t-">n para cumplir con los objetivos determinados.</span>
+   </div>
+<!--l. 675--><p class="indent" >
+<!--l. 677--><p class="indent" >   Finalmente, debemos formalizar la forma en que definiremos el problema, pues esto nos
+dará las herramientas para encontrar soluciones satisfactorias. Ya hemos determinado
+los elementos con los que cuenta un problema, la formalizaicón, entonces, es la
+siguiente:
+   <div class="newtheorem">
+<!--l. 679--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15005r24"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 24 </span>(Problema de búsqueda)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un problema de b</span>ú<span 
+class="ptmri7t-">squeda se define como una 6-tupla</span>
+<span 
+class="zptmcm7m-">SP </span><span 
+class="zptmcm7t-">= (</span><span 
+class="zptmcm7m-">S,A,s</span><sub><span 
+class="zptmcm7t-x-x-74">0</span></sub><span 
+class="zptmcm7m-">,T,F,c</span><span 
+class="zptmcm7t-">) </span><span 
+class="ptmri7t-">donde:</span>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 682--><p class="noindent" ><span 
+class="zptmcm7m-">S </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7y-">{</span><span 
+class="zptmcm7m-">s</span><sub><span 
+class="zptmcm7t-x-x-74">0</span></sub><span 
+class="zptmcm7m-">,s</span><sub><span 
+class="zptmcm7t-x-x-74">1</span></sub><span 
+class="zptmcm7m-">,...,s</span><sub><span 
+class="zptmcm7m-x-x-74">m</span></sub><span 
+class="zptmcm7y-">} </span><span 
+class="ptmri7t-">es un conjunto de estados del mundo, que reflejan c</span>ó<span 
+class="ptmri7t-">mo se</span>
+     <span 
+class="ptmri7t-">encuentra el ambiente en cada momento.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 683--><p class="noindent" ><span 
+class="zptmcm7m-">s</span><sub><span 
+class="zptmcm7t-x-x-74">0</span></sub> <span 
+class="zptmcm7y-">&#x2208; </span><span 
+class="zptmcm7m-">S </span><span 
+class="ptmri7t-">es la configuraci</span>ó<span 
+class="ptmri7t-">n inicial del mundo, o estado inicial.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 684--><p class="noindent" ><span 
+class="zptmcm7m-">A </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7y-">{</span><span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7t-x-x-74">1</span></sub><span 
+class="zptmcm7m-">,a</span><sub><span 
+class="zptmcm7t-x-x-74">2</span></sub><span 
+class="zptmcm7m-">,...,a</span><sub><span 
+class="zptmcm7m-x-x-74">n</span></sub><span 
+class="zptmcm7y-">} </span><span 
+class="ptmri7t-">son las acciones que puede realizar el agente.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 685--><p class="noindent" ><span 
+class="zptmcm7m-">T </span><span 
+class="zptmcm7t-">: </span><span 
+class="zptmcm7m-">S</span><span 
+class="zptmcm7y-">&#x00D7;</span><span 
+class="zptmcm7m-">A </span><span 
+class="zptmcm7y-">&#x2192; </span><span 
+class="zptmcm7m-">T </span><span 
+class="ptmri7t-">es la funci</span>ó<span 
+class="ptmri7t-">n de transici</span>ó<span 
+class="ptmri7t-">n, que indica que se pasa de un estado a</span>
+     <span 
+class="ptmri7t-">otro del mundo dado el efecto de una acci</span>ó<span 
+class="ptmri7t-">n.</span>
+
+     </li>
+     <li class="itemize">
+     <!--l. 686--><p class="noindent" ><span 
+class="zptmcm7m-">F </span><span 
+class="zptmcm7y-">&#x2286; </span><span 
+class="zptmcm7m-">S </span><span 
+class="ptmri7t-">el conjunto de metas o estados finales, a los que deseamos que el agente</span>
+     <span 
+class="ptmri7t-">conduzca el entorno.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 687--><p class="noindent" ><span 
+class="zptmcm7m-">c </span><span 
+class="zptmcm7t-">: </span><span 
+class="zptmcm7m-">S</span><span 
+class="zptmcm7y-">&#x00D7;</span><span 
+class="zptmcm7m-">A</span><span 
+class="zptmcm7y-">&#x00D7;</span><span 
+class="zptmcm7m-">S </span><span 
+class="zptmcm7y-">&#x2192; </span><span 
+class="msbm-10">&#x211D; </span><span 
+class="ptmri7t-">es una funci</span>ó<span 
+class="ptmri7t-">n de costo, que determina cu</span>á<span 
+class="ptmri7t-">nto le cuesta ala</span>
+     <span 
+class="ptmri7t-">agente pasar de un estado a otro con una acci</span>ó<span 
+class="ptmri7t-">n dada.</span></li></ul>
+   </div>
+<!--l. 689--><p class="indent" >
+<!--l. 691--><p class="indent" >   La forma en que hemos definido el problema nos recuerda a un <span 
+class="ptmb7t-">aut</span>ó<span 
+class="ptmb7t-">mata </span>pesado. Esto nos
+permite encontrar soluciones que se pueden implementar computacionalmente. Para
+encontrar las soluciones, recurrimos al concepto de camino:
+   <div class="newtheorem">
+<!--l. 693--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15006r25"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 25 </span>(Camino)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Un camino es una secuencia de acciones </span><span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7t-x-x-60">0</span></sub></sub><span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7t-x-x-60">1</span></sub></sub><img 
+src="02-Agentes8x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7m-x-x-60">m</span></sub></sub> <span 
+class="zptmcm7y-">&#x2286; </span><span 
+class="zptmcm7m-">A</span><span 
+class="ptmri7t-">, la</span>
+<span 
+class="ptmri7t-">cual determina una forma de moverse en la gr</span>á<span 
+class="ptmri7t-">fica.</span>
+   </div>
+<!--l. 695--><p class="indent" >
+<!--l. 697--><p class="indent" >   De forma más concreta, si <span 
+class="zptmcm7m-">A </span>son las acciones, un camino es un elemento de <span 
+class="zptmcm7m-">A</span><sup><span 
+class="zptmcm7y-x-x-74">*</span></sup> que es
+posible en el problema; es decir, de toda las cadenas de acciones que se pueden realizar
+dentro de las transiciones del problema.
+<!--l. 699--><p class="indent" >   Sin embargo, no todos los caminos nos servirán; buscamos aquellos caminos que nos
+lleven del estado inicial al final. Estas serán nuestras soluciones.
+   <div class="newtheorem">
+<!--l. 701--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15007r26"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 26 </span>(Solución)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Una soluci</span>ó<span 
+class="ptmri7t-">n es un camino </span><span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7t-x-x-60">0</span></sub></sub><span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7t-x-x-60">1</span></sub></sub><img 
+src="02-Agentes9x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="zptmcm7m-">a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7m-x-x-60">m</span></sub></sub> <span 
+class="zptmcm7y-">&#x2286; </span><span 
+class="zptmcm7m-">A </span><span 
+class="ptmri7t-">tal que parte de </span><span 
+class="zptmcm7m-">s</span><sub><span 
+class="zptmcm7t-x-x-74">0</span></sub><span 
+class="ptmri7t-">,</span>
+<span 
+class="ptmri7t-">esto es </span><span 
+class="zptmcm7m-">T </span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">s</span><sub><span 
+class="zptmcm7t-x-x-74">0</span></sub><span 
+class="zptmcm7m-">,a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7t-x-x-60">0</span></sub></sub><span 
+class="zptmcm7t-">) = </span><span 
+class="zptmcm7m-">s</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7t-x-x-60">1</span></sub></sub><span 
+class="ptmri7t-">, y que llega hasta un estado final, </span><span 
+class="zptmcm7m-">T </span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">s</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7m-x-x-60">m</span></sub></sub><span 
+class="zptmcm7m-">,a</span><sub><span 
+class="zptmcm7m-x-x-74">i</span><sub><span 
+class="zptmcm7m-x-x-60">m</span></sub></sub><span 
+class="zptmcm7t-">) </span><span 
+class="zptmcm7y-">&#x2208; </span><span 
+class="zptmcm7m-">F </span><span 
+class="ptmri7t-">.</span>
+   </div>
+<!--l. 703--><p class="indent" >
+<!--l. 705--><p class="indent" >   Si pensamos al problema como un autómata, las soluciones son las cadenas (de acciones)
+que son aceptadas por éste. Es decir, las soluciones conforman el lenguaje de este problema.
+Dentro del conjunto de soluciones, habrá soluciones con un costo menor, las cuales
+consideramos como las soluciones óptimas.
+
+   <div class="newtheorem">
+<!--l. 708--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15008r27"></a>
+<span 
+class="ptmb7t-">Definici</span>ó<span 
+class="ptmb7t-">n 27 </span>(Solución óptima)<span 
+class="ptmb7t-">.</span>  </span><span 
+class="ptmri7t-">Una  soluci</span>ó<span 
+class="ptmri7t-">n  </span>ó<span 
+class="ptmri7t-">ptima  es  una  soluci</span>ó<span 
+class="ptmri7t-">n  que  minimiza  la</span>
+<span 
+class="ptmri7t-">funci</span>ó<span 
+class="ptmri7t-">n de costo sobre el camino; es decir, es una soluci</span>ó<span 
+class="ptmri7t-">n a la funci</span>ó<span 
+class="ptmri7t-">n objetivo:</span>
+   <table 
+class="equation"><tr><td>
+   <div class="math-display" >
+<img 
+src="02-Agentes10x.png" alt="          m
+argai0mai&#x02CA;i1&#x22C5;n&#x22C5;&#x22C5;aim&#x2211;t=0c(sit,ait,sit+1)
+" class="math-display" ><a 
+ id="x1-15009r2"></a></div>
+   </td><td class="equation-label">(2)</td></tr></table>
+<!--l. 713--><p class="nopar" >
+   </div>
+<!--l. 714--><p class="indent" >
+   <div class="newtheorem">
+<!--l. 719--><p class="noindent" ><span class="head">
+<a 
+ id="x1-15010r8"></a>
+<span 
+class="ptmb7t-">Ejemplo 8.</span>  </span><span 
+class="ptmri7t-">Retomamos el problema del mundo de la aspiradora con dos cuadros; en</span>
+<span 
+class="ptmri7t-">primer lugar, formalizamos el problema para poder encontrar las soluciones:</span>
+     <ul class="itemize1">
+     <li class="itemize">
+     <!--l. 723--><p class="noindent" ><span 
+class="ptmri7t-">El conjunto de estados est</span>á <span 
+class="ptmri7t-">determinado de la siguiente forma:</span>
+<div class="math-display" >
+<img 
+src="02-Agentes11x.png" alt="S = {[(A,dA),(B,dB),Lag]:di &#x2208; {0,1},Lag &#x2208; {A,B}}
+" class="math-display" ></div>
+     <!--l. 725--><p class="noindent" ><span 
+class="ptmri7t-">Por  ejemplo,  </span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">] </span><span 
+class="ptmri7t-">indica  un  estado  en  donde  ambos  cuadros  est</span>á<span 
+class="ptmri7t-">n</span>
+     <span 
+class="ptmri7t-">sucios y el agente est</span>á <span 
+class="ptmri7t-">en A. En total tenemos 16 estados posibles. El estado inicial</span>
+     <span 
+class="ptmri7t-">puede ser </span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span><span 
+class="ptmri7t-">.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 726--><p class="noindent" ><span 
+class="ptmri7t-">Las acciones son </span><span 
+class="zptmcm7m-">A </span><span 
+class="zptmcm7t-">= </span><span 
+class="zptmcm7y-">{</span><span 
+class="zptmcm7m-">I,D,A</span><span 
+class="zptmcm7y-">} </span><span 
+class="ptmri7t-">donde </span><span 
+class="zptmcm7m-">I </span><span 
+class="ptmri7t-">indica izquierda, </span><span 
+class="zptmcm7m-">D </span><span 
+class="ptmri7t-">derecha y </span><span 
+class="zptmcm7m-">A </span><span 
+class="ptmri7t-">aspirar.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 727--><p class="noindent" ><span 
+class="ptmri7t-">Las transiciones se definen por la funci</span>ó<span 
+class="ptmri7t-">n:</span>
+     <table 
+class="align-star">
+                          <tr><td 
+class="align-odd"><span 
+class="zptmcm7m-">T</span> <span class="big"><img 
+src="02-Agentes12x.png" alt="("  class="left" align="middle"></span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span><span 
+class="zptmcm7m-">,A</span><span class="big"><img 
+src="02-Agentes13x.png" alt=")"  class="left" align="middle"></span></td>          <td 
+class="align-even"> <span 
+class="zptmcm7t-">= [(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span></td>                      <td 
+class="align-label"></td>                    <td 
+class="align-label">
+                    </td></tr><tr><td 
+class="align-odd"><span 
+class="zptmcm7m-">T</span> <span class="big"><img 
+src="02-Agentes14x.png" alt="("  class="left" align="middle"></span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,B</span><span 
+class="zptmcm7t-">]</span><span 
+class="zptmcm7m-">,A</span><span class="big"><img 
+src="02-Agentes15x.png" alt=")"  class="left" align="middle"></span></td>          <td 
+class="align-even"> <span 
+class="zptmcm7t-">= [(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span></td>                      <td 
+class="align-label"></td>                    <td 
+class="align-label">
+                    </td></tr><tr><td 
+class="align-odd"><span 
+class="zptmcm7m-">T</span> <span class="big"><img 
+src="02-Agentes16x.png" alt="("  class="left" align="middle"></span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span><span 
+class="zptmcm7m-">,D</span><span class="big"><img 
+src="02-Agentes17x.png" alt=")"  class="left" align="middle"></span></td>         <td 
+class="align-even"> <span 
+class="zptmcm7t-">= [(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,B</span><span 
+class="zptmcm7t-">]</span></td>                    <td 
+class="align-label"></td>                    <td 
+class="align-label">
+                    </td></tr><tr><td 
+class="align-odd"><span 
+class="zptmcm7m-">T</span> <span class="big"><img 
+src="02-Agentes18x.png" alt="("  class="left" align="middle"></span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,B</span><span 
+class="zptmcm7t-">]</span><span 
+class="zptmcm7m-">,I</span><span class="big"><img 
+src="02-Agentes19x.png" alt=")"  class="left" align="middle"></span></td>          <td 
+class="align-even"> <span 
+class="zptmcm7t-">= [(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span></td>                    <td 
+class="align-label"></td>                    <td 
+class="align-label">
+                    </td></tr><tr><td 
+class="align-odd"><span 
+class="zptmcm7m-">T</span> <span class="big"><img 
+src="02-Agentes20x.png" alt="("  class="left" align="middle"></span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span><span 
+class="zptmcm7m-">,I</span><span class="big"><img 
+src="02-Agentes21x.png" alt=")"  class="left" align="middle"></span></td>          <td 
+class="align-even"> <span 
+class="zptmcm7t-">= [(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">]</span></td>                    <td 
+class="align-label"></td>                    <td 
+class="align-label">
+                    </td></tr><tr><td 
+class="align-odd"><span 
+class="zptmcm7m-">T</span> <span class="big"><img 
+src="02-Agentes22x.png" alt="("  class="left" align="middle"></span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,B</span><span 
+class="zptmcm7t-">]</span><span 
+class="zptmcm7m-">,D</span><span class="big"><img 
+src="02-Agentes23x.png" alt=")"  class="left" align="middle"></span></td>         <td 
+class="align-even"> <span 
+class="zptmcm7t-">= [(</span><span 
+class="zptmcm7m-">A,d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub><span 
+class="zptmcm7t-">)</span><span 
+class="zptmcm7m-">,B</span><span 
+class="zptmcm7t-">]</span></td>                    <td 
+class="align-label"></td>                    <td 
+class="align-label">
+                    </td></tr><tr><td 
+class="align-odd"></td>                                                   <td 
+class="align-even"></td>                                              <td 
+class="align-label">                    </td></tr></table>
+     <!--l. 736--><p class="noindent" ><span 
+class="ptmri7t-">Donde </span><span 
+class="zptmcm7m-">d</span><sub><span 
+class="zptmcm7m-x-x-74">A</span></sub><span 
+class="zptmcm7m-">,d</span><sub><span 
+class="zptmcm7m-x-x-74">B</span></sub> <span 
+class="zptmcm7y-">&#x2208;{</span><span 
+class="zptmcm7t-">0</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">1</span><span 
+class="zptmcm7y-">} </span><span 
+class="ptmri7t-">indica la limpieza de cada uno de los cuartos.</span>
+     </li>
+     <li class="itemize">
+     <!--l. 737--><p class="noindent" ><span 
+class="ptmri7t-">Los estados finales son </span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">] </span><span 
+class="ptmri7t-">y </span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,B</span><span 
+class="zptmcm7t-">]</span>
+
+     </li>
+     <li class="itemize">
+     <!--l. 738--><p class="noindent" ><span 
+class="ptmri7t-">La funci</span>ó<span 
+class="ptmri7t-">n de costo se define como </span><span 
+class="zptmcm7m-">c</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">s,a,s</span><span 
+class="zptmcm7y-">&#x2032;</span><span 
+class="zptmcm7t-">) = 1 </span><span 
+class="ptmri7t-">para todo par de estados </span><span 
+class="zptmcm7m-">s,s</span><span 
+class="zptmcm7y-">&#x2032;&#x2208; </span><span 
+class="zptmcm7m-">S </span><span 
+class="ptmri7t-">y</span>
+     <span 
+class="ptmri7t-">acciones </span><span 
+class="zptmcm7m-">a </span><span 
+class="zptmcm7y-">&#x2208; </span><span 
+class="zptmcm7m-">A</span><span 
+class="ptmri7t-">.</span></li></ul>
+<!--l. 741--><p class="indent" >   <span 
+class="ptmri7t-">La visualizaci</span>ó<span 
+class="ptmri7t-">n del problema se encuentra en la Figura</span><span 
+class="ptmri7t-">&#x00A0;</span><a 
+href="#x1-15002r4"><span 
+class="ptmri7t-">4</span><!--tex4ht:ref: fig:VacuumGraph --></a><span 
+class="ptmri7t-">, de aqu</span>í<span 
+class="ptmri7t-">, podemos ver que</span>
+<span 
+class="ptmri7t-">existen varios caminos. Las soluciones desde el estado </span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">1)</span><span 
+class="zptmcm7m-">,A</span><span 
+class="zptmcm7t-">] </span><span 
+class="ptmri7t-">son varios; por</span>
+<span 
+class="ptmri7t-">ejemplo, IIDIAIAIADIDA es un camino que lleva a un estado soluci</span>ó<span 
+class="ptmri7t-">n </span><span 
+class="zptmcm7t-">[(</span><span 
+class="zptmcm7m-">A,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,</span><span 
+class="zptmcm7t-">(</span><span 
+class="zptmcm7m-">B,</span><span 
+class="zptmcm7t-">0)</span><span 
+class="zptmcm7m-">,B</span><span 
+class="zptmcm7t-">]</span><span 
+class="ptmri7t-">. Sin</span>
+<span 
+class="ptmri7t-">embargo, no es una soluci</span>ó<span 
+class="ptmri7t-">n </span>ó<span 
+class="ptmri7t-">ptima. Una soluci</span>ó<span 
+class="ptmri7t-">n </span>ó<span 
+class="ptmri7t-">ptima es ADA, y de hecho es la </span>ú<span 
+class="ptmri7t-">nica soluci</span>ó<span 
+class="ptmri7t-">n</span>
+ó<span 
+class="ptmri7t-">ptima desde el estado inicial dado.</span>
+   </div>
+<!--l. 743--><p class="indent" >
+    
+</body></html> 
+
+
+
