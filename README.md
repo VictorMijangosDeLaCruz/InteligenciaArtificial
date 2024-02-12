@@ -8,7 +8,7 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
 
 ## Contenido
 
-0. [Introducción](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/Notas/01%20Introduccion.html)
+0. [Introducción](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/Notas/01-Introduccion.html)
 1. Agentes
     1. [Mundo de la aspiradora](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/01%20Agentes/01%20VacuumWorld.html)
     2. [Agente dirigido mediante tabla](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/01%20Agentes/02%20TableDrivenAgent.html)
