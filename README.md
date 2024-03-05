@@ -2,7 +2,7 @@
 Página del curso de Inteligencia Artificial, de la Facultad de Ciencias, UANM.
 
 ## Presentación del curso
-ste curso busca revisar las principales áreas de la Inteligencia Artificial desde un enfoque teórico y práctico, que permita el diseño y la implementación de sistemas inteligentes para problemas específicos.
+Este curso busca revisar las principales áreas de la Inteligencia Artificial desde un enfoque teórico y práctico, que permita el diseño y la implementación de sistemas inteligentes para problemas específicos.
 
 En el curso se abordarán los temas más relevantes de la Inteligencia Artificial, buscando abarcar las perspectiva general del área; esto permitirá a los alumnos profundizar en temas específicos e introducirse a otras materias orientadas al área (Aprendizaje Automático, Redes Neuronales, Reconocimiento de Patrones). El curso adopta una perspectiva basada en agentes inteligentes, por lo que desarrolla un marco teórico basado en éstos. Asimismo, se revisan las aplicaciones típicas de la Inteligencia Artificial y se programarán algoritmos orientados a solucionar problemas particulares.
 
