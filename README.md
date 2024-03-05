@@ -1,5 +1,5 @@
 # InteligenciaArtificial
-Página del curso de Inteligencia Artificial, de la Facultad de Ciencias, UANM.
+Página del curso de Inteligencia Artificial, de la Facultad de Ciencias, UNAM.
 
 ## Presentación del curso
 Este curso busca revisar las principales áreas de la Inteligencia Artificial desde un enfoque teórico y práctico, que permita el diseño y la implementación de sistemas inteligentes para problemas específicos.
@@ -30,7 +30,7 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
     1. [Juego del gato](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/05%20Gato.html)
     2. [Algoritmo Minimax](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/06%20Minimax.html)
     3. [Algoritmo alpha-beta](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/07%20AlphaBeta.html)
-4. Búsqueda por optimización y satifacción de restricciones
+4. Búsqueda por optimización y satisfacción de restricciones
     1. [Problema de las 8 reinas](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/01%208Queens.html)
     2. [Algoritmo de ascenso de la colina](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/02%20HillClimbing.html)
     3. [Algoritmos genéticos](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/03%20Genetic.html)
@@ -38,8 +38,8 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
 5. Modelos probabilísticos
     1. Redes bayesianas
         1. [Red Bayesiana para el problema de Monty Hall](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/01%20MontyHall.html)
-        2. [Inferencia en red Baysiana: Muestreo por rechazo](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/02%20RejectionSampling.html)
-        3. [Inferencia en red Baysiana: Ponderación de verosimilitud](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/03%20LikelihoodWeighting.html)
+        2. [Inferencia en red Bayesiana: Muestreo por rechazo](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/02%20RejectionSampling.html)
+        3. [Inferencia en red Bayesiana: Ponderación de verosimilitud](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/03%20LikelihoodWeighting.html)
     2. Bayes Naïve
         1. [Bayes naïve (frecuentista)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/04%20NaiveBayes.html)
         2. [Bayes naïve (Gaussiano)](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/05%20GaussianNaiveBayes.html)
