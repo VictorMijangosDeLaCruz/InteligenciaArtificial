@@ -1,3 +1,14 @@
+# Scripts con soluciones
+*/vacuum_world.py
+*/maze_simulator.py
+*/AlphaBeta.py
+*/gato.py
+*/bayesian_monty.py
+*/ForwardBackward.py
+*/viterbi_hmm.py
+*/viterby_localization.py
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
