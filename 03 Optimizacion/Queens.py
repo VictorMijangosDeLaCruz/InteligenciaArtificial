@@ -39,6 +39,9 @@ class Board():
         elif init == 'init':
             for pos in [(0,6),(1,4),(2,1),(3,3),(4,5),(5,7),(6,2),(7,0)][:num]:
                 self.put(piece=piece, cell=pos)
+        elif init == 'line':
+            for i in range(num):
+                self.put(piece=piece, cell=(i,i))
         self.create_array()
                     
     def move(self, i,j):

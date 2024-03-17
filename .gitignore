@@ -1,3 +1,17 @@
+# Scripts con soluciones
+*/vacuum_world.py
+*/maze_simulator.py
+*/AlphaBeta.py
+*/gato.py
+*/bayesian_monty.py
+*/ForwardBackward.py
+*/viterbi_hmm.py
+*/viterbi_localization.py
+
+# Script para exportar archivos html
+*export_html.sh
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
