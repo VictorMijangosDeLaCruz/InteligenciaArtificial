@@ -64,9 +64,13 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
         2. [Iteración de política](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/08%20PolicyIteration.html)
 
 
-## Colaboradores
-@VictorMijangosDeLaCruz
-@AlexNakamuraDF
-@LouGlzHuesca
+--------------------------------------------------
+### Colaboradores
+[@VictorMijangosDeLaCruz](https://github.com/VictorMijangosDeLaCruz)
+
+[@AlexNakamuraDF](https://github.com/AlexNakamuraDF)
+
+[@LouGlzHuesca](https://github.com/LouGlzHuesca)
+
 --------------------------------------------------
 <div style="text-align: right">Proyecto PAPIME PE102723</div>
