@@ -35,7 +35,7 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
     2. [Algoritmo de ascenso de la colina](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/02%20HillClimbing.html)
     3. [Algoritmos genéticos](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/03%20Genetic.html)
     4. [Satisfacción de restricciones: Sudoku](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/04%20Sudoku.html)
-5. [Agentes lógicos y representación del cponocimiento](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/ProgLogica/ProgLogica.pdf)
+5. [Agentes lógicos y representación del conocimiento](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/ProgLogica/ProgLogica.pdf)
 6. Modelos probabilísticos
     1. Redes bayesianas
         1. [Red Bayesiana para el problema de Monty Hall](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/01%20MontyHall.html)
@@ -64,6 +64,9 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
         2. [Iteración de política](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/08%20PolicyIteration.html)
 
 
-
+## Colaboradores
+@VictorMijangosDeLaCruz
+@AlexNakamuraDF
+@LouGlzHuesca
 --------------------------------------------------
 <div style="text-align: right">Proyecto PAPIME PE102723</div>
