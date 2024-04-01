@@ -1,0 +1,393 @@
+%%%%% Lenguajes
+\newcommand{\pl}{\textsc{Prolog}}
+\newcommand{\hsk}{\textsc{Haskell}}
+\newcommand{\coql}{\textsc{Coq}}
+
+%%%%%
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\B}{\mathcal{B}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\T}{\mathcal{T}}
+
+%%%%% Simbolos logicos
+\newcommand{\true}{\mathop{\mathsf{true}}}
+\newcommand{\E}{\ensuremath{\exists}}
+
+\newcommand{\dy}{\vee}
+\newcommand{\cj}{\wedge}
+\newcommand{\imp}{\rightarrow}
+\newcommand{\Imp}{\Rightarrow}
+\renewcommand{\iff}{\leftrightarrow}
+\newcommand{\Iff}{\Leftrightarrow}
+\newcommand{\syss}{\leftrightarrow}
+
+\newcommand{\fa}{\forall}
+\newcommand{\ex}{\exists}
+\newcommand{\fabb}{\fa\hspace{-0.18cm}\fa}
+\newcommand{\exbb}{\ex\hspace{-0.163cm}\ex}
+
+\newcommand{\G}{\Gamma}
+\newcommand{\D}{\Delta}
+\newcommand{\Lb}{\Lambda}
+\newcommand{\Om}{\Omega}
+
+\newcommand{\lb}{\lambda}
+\newcommand{\al}{\alpha}
+\newcommand{\ga}{\gamma}
+
+\newcommand{\bool}{\mathsf{Bool}}
+\newcommand{\propo}{\ensuremath{\mathsf{PROP}}}
+\newcommand{\atom}{\ensuremath{\mathsf{ATOM}}}
+\newcommand{\term}{\ensuremath{\mathsf{TERM}}}
+\newcommand{\form}{\ensuremath{\mathsf{FORM}}}
+
+\newcommand{\vars}{\ensuremath{\mathsf{Var}}}
+\newcommand{\Var}{\ensuremath{\mathsf{Var}}}
+
+\newcommand{\vphi}{\varphi}
+\newcommand{\vp}{\varphi}
+
+\newcommand{\aeq}{\sim_\al}
+
+%%%%% Programacion logica
+\newcommand{\pmi}{\leftarrow}
+
+\newcommand{\impp}{\ensuremath{\,\text{:-}\,}\,}
+\newcommand{\meta}{\ensuremath{\;\text{?-}\;}}
+\newcommand{\si}{\sigma}
+
+\renewcommand{\P}{\mathbb{P}}
+
+
+%%%%% Razonamiento ecuacional
+
+% \renewcommand{\P}{\mathcal{P}}
+
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\hip}[2]{#1:#2}
+
+\newcommand{\eqdef}{=_{def}}
+
+\newcommand{\pf}[2]{#1\vdash#2}
+\newcommand{\bk}[2]{#1\vdash_{\bkc}#2}
+\newcommand{\bkd}[2]{#1\vdash_{\bkdc}#2}
+\newcommand{\tcp}[2]{#1\vdash_{C}#2} %??
+
+\newcommand{\bkc}{\mathcal{B}}
+\newcommand{\bkdc}{\mathcal{B}^{\textsc{Dem}}}
+
+%%%%% Deduccion natural
+\newcommand{\dn}{\mathsf{DN}}
+\newcommand{\dnC}{\mathsf{DN_C}}
+\newcommand{\dnM}{\mathsf{DN_M}}
+\newcommand{\dnp}{\mathsf{DN_p}}
+\newcommand{\dnm}{\mathsf{DN_p^M}}
+\newcommand{\dnc}{\mathsf{DN_p^C}}
+
+\newcommand{\Dnm}{\mathsf{DN_m}}
+\newcommand{\Dni}{\mathsf{DN_i}}
+\newcommand{\Dnc}{\mathsf{DN_c}}
+%\newcommand{\dnp}{\mathsf{DN}}
+% \renewcommand{\vp}{A}
+% \renewcommand{\psi}{B}
+% \renewcommand{\chi}{C}
+
+
+%%%%% Calculo de secuentes
+
+\newcommand{\scd}[2]{#1 \vdash #2}
+
+
+
+%%%%% Resolucion binaria
+\newcommand{\cv}{\square}
+\newcommand{\sat}{\textsf{SAT}}
+\newcommand{\modsrch}{\models_?}
+
+
+%%%%% Simbolos matematicos
+
+\newcommand{\inc}{\subseteq}
+\newcommand{\iso}{\ensuremath{\cong}}
+\newcommand{\union}{\ensuremath{\cup}}
+\newcommand{\morinyec}{\ensuremath{\precapprox}}
+\newcommand{\nin}{\ensuremath{\notin}}
+\newcommand{\niso}{\ensuremath{\not \cong}}
+
+\newcommand{\restr}[2]{#1\!\!\boldsymbol{\restriction}\!#2}
+
+\newcommand{\vacio}{\varnothing}
+\newcommand{\ol}[1]{\overline{#1}}
+
+\newcommand{\supc}{\supseteq}
+\newcommand{\limo}{\mathop{\mathpzc{Lim}}}
+\newcommand{\ord}{\mathsf{OR}}
+
+
+\newcommand{\vx}{\vec{x}}
+\newcommand{\vy}{\vec{y}}
+\newcommand{\vz}{\vec{z}}
+\newcommand{\vt}{\vec{t}}
+\newcommand{\vf}{\vec{f}}
+
+%%%%% Curry-Howard
+% \newcommand{\true}{\mathsf{true}}
+\newcommand{\false}{\mathsf{false}}
+\newcommand{\ifte}[3]{\mathsf{if\;}#1\mathsf{\; then\;}#2\mathsf{\;
+    else\;}#3}
+\newcommand{\iszero}{\mathop{\mathsf{iszero}}}
+%\newcommand{\suc}{\mathop{\mathsf{succ}}}
+\newcommand{\pred}{\mathop{\mathsf{pred}}}
+\newcommand{\suc}{\mathop{{\sf suc}}}
+\newcommand{\no}{\mathop{{\sf not}}}
+\newcommand{\fun}{\mathop{{\sf  fun}}}
+\newcommand{\inl}{\mathop{{\sf inl }}}
+\newcommand{\inr}{\mathop{{\sf inr }}}
+\newcommand{\nat}{\mathsf{Nat}}
+\newcommand{\Tf}{\mathsf{T}}
+
+\newcommand{\Lp}{{\tt fst}}
+\newcommand{\Rp}{{\tt snd}}
+
+\newcommand{\ejp}{\mathop{\mathtt{ejp}}}
+\newcommand{\ej}{\mathop{\mathtt{ej}}}
+\newcommand{\comp}{\mathop{\mathtt{comp}}}
+\newcommand{\eval}{\mathop{\mathtt{eval}}}
+\newcommand{\ap}{\mathop{\mathtt{+\!\!\!+}}}
+
+
+%%%%% Identificadores
+
+\newcommand{\A}{\mathcal{A}}
+% \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+% \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+% \newcommand{\N}{\ensuremath{\mathbb{N}}}
+% \newcommand{\R}{\ensuremath{\mathbb{R}}}
+
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Ge}{\mathcal{G}}
+\newcommand{\Pe}{\mathcal{P}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\Kb}{\mathbb{K}}
+\newcommand{\Eb}{\mathbb{E}}
+\newcommand{\Ebs}{\mathbb{E}^\star}
+\newcommand{\Ob}{\mathbb{O}}
+\newcommand{\Ib}{\mathbb{I}}
+\newcommand{\kb}{\bbkappa}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Nc}{\mathcal{N}}
+%\newcommand{\E}{\mathcal{E}}
+%\newcommand{\R}{\mathcal{R}}
+%\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\Sc}{\mathcal{S}}
+\newcommand{\Sf}{\mathsf{\Sigma}}
+\renewcommand{\S}{\mathbb{\Sigma}}
+\newcommand{\Te}{\mathcal{T}}
+\newcommand{\Rb}{\mathbb{R}}
+\newcommand{\Qb}{\mathbb{Q}}
+\newcommand{\Kbb}{\mathbb{K}}
+% \newcommand{\T}{\mathbb{\Theta}}
+\renewcommand{\L}{\mathcal{L}}
+
+
+\newcommand{\Db}{\mathbb{D}}
+\newcommand{\Fb}{\mathbb{F}}
+\newcommand{\De}{\mathcal{D}}
+
+\newcommand{\mg}{\mathbb{m}}
+
+\newcommand{\cg}{\mathbb{C}}
+\newcommand{\dg}{\mathbb{D}}
+\newcommand{\jg}{\mathbb{J}}
+\newcommand{\Ha}{\mathcal{H}}
+%\newcommand{\A}{\mathcal{A}}
+\newcommand{\sg}{\mathbb{S}}
+
+\newcommand{\Mg}{\mathbb{M}}
+\newcommand{\Bg}{\mathbb{B}}
+\newcommand{\Lg}{\mathbb{L}}
+\newcommand{\Tg}{\mathbb{T}}
+
+% \newcommand{\B}{\mathbb{B}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\W}{\mathcal{W}}
+
+\newcommand{\Bc}{\mathcal{B}}
+\newcommand{\Df}{\mathfrak{D}}
+\newcommand{\Dc}{\mathcal{D}}
+%\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Mf}{\mathfrak{M}}
+
+\newcommand{\Sg}{\mathbb{S}}
+
+\newcommand{\Tsf}{\mathsf{T}}
+
+
+%\newcommand{\id}{\mathsf{Id}}
+
+%\newcommand{\uc}{\mathcal{U}}
+%\newcommand{\Ic}{\mathcal{I}}
+%\newcommand{\pc}{\mathcal{P}}
+%\newcommand{\qc}{\mathcal{Q}}
+%\newcommand{\mc}{\mathcal{M}}
+
+
+%%%%% Cosmetics
+\newcommand{\la}{\left\langle}
+\newcommand{\ra}{\right\rangle}
+
+\newcommand{\inds}[1]{\index[simb]{#1}}
+
+\newcommand{\ida}{$\Rightarrow \; )$ }
+\newcommand{\regr}{$\Leftarrow \; )$ }
+% \newcommand{\done}{\ensuremath{\checkmark}}
+
+\newcommand{\espc}{\vspace*{.3cm}}
+\newcommand{\pt}[1]{\langle #1 \rangle}
+
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+ \newcommand{\beq}{\begin{equation}}
+ \newcommand{\eeq}{\end{equation}}
+ \newcommand{\beqs}{\begin{equation*}}
+ \newcommand{\eeqs}{\end{equation*}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+
+\newcommand{\bej}{\begin{ejercs}}
+\newcommand{\eej}{\end{ejercs}}
+
+\newenvironment{prueba}{\vspace{-5mm}\noindent\textbf{Demostraci\'on}\\}{
+\noindent$\blacksquare$\\}
+
+\def\stackunder#1#2{\mathrel{\mathop{#2}\limits_{#1}}}
+
+
+%\newtheorem{lema}{Lema}
+\newtheorem{teorema}{Teorema}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{proposicion}{Proposición}
+
+\newtheorem{theorem}{Teorema}
+\newcommand{\teo}[1]{\begin{theorem} #1 \end{theorem}}
+\newtheorem{proposition}{Proposici\'on}
+\newcommand{\prop}[1]{\begin{proposition} #1 \end{proposition}}
+\newtheorem{definition}{Definici\'on}
+\newcommand{\defin}[1]{\begin{definition} #1 \end{definition}}
+\newtheorem{corollary}{Corolario}
+\newcommand{\cor}[1]{\begin{corollary} #1 \end{corollary}}
+\newtheorem{lemma}{Lema}
+\newcommand{\lema}[1]{\begin{lemma} #1 \end{lemma}}
+% \newcommand{\dem}[1]{\begin{proof} #1 \end{proof}}
+
+% \newcommand{\proof}{ \vspace*{-15pt} \hfill\\\noindent\textbf{\textit{
+% Demostraci\'on. }}}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+%\newcommand{\case}{\mathsf{case}}
+%\renewcommand\labelitemi{$\circ$}
+%%\newcommand{\qed}{\hfill$\mathbb{Qed}$}
+% \newcommand{\qed}{\hfill$\mathsf{\boldsymbol{\dashv}}$}
+
+\newtheorem{eje}{Ejemplo}[section]
+\newcommand{\ejem}[1]{\begin{eje}\normalfont #1 \end{eje}}
+
+\newcommand{\hint}[1]{\textit{\textbf{Sugerencia:} #1}}
+
+
+\newcounter{EjempCtr}[section]
+\newenvironment{enumrom}{\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\theenumii}{\roman{enumii}}
+\renewcommand{\theenumiii}{\roman{enumiii}}
+\renewcommand{\theenumiv}{\roman{enumiv}}
+\begin{enumerate}}{\end{enumerate}}
+\newenvironment{Ejemplo}
+        {\stepcounter{EjempCtr}%
+        \begin{description}\item[Ejemplo \thesection.\arabic{EjempCtr}]}%
+        {\end{description}}
+\newenvironment{demostr}{{\em Demostración:}
+        \begin{quotation}}{\end{quotation}}
+
+\newcommand{\beje}{\begin{Ejemplo}}
+\newcommand{\eeje}{\end{Ejemplo}}
+
+
+
+
+%%%%% Notas
+% \newcommand{\doubt}{\Red{{\LARGE {\sf ??}}}}
+% 
+% \newcommand{\coment}[1]{\hfill\\ \Big[{\bf Comentario Privado:} #1\Big]}
+% \newcommand{\preg}[1]{\hfill\\ \BrickRed{{\bf Pregunta:} #1}}
+% \newcommand{\conjet}[1]{\hfill\\ \OliveGreen{{\bf Conjecura:} #1}}
+% 
+% \newcommand{\pendiente}{\BrickRed{{\sc Pendiente}}}
+% \newcommand{\verifpendiente}{\BrickRed{{\sc Verificación pendiente}}}
+
+% \newcommand{\sketch}{\Red{{\sc sketch}}}
+   
+%%=================================================================================
+%%%%% Y estos para que sirven???
+% \newcommand{\tog}{\makebox[7mm][l]}
+% \newcommand{\toge}{\makebox[11mm][l]}
+% \newcommand{\toget}{\makebox[13mm][l]}
+% \newcommand{\togeth}{\makebox[14mm][l]}
+% \newcommand{\togethe}{\makebox[15mm][l]}
+% \newcommand{\together}{\makebox[17mm][l]}
+
+% \renewcommand\contentsname{\'Indice}
+%\renewcommand\chaptername{Cap\'itulo}
+% \renewcommand\indexname{\'Indice}
+% 
+%%\newcommand{\qed}{\hfill$\mathbb{Qed}$}
+%\newcommand{\qed}{\hfill$\mathsf{\boldsymbol{\dashv}}$}
+%\renewcommand{\qed}{\hfill$\boldsymbol{\dashv}$}
+%\newcommand{\qed}{\hfill$\mathbb{Qed}$}
+
+
+% \newcommand{\Ejercicios}{\section*{Ejercicios}}
+% \newenvironment{manitas}{%
+%       \renewcommand{\labelitemi}{\ding{44}}%
+%       \vspace{-0.5cm}%
+%       \begin{itemize}%
+%       
+% \setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}\setlength{\topsep}{0pt}%
+%       }{\end{itemize}}
+% \newenvironment{malitos}{%
+%       \renewcommand{\labelitemi}%
+%             {\raisebox{1.5ex}{\makebox[0.3cm][l]{\begin{rotate}{-90}%
+%             \ding{43}\end{rotate}}}}%
+%       \vspace{-0.5cm}%
+%       \begin{itemize}%
+%       
+% \setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}\setlength{\topsep}{0pt}%
+%       }{\end{itemize}}
+% \newenvironment{ejercs}{
+%      \renewcommand{\labelenumi}{\thesection.\theenumi.-}
+%      \renewcommand{\labelenumii}{\theenumii)}
+%      \begin{enumerate}}
+%      {\end{enumerate}}
+
+%\newenvironment{leterize}{%
+%        \renewcommand{\theenumi}{\alph{enumi}}
+%        \begin{enumerate}}{\end{enumerate}}
+
+%\newenvironment{manitas}{%
+%      \renewcommand{\labelitemi}{\ding{44}}%
+%      \vspace{-0.5cm}%
+%      \begin{itemize}%
+%      \setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}\setlength{\topsep}{0pt}%
+%      }{\end{itemize}}
+
+
+%\renewcommand{\qed}{\qedsymbol{$\mathbf{\dashv}$}}
