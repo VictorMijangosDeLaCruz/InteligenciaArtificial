@@ -35,7 +35,8 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
     2. [Algoritmo de ascenso de la colina](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/02%20HillClimbing.html)
     3. [Algoritmos genéticos](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/03%20Genetic.html)
     4. [Satisfacción de restricciones: Sudoku](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/03%20Optimizacion/04%20Sudoku.html)
-5. Modelos probabilísticos
+5. [Agentes lógicos y representación del cponocimiento](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/ProgLogica/ProgLogica.pdf)
+6. Modelos probabilísticos
     1. Redes bayesianas
         1. [Red Bayesiana para el problema de Monty Hall](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/01%20MontyHall.html)
         2. [Inferencia en red Bayesiana: Muestreo por rechazo](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/02%20RejectionSampling.html)
@@ -47,7 +48,7 @@ En el curso se abordarán los temas más relevantes de la Inteligencia Artificia
         1. [Algoritmo de Avance-Retroceso](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/08%20ForwardBackward.html)
         2. [Algoritmo de Viterbi para etiquetado de texto](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/06%20HMMViterbi.html)
         3. [Algoritmo de Viterbi para localización](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/04%20Probabilisticos/07%20ViterbiLocalization.html)
-6. Aprendizaje automático
+7. Aprendizaje automático
     1. [Estructura de un agente de aprendizaje](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/00%20EstructuraAprendizaje.html)
     2. Aprendizaje supervisado: Modelos paramétricos (lineales)
         1. [Regresión lineal](https://VictorMijangosDeLaCruz.github.io/InteligenciaArtificial/05%20Aprendizaje/01%20LinearRegression.html)
